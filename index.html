@@ -20,7 +20,7 @@
       padding: 2rem;
     }
     .container {
-      max-width: 1000px;
+      max-width: 1100px;
     }
     .title {
       text-align: center;
@@ -101,6 +101,16 @@
     .social a:hover {
       color: #a855f7;
     }
+    /* Modal list */
+    .steps li {
+      margin-bottom: 0.8rem;
+      line-height: 1.5;
+    }
+    .steps li::before {
+      content: "✔️ ";
+      margin-right: 0.3rem;
+      color: #c084fc;
+    }
   </style>
 </head>
 <body>
@@ -133,11 +143,22 @@
 
       <!-- Telegram -->
       <div class="col-12 col-md-3">
-        <div class="card h-100" onclick="copyTelegram()">
+        <div class="card h-100" onclick="openLink('https://t.me/moddingcentral')">
           <div class="card-body">
             <div class="card-icon">💬</div>
             <h5 class="card-title">Telegram</h5>
-            <p class="card-text">Join our community on Telegram. Tap to copy username.</p>
+            <p class="card-text">Join our community on Telegram for updates and lobbies.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PayPal -->
+      <div class="col-12 col-md-3">
+        <div class="card h-100" onclick="openLink('https://www.paypal.com/paypalme/MrJasonDEX/5')">
+          <div class="card-body">
+            <div class="card-icon">💰</div>
+            <h5 class="card-title">Pay Host (£5)</h5>
+            <p class="card-text">Send £5 to message the host and join DA lobbies.</p>
           </div>
         </div>
       </div>
@@ -148,7 +169,7 @@
           <div class="card-body">
             <div class="card-icon">⚡</div>
             <h5 class="card-title">Join DA Lobbies</h5>
-            <p class="card-text">Learn how to join and play in our DA lobbies.</p>
+            <p class="card-text">Step-by-step guide to get started.</p>
           </div>
         </div>
       </div>
@@ -157,7 +178,7 @@
     <div class="footer">
       <div class="social">
         <a href="https://github.com/" target="_blank">🐙</a>
-        <a href="https://t.me/" target="_blank">💬</a>
+        <a href="https://t.me/moddingcentral" target="_blank">💬</a>
         <a href="https://youtube.com/" target="_blank">▶️</a>
       </div>
       <small>© <span id="year"></span> Mods Central. All rights reserved.</small>
@@ -173,14 +194,12 @@
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>
-            ✍️ Replace this text with your instructions.  
-            Example:  
-            1. Add our host on PlayStation/Xbox.  
-            2. Wait for your invite when the lobby is ready.  
-            3. Follow the in-lobby steps we provide for setup.  
-            4. Enjoy your DA lobby experience!  
-          </p>
+          <ul class="steps">
+            <li>Send <strong>£5 via PayPal</strong> using the PayPal card above.</li>
+            <li>Message the host once payment is complete.</li>
+            <li>Follow the host on <strong>TikTok</strong> — you’ll join when they are available.</li>
+            <li>Wait for your invite and enjoy your DA lobby experience!</li>
+          </ul>
         </div>
         <div class="modal-footer border-0">
           <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Close</button>
@@ -219,15 +238,6 @@
     // Card link opener
     function openLink(url) {
       window.open(url, "_blank");
-    }
-
-    // Telegram copy
-    function copyTelegram() {
-      const username = "@YourTelegramUser";
-      navigator.clipboard.writeText(username).then(() => {
-        // Toast would look nicer but keeping alert for simplicity
-        alert("Telegram username copied: " + username);
-      });
     }
 
     // Year in footer
