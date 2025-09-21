@@ -46,7 +46,6 @@
       backdrop-filter: blur(10px);
       box-shadow: 0 0 20px rgba(168,85,247,0.15);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
     }
     .card:hover {
       transform: translateY(-8px);
@@ -121,55 +120,61 @@
     <div class="row g-4">
       <!-- DA Tool -->
       <div class="col-12 col-md-3">
-        <div class="card h-100" onclick="openLink('https://example.com/da-tool')">
+        <div class="card h-100">
           <div class="card-body">
             <div class="card-icon">🛠️</div>
             <h5 class="card-title">DA Tool</h5>
             <p class="card-text">Powerful digital assistant with advanced features.</p>
+            <a href="https://example.com/da-tool" target="_blank" class="btn btn-outline-light mt-2">Open Tool</a>
           </div>
         </div>
       </div>
 
       <!-- BO6 Bot Lobby Tool -->
       <div class="col-12 col-md-3">
-        <div class="card h-100" onclick="openLink('https://example.com/bo6')">
+        <div class="card h-100">
           <div class="card-body">
             <div class="card-icon">🎮</div>
             <h5 class="card-title">BO6 Bot Lobby Tool</h5>
             <span class="coming-soon">Coming Soon</span>
+            <br>
+            <button class="btn btn-outline-light mt-2 disabled">Not Available</button>
           </div>
         </div>
       </div>
 
       <!-- Telegram -->
       <div class="col-12 col-md-3">
-        <div class="card h-100" onclick="openLink('https://t.me/moddingcentral')">
+        <div class="card h-100">
           <div class="card-body">
             <div class="card-icon">💬</div>
             <h5 class="card-title">Telegram</h5>
             <p class="card-text">Join our community on Telegram for updates and lobbies.</p>
+            <a href="https://t.me/moddingcentral" target="_blank" class="btn btn-outline-light mt-2">Join Telegram</a>
           </div>
         </div>
       </div>
 
       <!-- PayPal -->
       <div class="col-12 col-md-3">
-        <div class="card h-100" onclick="openLink('https://www.paypal.com/paypalme/MrJasonDEX/5')">
+        <div class="card h-100">
           <div class="card-body">
             <div class="card-icon">💰</div>
             <h5 class="card-title">Pay Host (£5)</h5>
             <p class="card-text">Send £5 to message the host and join DA lobbies.</p>
+            <a href="https://www.paypal.com/paypalme/MrJasonDEX/5" target="_blank" class="btn btn-outline-light mt-2">Pay £5</a>
           </div>
         </div>
       </div>
 
       <!-- Join DA Lobbies -->
       <div class="col-12 col-md-3">
-        <div class="card h-100" data-bs-toggle="modal" data-bs-target="#daModal">
+        <div class="card h-100">
           <div class="card-body">
             <div class="card-icon">⚡</div>
             <h5 class="card-title">Join DA Lobbies</h5>
             <p class="card-text">Step-by-step guide to get started.</p>
+            <button class="btn btn-outline-light mt-2" data-bs-toggle="modal" data-bs-target="#daModal">View Steps</button>
           </div>
         </div>
       </div>
@@ -234,11 +239,6 @@
       }
     }
     type();
-
-    // Card link opener
-    function openLink(url) {
-      window.open(url, "_blank");
-    }
 
     // Year in footer
     document.getElementById("year").textContent = new Date().getFullYear();
