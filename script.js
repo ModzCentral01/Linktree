@@ -42,11 +42,15 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-// Loading spinner
+// Preloader animation
 window.addEventListener('load', function() {
-  setTimeout(function() {
-    document.getElementById('spinner').style.display = 'none';
-  }, 600);
+  const preloader = document.getElementById('spinner');
+  preloader.classList.add('fade-out');
+  setTimeout(() => {
+    preloader.style.display = 'none';
+    // Reveal content with smooth fade
+    document.body.classList.add('content-loaded');
+  }, 800);
 });
 
 // TikTok browser detection and Toast
@@ -152,3 +156,31 @@ if (feedbackForm) {
     modal.hide();
   });
 }
+
+// AOS initialization
+document.addEventListener('DOMContentLoaded', function() {
+  AOS.init({
+    duration: 800,
+    once: true,
+    offset: 100
+  });
+  
+  // Add reveal animation to cards
+  document.querySelectorAll('.card').forEach((card, index) => {
+    card.setAttribute('data-aos', 'fade-up');
+    card.setAttribute('data-aos-delay', (index * 100).toString());
+  });
+});
+
+// Add hover effect to cards
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('mouseenter', function() {
+    this.style.transform = 'translateY(-10px) scale(1.02)';
+    this.style.boxShadow = '0 20px 40px rgba(168,85,247,0.25)';
+  });
+  
+  card.addEventListener('mouseleave', function() {
+    this.style.transform = 'translateY(0) scale(1)';
+    this.style.boxShadow = '0 8px 32px rgba(31, 38, 135, 0.15)';
+  });
+});

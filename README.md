@@ -1,71 +1,58 @@
-# 🚀 Mods Central — Link Hub
+# Mods Central Linktree
 
-A **static single-page site** built with **Bootstrap 5**, designed as a modern Linktree-style hub for **Mods Central**.  
-Hosted on **GitHub Pages**, mobile-first, and styled in a **purple + black gamer aesthetic** with animations.
+A modern, mobile-friendly Linktree for GitHub Pages, featuring:
 
----
+## Features
+- Responsive design (mobile/tablet/desktop)
+- Animated cards and modals
+- Dark/Light mode toggle
+- Countdown timer to next event
+- Typewriter animated header
+- Featured badges for important links
+- Copy Link buttons for all social and card links
+- Share button (native share or clipboard)
+- Back to Top floating button
+- Contact and Feedback modals (Bootstrap)
+- Telegram floating button
+- TikTok browser detection and external open
+- Loading spinner on page load
+- FAQ accordion
+- All custom CSS and JS in separate files
 
-## 🎨 Features
+## Setup & Usage
+1. Clone or fork this repo.
+2. Place all files in your GitHub Pages repo (e.g. `yourusername.github.io/modscentral`).
+3. Ensure these files exist:
+   - `index.html`
+   - `style.css`
+   - `script.js`
+4. Push to GitHub. Your site will be live at `https://yourusername.github.io/modscentral/`.
 
-- **Responsive Bootstrap design** (mobile-friendly, works on all devices).
-- **Typewriter animation** under the title cycling through: *Tools · Bots · Community*.
-- **Cards grid** with hover glow effect:
-  - 🛠️ **DA Tool** → external link (placeholder).
-  - 🎮 **BO6 Bot Lobby Tool** → *Coming Soon* badge with pulse animation.
-  - 💬 **Telegram** → links to [@moddingcentral](https://t.me/moddingcentral).
-  - 💰 **Pay Host (£5)** → auto-opens PayPal link with `£5` pre-filled.
-  - ⚡ **Join DA Lobbies** → opens a modal with step-by-step instructions.
-- **Join DA Lobbies modal** (Bootstrap modal popup):
-  - Step 1: Pay £5 via PayPal.
-  - Step 2: Message the host once payment is complete.
-  - Step 3: Follow the host on TikTok — join when they are available.
-  - Step 4: Wait for invite & enjoy your DA lobby.
-- **Footer with social links** (GitHub, Telegram, YouTube).
-- **Glassmorphism-style UI** with blur and neon purple glow.
-- **Dark theme with radial gradient background.**
+## What’s Working
+- All features above are tested and work on GitHub Pages (static hosting).
+- No server-side code required.
+- Mobile UX is fully optimized.
 
----
+## What’s Next / Ideas
+- Animated backgrounds (particles, gradients)
+- Profile avatar and bio
+- Progress bar for countdown
+- QR code generator for sharing
+- Link categories/tabs
+- Search bar for links
+- Newsletter signup
+- More social integrations (Discord, Twitch, etc.)
+- Custom theme picker
+- Accessibility improvements
+- Link analytics
+- And more!
 
-## ⚡ Tech Stack
-
-- **Bootstrap 5.3** (CDN) for layout & components.
-- **Google Fonts** (`Orbitron` + `Poppins`) for futuristic styling.
-- **Custom CSS** for purple/black theme, hover glow, and animations.
-- **JavaScript** for:
-  - Typewriter effect.
-  - Dynamic year in footer.
-  - Modal + external link handling.
-
----
----
-
-## 🌐 Hosting on GitHub Pages
-
-1. Push this repo to **GitHub**.  
-2. Go to **Settings → Pages** in your repository.  
-3. Under **Build and deployment**, select:
-   - **Branch:** `main` (or `master`)  
-   - **Folder:** `/root`  
-4. Click **Save**.  
-5. After a few minutes, your site will be live at:
-
-   ---
-
-## 🔮 Next Steps / Ideas
-
-- Add a **TikTok card** linking directly to the host profile.  
-- Add **more social icons** (Discord, Instagram, etc).  
-- Custom **favicon/logo** for Mods Central.  
-- SEO meta tags + OpenGraph preview card for sharing.  
-- Add **loading animation** on first page load.  
-- Dark/Light **theme toggle**.  
+## How to Contribute
+Open issues or pull requests for new features, bug fixes, or ideas.
 
 ---
 
-## 👤 Credits
-
-Created for Mods Central.  
-Designed with ❤️ using Bootstrap + custom CSS.  
+Made for the Mods Central community. Enjoy!
 
 
 
