@@ -157,19 +157,77 @@ if (feedbackForm) {
   });
 }
 
-// AOS initialization
-document.addEventListener('DOMContentLoaded', function() {
-  AOS.init({
-    duration: 800,
-    once: true,
-    offset: 100
-  });
-  
-  // Add reveal animation to cards
-  document.querySelectorAll('.card').forEach((card, index) => {
-    card.setAttribute('data-aos', 'fade-up');
-    card.setAttribute('data-aos-delay', (index * 100).toString());
-  });
+// Initialize particles
+particlesJS('particles-js',
+  {
+    "particles": {
+      "number": {
+        "value": 80,
+        "density": {
+          "enable": true,
+          "value_area": 800
+        }
+      },
+      "color": {
+        "value": "#a855f7"
+      },
+      "shape": {
+        "type": "circle"
+      },
+      "opacity": {
+        "value": 0.2,
+        "random": true
+      },
+      "size": {
+        "value": 3,
+        "random": true
+      },
+      "line_linked": {
+        "enable": true,
+        "distance": 150,
+        "color": "#9333ea",
+        "opacity": 0.1,
+        "width": 1
+      },
+      "move": {
+        "enable": true,
+        "speed": 2,
+        "direction": "none",
+        "random": false,
+        "straight": false,
+        "out_mode": "out",
+        "bounce": false
+      }
+    },
+    "interactivity": {
+      "detect_on": "canvas",
+      "events": {
+        "onhover": {
+          "enable": true,
+          "mode": "grab"
+        },
+        "onclick": {
+          "enable": true,
+          "mode": "push"
+        },
+        "resize": true
+      }
+    },
+    "retina_detect": true
+  }
+);
+
+// Initialize AOS
+AOS.init({
+  duration: 800,
+  once: true,
+  offset: 100
+});
+
+// Add data-aos attributes to cards
+document.querySelectorAll('.card').forEach((card, index) => {
+  card.setAttribute('data-aos', 'fade-up');
+  card.setAttribute('data-aos-delay', (index * 100).toString());
 });
 
 // Add hover effect to cards

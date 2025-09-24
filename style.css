@@ -100,6 +100,10 @@ body::before {
   flex-direction: column;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transform-style: preserve-3d;
+  perspective: 1000px;
 }
 
 .card[data-type="mod"],
@@ -133,10 +137,7 @@ body::before {
   background: rgba(255,255,255,0.05);
   box-shadow: 0 15px 45px rgba(168,85,247,0.2);
   border: 1px solid rgba(168,85,247,0.2);
-}
-
-.card-body {
-  padding: 1.8rem;
+  transform: translateY(-10px) rotateX(5deg);
 }
 
 .card-icon {
@@ -147,10 +148,13 @@ body::before {
   -webkit-text-fill-color: transparent;
   display: inline-block;
   transition: transform 0.3s ease;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
 }
 
 .card:hover .card-icon {
-  transform: scale(1.1);
+  transform: translateZ(20px) scale(1.2);
   animation: bounce 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -529,4 +533,25 @@ body.content-loaded {
 /* Smooth scroll behavior */
 html {
   scroll-behavior: smooth;
+}
+
+#particles-js {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+/* Gradient animation for title */
+.title {
+  background-size: 200% auto;
+  animation: gradient 3s ease infinite;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
