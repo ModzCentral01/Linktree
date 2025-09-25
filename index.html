@@ -3,416 +3,299 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mods Central — Tools & Links</title>
-  <meta name="description" content="Mods Central — Tools, Bot Lobbies, Community & More. Join DA lobbies daily at 10am GMT.">
-  <meta property="og:title" content="Mods Central">
-  <meta property="og:description" content="Tools, Bot Lobbies, Community & More. Join DA lobbies daily at 10am GMT.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://yourusername.github.io/modscentral/">
-  <meta property="og:image" content="https://yourdomain.com/logo.png"> <!-- Replace with your logo -->
-  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/646/646094.png" type="image/png">
-  
+  <title>Mods Central — Hub & Shop</title>
+
+  <!-- Google Font: Rubik -->
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;800&display=swap" rel="stylesheet">
+
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-  <!-- Particle.js -->
-  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-  <!-- AOS Library -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="style.css">
-  <div id="particles-js"></div>
+
+  <style>
+    body {
+      background: #0b0b12;
+      color: #f1f1f1;
+      font-family: 'Rubik', sans-serif;
+    }
+    h1, h2, h3 {
+      font-weight: 800;
+      color: #c084fc;
+      text-shadow: 0 0 10px #9333ea;
+    }
+    .profile {
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+    .profile img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid #9333ea;
+      box-shadow: 0 0 15px #9333ea;
+      margin-bottom: 1rem;
+    }
+    .countdown {
+      text-align: center;
+      font-size: 1.1rem;
+      margin: 1rem 0 2rem;
+      color: #a855f7;
+    }
+    .links .btn {
+      display: block;
+      width: 100%;
+      margin: 0.5rem auto;
+      padding: 0.9rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #fff;
+      background: #1f1f3a;
+      border: 1px solid #9333ea;
+      border-radius: 12px;
+      transition: all 0.2s ease-in-out;
+      box-shadow: 0 0 8px rgba(147, 51, 234, 0.4);
+    }
+    .links .btn:hover {
+      background: #9333ea;
+      box-shadow: 0 0 18px #c084fc;
+      transform: translateY(-3px);
+    }
+    .card {
+      background: #1a1a2e;
+      border: 1px solid #9333ea;
+      border-radius: 12px;
+      color: #eaeaea;
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 0 15px #9333ea;
+    }
+    .price {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #c084fc;
+    }
+    .btn-pay {
+      background: #9333ea;
+      border: none;
+      color: #fff;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+    .btn-pay:hover {
+      background: #c084fc;
+      box-shadow: 0 0 12px #c084fc;
+    }
+    .footer {
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      border-top: 1px solid #333;
+      font-size: 0.85rem;
+      color: #aaa;
+    }
+    .fab-telegram {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #9333ea;
+      color: white;
+      border-radius: 50%;
+      width: 55px;
+      height: 55px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      text-decoration: none;
+      box-shadow: 0 0 12px #9333ea;
+      transition: transform 0.2s;
+    }
+    .fab-telegram:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 18px #c084fc;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1 class="title">🚀 Mods Central</h1>
-    <div class="typewriter" id="typewriter"></div>
+  <!-- Hero/Profile -->
+  <div class="profile">
+    <img src="https://cdn-icons-png.flaticon.com/512/646/646094.png" alt="Mods Central Logo">
+    <h1>🚀 Mods Central</h1>
+    <p>Tools • Bots • Modded Accounts • Community</p>
+  </div>
 
-    <!-- Countdown -->
-    <div class="countdown text-center">
-      <h4>⏳ Next Lobby Starts In:</h4>
-      <div id="timer" style="font-size:1.5rem; font-weight:600; color:#fff;"></div>
-    </div>
+  <!-- Countdown -->
+  <div class="countdown">
+    ⏳ Next Lobby Starts In: <span id="timer"></span>
+  </div>
 
-    <!-- Cards -->
-    <div class="row g-4 row-cols-1 row-cols-md-3 row-cols-lg-5">
-      <!-- DA Tool -->
-      <div class="col-12 col-md-3">
-        <div class="card h-100" data-type="mod">
+  <!-- Linktree Section -->
+  <div class="container links mb-5">
+    <h2 class="mb-3 text-center">Quick Links</h2>
+    <a href="https://t.me/moddingcentral" target="_blank" class="btn">💬 Telegram Community</a>
+    <a href="https://github.com/MrJasonDEX/Cold-War-Mods" target="_blank" class="btn">🛠️ DA Tool</a>
+    <a href="https://github.com/ModzCentral01/Black-Ops-6-Bot-" target="_blank" class="btn">🎮 BO6 Bot Lobby Tool</a>
+    <a href="https://www.tiktok.com/@mrjasondex" target="_blank" class="btn">🎵 TikTok Updates</a>
+    <a href="https://www.paypal.com/paypalme/MrJasonDEX/5" target="_blank" class="btn">💰 Support — £5</a>
+    <a href="#shop" class="btn">🛒 Shop Modded Accounts</a>
+    <a href="#faq" class="btn">❓ FAQ</a>
+    <a href="#contact" class="btn">📩 Contact</a>
+    <a href="#feedback" class="btn">⭐ Leave Feedback</a>
+  </div>
+
+  <!-- Shop Section -->
+  <div class="container" id="shop">
+    <h2>🛒 Modded Account Shop</h2>
+    <p class="text-center mb-4">Choose your package — safe, fast delivery, PayPal GBP only</p>
+
+    <!-- Black Ops 3 -->
+    <h3>🎮 Call of Duty: Black Ops 3</h3>
+    <div class="row g-4 mb-4">
+      <div class="col-md-6">
+        <div class="card p-3 h-100">
           <div class="card-body">
-            <div class="card-icon">🛠️</div>
-            <h5 class="card-title">DA Tool</h5>
-            <p class="card-text">Powerful digital assistant with advanced features.</p>
-            <a href="https://github.com/MrJasonDEX/Cold-War-Mods" target="_blank" class="btn btn-outline-light mt-2">Open Tool</a>
+            <h5 class="card-title">🔥 Ultimate Modded Account</h5>
+            <p class="card-text">Prestige 1000, Unlock All, Zombies Mods, Unreleased Camos</p>
+            <p class="price">£15</p>
+            <a href="https://www.paypal.com/paypalme/MrJasonDEX/15" target="_blank" class="btn btn-pay">Buy Now</a>
           </div>
         </div>
       </div>
-
-      <!-- BO6 Bot Lobby Tool -->
-      <div class="col-12 col-md-3">
-        <div class="card h-100" data-type="mod">
+      <div class="col-md-6">
+        <div class="card p-3 h-100">
           <div class="card-body">
-            <div class="card-icon">🎮</div>
-            <h5 class="card-title">BO6 Bot Lobby Tool</h5>
-            <p class="card-text">Access BO6 bot lobby features and tools.</p>
-            <a href="https://github.com/ModzCentral01/Black-Ops-6-Bot-" target="_blank" class="btn btn-outline-light mt-2">Open Tool</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Telegram -->
-      <div class="col-12 col-md-3">
-        <div class="card h-100" data-type="telegram">
-          <div class="card-body">
-            <div class="card-icon">💬</div>
-            <h5 class="card-title">Telegram <span class="badge bg-warning text-dark ms-1">Featured</span></h5>
-            <p class="card-text">Join our community for updates & lobbies.</p>
-            <a href="https://t.me/moddingcentral" target="_blank" class="btn btn-outline-light mt-2">Join Telegram</a>
-            <button class="btn btn-outline-secondary btn-sm mt-2 copy-link" data-link="https://t.me/moddingcentral">Copy Link</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- TikTok -->
-      <div class="col-12 col-md-3">
-        <div class="card h-100">
-          <div class="card-body">
-            <div class="card-icon">🎵</div>
-            <h5 class="card-title">TikTok</h5>
-            <p class="card-text">Follow the host for updates and invites.</p>
-            <a href="https://www.tiktok.com/@mrjasondex" id="tiktok-link" target="_blank" class="btn btn-outline-light mt-2">Open TikTok</a>
-            <button class="btn btn-outline-secondary btn-sm mt-2 copy-link" data-link="https://www.tiktok.com/@mrjasondex">Copy Link</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- PayPal -->
-      <div class="col-12 col-md-3">
-        <div class="card h-100">
-          <div class="card-body">
-            <div class="card-icon">💰</div>
-            <h5 class="card-title">Pay Host (£5)</h5>
-            <p class="card-text">Send £5 to message the host and join DA lobbies.</p>
-            <a href="https://www.paypal.com/paypalme/MrJasonDEX/5" target="_blank" class="btn btn-outline-light mt-2">Pay £5</a>
-            <button class="btn btn-outline-secondary btn-sm mt-2 copy-link" data-link="https://www.paypal.com/paypalme/MrJasonDEX/5">Copy Link</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Join DA Lobbies -->
-      <div class="col-12 col-md-3">
-        <div class="card h-100">
-          <div class="card-body">
-            <div class="card-icon">⚡</div>
-            <h5 class="card-title">Join DA Lobbies</h5>
-            <p class="card-text">Step-by-step guide to get started.</p>
-            <button class="btn btn-outline-light mt-2" data-bs-toggle="modal" data-bs-target="#daModal">View Steps</button>
+            <h5 class="card-title">🔥 Maxed-Out Account</h5>
+            <p class="card-text">Prestige Master 1000, Modded Classes, God Mode</p>
+            <p class="price">£10</p>
+            <a href="https://www.paypal.com/paypalme/MrJasonDEX/10" target="_blank" class="btn btn-pay">Buy Now</a>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- FAQ -->
-    <div class="mt-5">
-      <h3 class="text-center mb-3" style="color:#c084fc;">❓ FAQ</h3>
-      <div class="accordion" id="faqAccordion">
-        <div class="accordion-item" style="background:rgba(255,255,255,0.05); border:1px solid #9333ea;">
-          <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q1" style="background:transparent; color:#fff;">
-              When are lobbies hosted?
-            </button>
-          </h2>
-          <div id="q1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-            <div class="accordion-body">Every day at <strong>10am GMT</strong>. Use the countdown above to see the next start time.</div>
+    <!-- Cold War -->
+    <h3>🎮 Call of Duty: Cold War</h3>
+    <div class="row g-4 mb-4">
+      <div class="col-md-4">
+        <div class="card p-3 h-100">
+          <div class="card-body">
+            <h5 class="card-title">🔥 Custom Modded Classes</h5>
+            <p class="card-text">Includes Ray Gun & Modded Weapons</p>
+            <p class="price">£15</p>
+            <a href="https://www.paypal.com/paypalme/MrJasonDEX/15" target="_blank" class="btn btn-pay">Buy Now</a>
           </div>
         </div>
-        <div class="accordion-item" style="background:rgba(255,255,255,0.05); border:1px solid #9333ea;">
-          <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q2" style="background:transparent; color:#fff;">
-              How do I join?
-            </button>
-          </h2>
-          <div id="q2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-            <div class="accordion-body">Click <strong>Join DA Lobbies</strong>, follow the steps, and pay £5 via PayPal to message the host.</div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-3 h-100">
+          <div class="card-body">
+            <h5 class="card-title">✅ DA Unlock All</h5>
+            <p class="card-text">Full unlock across Cold War</p>
+            <p class="price">£10</p>
+            <a href="https://www.paypal.com/paypalme/MrJasonDEX/10" target="_blank" class="btn btn-pay">Buy Now</a>
           </div>
         </div>
-        <div class="accordion-item" style="background:rgba(255,255,255,0.05); border:1px solid #9333ea;">
-          <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q3" style="background:transparent; color:#fff;">
-              Refund policy?
-            </button>
-          </h2>
-          <div id="q3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-            <div class="accordion-body">Refunds are not guaranteed. Please ensure you’re ready to join at the hosting time.</div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-3 h-100">
+          <div class="card-body">
+            <h5 class="card-title">✅ Crystals / In-Game Currency</h5>
+            <p class="card-text">Boost your Cold War loadout</p>
+            <p class="price">£5</p>
+            <a href="https://www.paypal.com/paypalme/MrJasonDEX/5" target="_blank" class="btn btn-pay">Buy Now</a>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Footer -->
-    <div class="footer">
-      <small>© <span id="year"></span> Mods Central | v1.0.0</small>
-      <div class="mt-2">
-        <button class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#contactModal">Contact</button>
-        <button class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#feedbackModal">Feedback</button>
+    <!-- Divinium -->
+    <h3>🧪 BO3 Liquid Divinium Packs</h3>
+    <div class="row g-4 mb-4">
+      <div class="col-md-4">
+        <div class="card p-3 h-100">
+          <div class="card-body">
+            <h5 class="card-title">💰 100k Divinium</h5>
+            <p class="price">£5</p>
+            <a href="https://www.paypal.com/paypalme/MrJasonDEX/5" target="_blank" class="btn btn-pay">Buy Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-3 h-100">
+          <div class="card-body">
+            <h5 class="card-title">💰 500k Divinium</h5>
+            <p class="price">£10</p>
+            <a href="https://www.paypal.com/paypalme/MrJasonDEX/10" target="_blank" class="btn btn-pay">Buy Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-3 h-100">
+          <div class="card-body">
+            <h5 class="card-title">💰 1 Million Divinium</h5>
+            <p class="price">£20</p>
+            <a href="https://www.paypal.com/paypalme/MrJasonDEX/20" target="_blank" class="btn btn-pay">Buy Now</a>
+          </div>
+        </div>
       </div>
     </div>
+
+    <!-- Other Services -->
+    <h3>🎮 Other Games & Services</h3>
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="card p-3 h-100">
+          <div class="card-body">
+            <h5 class="card-title">Need for Speed Heat</h5>
+            <p class="card-text">Unlock All & Modded Cars</p>
+            <p class="price">£10</p>
+            <a href="https://www.paypal.com/paypalme/MrJasonDEX/10" target="_blank" class="btn btn-pay">Buy Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card p-3 h-100">
+          <div class="card-body">
+            <h5 class="card-title">IPTV 1-Year Subscription</h5>
+            <p class="card-text">Unlimited Streaming (Firestick & Android)</p>
+            <p class="price">£50</p>
+            <a href="https://www.paypal.com/paypalme/MrJasonDEX/50" target="_blank" class="btn btn-pay">Buy Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    📩 Custom bundles available — message anytime!<br>
+    © <span id="year"></span> Mods Central
   </div>
 
   <!-- Floating Telegram FAB -->
   <a href="https://t.me/moddingcentral" target="_blank" class="fab-telegram">💬</a>
 
-  <!-- Modal for Join DA Lobbies -->
-  <div class="modal fade" id="daModal" tabindex="-1" aria-labelledby="daModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content" style="background: rgba(30, 27, 46, 0.95); color: #e2e8f0; border-radius: 12px; border: 1px solid #9333ea;">
-        <div class="modal-header border-0">
-          <h5 class="modal-title" id="daModalLabel" style="color:#c084fc;">⚡ How to Join DA Lobbies</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <ul class="steps">
-            <li>Send <strong>£5 via PayPal</strong> using the button below.</li>
-            <li>Message the host once payment is complete.</li>
-            <li>Follow the host on <strong>TikTok</strong> — you’ll join when they are available.</li>
-            <li>Wait for your invite and enjoy your DA lobby experience!</li>
-          </ul>
-          <!-- PayPal Button -->
-          <div class="text-center mt-3">
-            <a href="https://www.paypal.com/paypalme/MrJasonDEX/5" target="_blank" class="btn btn-outline-light">💰 Pay £5 Now</a>
-          </div>
-        </div>
-        <div class="modal-footer border-0">
-          <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- TikTok Toast -->
-  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1055">
-    <div id="tiktokToast" class="toast align-items-center text-bg-dark border-0" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="d-flex">
-        <div class="toast-body">
-          <strong>Open TikTok in your browser!</strong><br>
-          Copy and paste this link into Chrome or Safari:<br>
-          <span id="tiktokUrl">https://www.tiktok.com/@mrjasondex</span>
-        </div>
-        <button type="button" class="btn btn-outline-light btn-sm ms-2" id="copyTikTok">Copy Link</button>
-        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Loading Spinner -->
-  <div id="spinner" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(30,27,46,0.95);z-index:20000;display:flex;align-items:center;justify-content:center;">
-    <div class="spinner-border text-light" style="width:4rem;height:4rem;" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-  </div>
-
-  <!-- Dark/Light Mode Toggle -->
-  <button id="themeToggle" class="btn btn-outline-light position-fixed top-0 end-0 m-3" title="Toggle dark/light mode">
-    <span id="themeIcon">🌙</span>
-  </button>
-  <!-- Contact Modal -->
-  <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="contactModalLabel">Contact Host</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form id="contactForm">
-            <div class="mb-3">
-              <label for="contactName" class="form-label">Name</label>
-              <input type="text" class="form-control" id="contactName" required>
-            </div>
-            <div class="mb-3">
-              <label for="contactEmail" class="form-label">Email</label>
-              <input type="email" class="form-control" id="contactEmail" required>
-            </div>
-            <div class="mb-3">
-              <label for="contactMsg" class="form-label">Message</label>
-              <textarea class="form-control" id="contactMsg" rows="3" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-outline-primary">Send</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Feedback Modal -->
-  <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="feedbackModalLabel">Feedback</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form id="feedbackForm">
-            <div class="mb-3">
-              <label for="feedbackMsg" class="form-label">Your suggestion</label>
-              <textarea class="form-control" id="feedbackMsg" rows="3" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-outline-success">Send Feedback</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Bootstrap Bundle JS -->
+  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Custom JS -->
-  <script src="script.js"></script>
-
   <script>
-    // Typewriter effect
-    const words = ["Tools", "Bots", "Community"];
-    let i = 0, j = 0, currentWord = "", isDeleting = false;
-    function type() {
-      currentWord = words[i];
-      const display = document.getElementById("typewriter");
-      if (isDeleting) {
-        display.textContent = currentWord.substring(0, j--);
-        if (j < 0) {
-          isDeleting = false;
-          i = (i + 1) % words.length;
-          setTimeout(type, 500);
-        } else setTimeout(type, 50);
-      } else {
-        display.textContent = currentWord.substring(0, j++);
-        if (j > currentWord.length) {
-          isDeleting = true;
-          setTimeout(type, 1200);
-        } else setTimeout(type, 120);
-      }
-    }
-    type();
-
-    // Year in footer
+    // Footer year
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Countdown timer to 10am GMT
+    // Countdown to 10am GMT
     function updateCountdown() {
       const now = new Date();
       let target = new Date();
       target.setUTCHours(10, 0, 0, 0);
-      if (now.getTime() > target.getTime()) {
-        target.setUTCDate(target.getUTCDate() + 1);
-      }
+      if (now > target) target.setUTCDate(target.getUTCDate() + 1);
       const diff = target - now;
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const hours = Math.floor(diff / 1000 / 60 / 60);
+      const minutes = Math.floor((diff / 1000 / 60) % 60);
       const seconds = Math.floor((diff / 1000) % 60);
-      document.getElementById("timer").textContent =
-        `${hours}h ${minutes}m ${seconds}s`;
+      document.getElementById("timer").textContent = `${hours}h ${minutes}m ${seconds}s`;
     }
     setInterval(updateCountdown, 1000);
     updateCountdown();
-
-    // Loading spinner
-    window.addEventListener('load', function() {
-      setTimeout(function() {
-        document.getElementById('spinner').style.display = 'none';
-      }, 600);
-    });
-
-    // TikTok browser detection and Toast
-    function isTikTokBrowser() {
-      return navigator.userAgent.toLowerCase().includes('tiktok');
-    }
-    var tiktokToast = new bootstrap.Toast(document.getElementById('tiktokToast'));
-    document.getElementById('tiktok-link').addEventListener('click', function(e) {
-      if (isTikTokBrowser()) {
-        e.preventDefault();
-        tiktokToast.show();
-      }
-    });
-    document.getElementById('copyTikTok').addEventListener('click', function() {
-      navigator.clipboard.writeText(document.getElementById('tiktokUrl').textContent);
-      this.textContent = 'Copied!';
-      setTimeout(() => { this.textContent = 'Copy Link'; }, 1200);
-    });
-
-    // Smooth scroll for FAQ and modal triggers
-    document.querySelectorAll('button[data-bs-toggle="collapse"], button[data-bs-toggle="modal"]').forEach(function(btn) {
-      btn.addEventListener('click', function(e) {
-        setTimeout(function() {
-          var targetId = btn.getAttribute('data-bs-target');
-          if (targetId && targetId.startsWith('#')) {
-            var el = document.querySelector(targetId);
-            if (el) el.scrollIntoView({behavior:'smooth',block:'center'});
-          }
-        }, 400);
-      });
-    });
-
-    // Dark/Light mode toggle
-    const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
-    themeToggle.addEventListener('click', () => {
-      document.body.classList.toggle('light-mode');
-      if (document.body.classList.contains('light-mode')) {
-        themeIcon.textContent = '🌙';
-        document.querySelectorAll('.card').forEach(card => {
-          card.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-          card.style.color = '#000';
-        });
-      } else {
-        themeIcon.textContent = '☀️';
-        document.querySelectorAll('.card').forEach(card => {
-          card.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
-          card.style.color = '#e2e8f0';
-        });
-      }
-    });
-
-    // Share button functionality
-    document.getElementById('shareBtn').addEventListener('click', () => {
-      navigator.clipboard.writeText(window.location.href);
-      alert('Page link copied to clipboard!');
-    });
-
-    // Back to top button
-    const backToTopBtn = document.getElementById('backToTop');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) {
-        backToTopBtn.style.display = 'block';
-      } else {
-        backToTopBtn.style.display = 'none';
-      }
-    });
-    backToTopBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // Contact form submission
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const name = document.getElementById('contactName').value;
-      const email = document.getElementById('contactEmail').value;
-      const message = document.getElementById('contactMsg').value;
-      alert(`Message sent!\n\nName: ${name}\nEmail: ${email}\nMessage: ${message}`);
-      this.reset();
-      var modal = bootstrap.Modal.getInstance(document.getElementById('contactModal'));
-      modal.hide();
-    });
-
-    // Feedback form submission
-    document.getElementById('feedbackForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const feedback = document.getElementById('feedbackMsg').value;
-      alert(`Feedback sent! Thank you for your suggestion.`);
-      this.reset();
-      var modal = bootstrap.Modal.getInstance(document.getElementById('feedbackModal'));
-      modal.hide();
-    });
   </script>
 </body>
 </html>
