@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>🚀 Mods Central — Modded Accounts & Services</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mods Central — Hub & Shop</title>
+  <meta name="description" content="Mods Central — Tools, Bot Lobbies, Modded Accounts & Shop. Telegram: t.me/moddingcentral">
 
-  <!-- Google Font -->
+  <!-- Rubik font -->
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;800&display=swap" rel="stylesheet">
 
   <!-- Bootstrap CSS -->
@@ -14,95 +15,116 @@
   <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
-  <!-- AOS (scroll animations) -->
+  <!-- AOS -->
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
   <style>
-    body {
-      background: linear-gradient(135deg, #0b0b12, #1a1a2e);
-      color: #f5f5f5;
-      font-family: 'Rubik', sans-serif;
-      scroll-behavior: smooth;
+    :root{
+      --bg1:#07070b;
+      --bg2:#121226;
+      --accent:#9333ea;
+      --accent2:#c084fc;
+      --muted:#bfc4d8;
+      --card-bg: rgba(255,255,255,0.03);
     }
-    h1, h2, h3 {
-      color: #c084fc;
-      font-weight: 800;
-      text-shadow: 0 0 10px #9333ea;
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:'Rubik',system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+      background:
+        radial-gradient(900px 300px at 10% 8%, rgba(147,51,234,0.06), transparent 6%),
+        linear-gradient(180deg,var(--bg1),var(--bg2));
+      color:#eef2ff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      scroll-behavior:smooth;
     }
-    .navbar {
-      background: rgba(10, 10, 20, 0.9);
-      backdrop-filter: blur(10px);
+
+    /* particles background */
+    #particles-js{position:fixed; inset:0; z-index:0; pointer-events:none;}
+
+    /* container */
+    .wrap{position:relative; z-index:1; max-width:1200px; margin:0 auto; padding:6.2rem 1rem 5rem;}
+
+    /* NAV */
+    .navbar{background: rgba(6,6,12,0.6); backdrop-filter: blur(6px); border-bottom:1px solid rgba(147,51,234,0.05)}
+    .navbar-brand{font-weight:800; color:var(--accent2) !important}
+    .nav-link{color:#e7e4ff !important}
+    .nav-link:hover{color:var(--accent2) !important}
+
+    /* HERO */
+    .hero{ text-align:center; padding:2.2rem 1rem; border-radius:12px;
+      background: linear-gradient(180deg, rgba(147,51,234,0.02), rgba(0,0,0,0.06));
+      border:1px solid rgba(147,51,234,0.06);
+      box-shadow:0 8px 30px rgba(8,7,18,0.6);
     }
-    .hero {
-      padding: 5rem 1rem;
-      text-align: center;
+    .logo{width:110px;height:110px;border-radius:50%;border:3px solid var(--accent); box-shadow:0 8px 30px rgba(147,51,234,0.08)}
+    .hero h1{color:var(--accent2); font-weight:800; margin-top:.6rem; text-shadow:0 0 12px rgba(147,51,234,0.12)}
+    .lead { color:#e7e4ff; font-weight:600 }
+    .typewriter { color:var(--accent2); font-weight:700 }
+    .countdown { color:#cdb7ff; font-weight:700; margin-top:0.5rem }
+    .live-badge { display:inline-flex; align-items:center; gap:.45rem; padding:.45rem .7rem; border-radius:999px; font-weight:800 }
+
+    /* HUB */
+    .hub { margin-top:1rem; display:grid; gap:.7rem; grid-template-columns:repeat(1,1fr); }
+    @media(min-width:700px){ .hub { grid-template-columns:repeat(2,1fr); } }
+    .link-btn { display:flex; align-items:center; gap:.9rem; padding:.9rem 1rem; border-radius:12px; text-decoration:none; color:#fff;
+      background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(147,51,234,0.12); font-weight:700; box-shadow:0 12px 30px rgba(8,8,18,0.6);
+      transition: transform .15s, box-shadow .15s, background .15s;
     }
-    .card {
-      background: rgba(18, 18, 30, 0.9);
-      border: 1px solid #9333ea;
-      border-radius: 12px;
-      color: #eaeaea;
-      transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 0 12px rgba(147, 51, 234, 0.3);
-    }
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 20px rgba(192, 132, 252, 0.6);
-    }
-    .btn-purple {
-      background: #9333ea;
-      color: white;
-      font-weight: 600;
-      border-radius: 8px;
-      padding: 0.6rem 1.2rem;
-    }
-    .btn-purple:hover {
-      background: #c084fc;
-      color: black;
-    }
-    .section {
-      padding: 3rem 1rem;
-    }
-    .footer {
-      text-align: center;
-      padding: 2rem 1rem;
-      font-size: 0.9rem;
-      color: #aaa;
-    }
-    .fab-telegram {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #9333ea;
-      color: white;
-      border-radius: 50%;
-      width: 55px;
-      height: 55px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      text-decoration: none;
-      box-shadow: 0 0 12px #9333ea;
-      transition: transform 0.2s;
-    }
-    .fab-telegram:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 18px #c084fc;
+    .link-btn:hover { transform:translateY(-4px); box-shadow:0 20px 44px rgba(147,51,234,0.14); background: linear-gradient(90deg,var(--accent),var(--accent2)) }
+    .link-btn .icon { width:46px; height:46px; display:flex; align-items:center; justify-content:center; border-radius:10px; background: rgba(0,0,0,0.18) }
+    .link-btn small{ color:var(--muted); margin-left:auto; font-weight:600 }
+
+    /* SECTION TITLES */
+    .section-title { color:var(--accent2); font-weight:800; text-align:center; margin-top:2rem; text-shadow:0 0 8px rgba(147,51,234,0.08) }
+
+    /* SHOP CARDS */
+    .shop-card { background:var(--card-bg); border:1px solid rgba(147,51,234,0.08); border-radius:12px; padding:1rem; transition: transform .15s, box-shadow .15s; }
+    .shop-card:hover { transform:translateY(-6px); box-shadow:0 18px 40px rgba(147,51,234,0.08) }
+    .shop-card h5 { color:var(--accent2); font-weight:800 }
+    .price { color:var(--accent2); font-weight:800 }
+    .buy-btn { background: linear-gradient(90deg,var(--accent),var(--accent2)); border:none; color:#0b0710; font-weight:800; border-radius:10px; padding:.45rem .8rem }
+    .buy-btn:hover { opacity:.96; transform:translateY(-2px) }
+
+    /* CART BUTTON */
+    #cartBtn { position:fixed; right:18px; bottom:90px; z-index:9999; background:rgba(15,12,25,0.9); border:1px solid rgba(147,51,234,0.08); color:#fff; padding:.6rem .75rem; border-radius:10px; box-shadow:0 10px 28px rgba(8,8,18,0.6); }
+    #backToTop { position:fixed; right:18px; bottom:150px; display:none; z-index:9999; }
+
+    /* INFO BOXES */
+    .info-row { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; margin-top:1.25rem }
+    .info-box { background: rgba(255,255,255,0.02); padding:.9rem 1rem; border-radius:10px; border:1px solid rgba(147,51,234,0.06); min-width:170px; text-align:center }
+
+    /* FOOTER */
+    .footer { margin-top:2.5rem; text-align:center; color:#bfc4d8; padding:2rem 1rem }
+
+    /* FAQ tweak */
+    .faq .accordion-button { background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent); color:#e9e7ff }
+    .faq .accordion-button:not(.collapsed) { color:#0b0710; background: linear-gradient(90deg,var(--accent),var(--accent2)) }
+
+    /* small screens */
+    @media (max-width:720px) {
+      .hero { padding:1.6rem 1rem }
+      .link-btn { font-size:.98rem; gap:.6rem; padding:.8rem }
     }
   </style>
 </head>
 <body>
+  <!-- Particles -->
+  <div id="particles-js"></div>
 
-  <!-- Navbar -->
+  <!-- NAVBAR -->
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand fw-bold text-purple" href="#">🚀 Mods Central</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <a class="navbar-brand" href="#">🚀 Mods Central</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navCollapse">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
+      <div id="navCollapse" class="collapse navbar-collapse">
         <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#hub">Tools</a></li>
           <li class="nav-item"><a class="nav-link" href="#shop">Shop</a></li>
           <li class="nav-item"><a class="nav-link" href="#how">How It Works</a></li>
           <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
@@ -111,196 +133,664 @@
     </div>
   </nav>
 
-  <!-- Hero -->
-  <section class="hero" id="home">
-    <h1 data-aos="fade-up">🚀 Modded Account Services</h1>
-    <p class="lead" data-aos="fade-up" data-aos-delay="150">PS4 / PS5 & All Platforms</p>
-    <p data-aos="fade-up" data-aos-delay="300">💥 Unlock exclusive mods, max out ranks, and dominate your favourite games! 💥</p>
-    <a href="#shop" class="btn btn-purple btn-lg mt-3" data-aos="zoom-in">View Shop</a>
-  </section>
+  <!-- PAGE CONTENT -->
+  <main class="wrap" id="home">
 
-  <!-- Shop -->
-  <section class="section" id="shop">
-    <div class="container">
-      <h2 class="text-center mb-4">🛒 Shop</h2>
+    <!-- HERO -->
+    <section class="hero" data-aos="fade-down">
+      <img class="logo" src="https://cdn-icons-png.flaticon.com/512/646/646094.png" alt="logo">
+      <h1>🚀 Modded Account Services — PS4 / PS5 & All Platforms</h1>
+      <p class="lead">💥 Unlock exclusive mods, max ranks & dominate your favourite games</p>
+      <div class="typewriter" id="typewriter">Tools • Bots • Modded Accounts • Community</div>
 
-      <!-- Category Accordions -->
-      <div class="accordion" id="shopAccordion">
+      <!-- LIVE STATUS (below hero top) -->
+      <div class="mt-3" id="liveStatusWrap" aria-live="polite">
+        <div id="liveBadge" style="display:inline-block"></div>
+        <div id="liveCountdown" style="margin-top:.6rem"></div>
+        <div class="small text-muted mt-1" id="localNext"></div>
+      </div>
 
+      <div class="d-flex justify-content-center mt-3" data-aos="zoom-in">
+        <a href="#shop" class="btn btn-lg" style="background:linear-gradient(90deg,var(--accent),var(--accent2)); color:#0b0710; font-weight:800; border-radius:12px; padding:.7rem 1.2rem;">Browse Shop</a>
+        <a href="https://t.me/moddingcentral" target="_blank" class="btn btn-outline-light ms-3" style="border-radius:12px; padding:.6rem 1rem;">Join Telegram</a>
+      </div>
+    </section>
+
+    <!-- LINK HUB -->
+    <section id="hub" class="mt-4" data-aos="fade-up">
+      <h2 class="section-title">Quick Access — Tools & Socials</h2>
+      <div class="hub mt-3">
+        <a class="link-btn" href="https://t.me/moddingcentral" target="_blank" rel="noopener">
+          <div class="icon"><i class="fab fa-telegram-plane"></i></div>
+          Telegram Community
+          <small>Join & DM orders</small>
+        </a>
+
+        <a id="tiktok-link" class="link-btn" href="https://www.tiktok.com/@modzcentral1?_t=ZN-90157LpqEB4&_r=1" target="_blank" rel="noopener">
+          <div class="icon"><i class="fab fa-tiktok"></i></div>
+          TikTok — @modzcentral1
+          <small>Follow for previews</small>
+        </a>
+
+        <a class="link-btn" href="https://github.com/ModzCentral01/Black-Ops-6-Bot-" target="_blank" rel="noopener">
+          <div class="icon"><i class="fa-solid fa-robot"></i></div>
+          Black Ops 6 — Bot Lobby Tool
+          <small>GitHub repo</small>
+        </a>
+
+        <a class="link-btn" href="https://github.com/MrJasonDEX/Cold-War-Mods" target="_blank" rel="noopener">
+          <div class="icon"><i class="fa-solid fa-toolbox"></i></div>
+          DA Tool & Cold War Menus
+          <small>GitHub repo</small>
+        </a>
+
+        <a class="link-btn" href="https://github.com/MrJasonDEX/Puplic-Repo-for-Mods" target="_blank" rel="noopener">
+          <div class="icon"><i class="fa-solid fa-folder-open"></i></div>
+          Public Repo for Mods
+          <small>All public mods</small>
+        </a>
+
+        <a class="link-btn" href="https://github.com/MrJasonDEX/PSN-Unfriender-Tool" target="_blank" rel="noopener">
+          <div class="icon"><i class="fa-solid fa-user-slash"></i></div>
+          PSN Unfriend Tool
+          <small>GitHub repo</small>
+        </a>
+      </div>
+    </section>
+
+    <!-- SHOP -->
+    <section id="shop" class="mt-5" data-aos="fade-up">
+      <h2 class="section-title">🛒 Modded Account Shop</h2>
+      <p class="text-center" style="color:var(--muted)">PayPal (GBP only). Delivery typically in 24–48 hours after payment and account access is provided via Telegram.</p>
+
+      <div class="accordion mt-4" id="shopAccordion">
         <!-- BO3 -->
-        <div class="accordion-item">
+        <div class="accordion-item mb-3">
           <h2 class="accordion-header">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#bo3">
-              🎮 Black Ops 3 Modded Accounts
+              🎮 Black Ops 3 — Accounts & Extras
             </button>
           </h2>
           <div id="bo3" class="accordion-collapse collapse" data-bs-parent="#shopAccordion">
             <div class="accordion-body">
-              <div class="row g-4">
+              <div class="row g-3">
                 <div class="col-md-6">
-                  <div class="card p-3 h-100">
-                    <h5>🔥 Ultimate Account (£15)</h5>
-                    <ul>
-                      <li>Prestige 1000, Unlock All</li>
-                      <li>Modded Classes, Custom Avatars</li>
-                      <li>Zombies Prestige 12, All Easter Eggs</li>
-                      <li>Unlimited Death Machine & Beast Mode</li>
+                  <div class="shop-card p-3 h-100">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <h5>🔥 Package 1 — Ultimate Modded Account <span class="badge bg-warning text-dark ms-2">Best</span></h5>
+                    </div>
+                    <p class="small text-muted">£15 · Multiplayer & Zombies packed</p>
+                    <ul class="small">
+                      <li>Prestige 1000, Level 35, Modded Classes, Unlock All</li>
+                      <li>Custom Avatars, void/cherry fizz Classes</li>
+                      <li>Zombies: Prestige 12, Level 35, All Easter Eggs Complete</li>
+                      <li>Unlimited Death Machine & Beast Mode (Shadows of Evil)</li>
                       <li>Unreleased Camos, Green Clan Tag</li>
                     </ul>
-                    <a href="https://www.paypal.com/paypalme/MrJasonDEX/15" class="btn btn-purple mt-auto">Buy £15</a>
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                      <div class="price">£15</div>
+                      <button class="buy-btn" onclick="addToCart('bo3-ult','Package 1 — Ultimate (BO3)',15)">Add to Cart</button>
+                    </div>
+                    <div class="mt-2"><a href="#" class="small" onclick="openDetails('Package 1 — Ultimate (BO3)','Detailed: Prestige 1000, Zombies Prestige 12, Unreleased Camos, video previews available.',15); return false;">View details</a></div>
                   </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="card p-3 h-100">
-                    <h5>🔥 Maxed-Out Account (£10)</h5>
-                    <ul>
-                      <li>Prestige Master, Level 1000</li>
-                      <li>God Mode, Unlimited Death Machine</li>
-                      <li>MP + Zombies fully maxed</li>
-                    </ul>
-                    <a href="https://www.paypal.com/paypalme/MrJasonDEX/10" class="btn btn-purple mt-auto">Buy £10</a>
-                  </div>
-                </div>
-              </div>
 
-              <div class="row g-4 mt-3">
-                <div class="col-md-4">
-                  <div class="card p-3 h-100">
-                    <h5>💀 Zombies Gumballs (£5)</h5>
-                    <p>5x Each Gumball on Slots</p>
-                    <a href="https://www.paypal.com/paypalme/MrJasonDEX/5" class="btn btn-purple mt-auto">Buy £5</a>
+                <div class="col-md-6">
+                  <div class="shop-card p-3 h-100">
+                    <h5>🔥 Package 2 — Maxed-Out Modded Account</h5>
+                    <p class="small text-muted">£10 · Prestige Master ranks & mod perks</p>
+                    <ul class="small">
+                      <li>Prestige Master, Level 1,000</li>
+                      <li>Unlimited Death Machine, God Mode, Modded Classes</li>
+                      <li>Zombies: Prestige Master 1,000, Unlimited Death Machine</li>
+                    </ul>
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                      <div class="price">£10</div>
+                      <button class="buy-btn" onclick="addToCart('bo3-max','Package 2 — Maxed (BO3)',10)">Add to Cart</button>
+                    </div>
+                    <div class="mt-2"><a href="#" class="small" onclick="openDetails('Package 2 — Maxed (BO3)','Detailed: Prestige Master, Unlimited Death Machine, God Mode.',10); return false;">View details</a></div>
                   </div>
                 </div>
+
                 <div class="col-md-4">
-                  <div class="card p-3 h-100">
-                    <h5>💣 Zombies Extras (£3)</h5>
-                    <p>Unlimited Death Machine / Beast Mode</p>
-                    <a href="https://www.paypal.com/paypalme/MrJasonDEX/3" class="btn btn-purple mt-auto">Buy £3</a>
+                  <div class="shop-card p-3 h-100">
+                    <h5>💀 Zombies Gumballs</h5>
+                    <p class="small text-muted">5x Each Gumball on Slots (No Stats Transfer)</p>
+                    <div class="d-flex justify-content-between mt-3">
+                      <div class="price">£5</div>
+                      <button class="buy-btn" onclick="addToCart('gumballs','Zombies Gumballs (5x each)',5)">Add to Cart</button>
+                    </div>
+                    <div class="mt-2 small text-muted">Video previews available — request on Telegram</div>
                   </div>
                 </div>
+
+                <div class="col-md-4">
+                  <div class="shop-card p-3 h-100">
+                    <h5>💣 Zombies Extras</h5>
+                    <p class="small text-muted">Unlimited Death Machine / Beast Mode classes</p>
+                    <div class="d-flex justify-content-between mt-3">
+                      <div class="price">£3</div>
+                      <button class="buy-btn" onclick="addToCart('zm-extras','Zombies Extras',3)">Add to Cart</button>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
         </div>
 
         <!-- Cold War -->
-        <div class="accordion-item">
+        <div class="accordion-item mb-3">
           <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cw">
-              🎮 Cold War Modded Accounts
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#coldwar">
+              ⚡ Cold War — Modded Classes & Unlocks
             </button>
           </h2>
-          <div id="cw" class="accordion-collapse collapse" data-bs-parent="#shopAccordion">
+          <div id="coldwar" class="accordion-collapse collapse" data-bs-parent="#shopAccordion">
             <div class="accordion-body">
-              <div class="row g-4">
-                <div class="col-md-4"><div class="card p-3 h-100"><h5>🔥 Custom Classes (£15)</h5><a href="https://www.paypal.com/paypalme/MrJasonDEX/15" class="btn btn-purple mt-auto">Buy £15</a></div></div>
-                <div class="col-md-4"><div class="card p-3 h-100"><h5>✅ DA Unlock All (£10)</h5><a href="https://www.paypal.com/paypalme/MrJasonDEX/10" class="btn btn-purple mt-auto">Buy £10</a></div></div>
-                <div class="col-md-4"><div class="card p-3 h-100"><h5>💎 Crystals / Currency (£5)</h5><a href="https://www.paypal.com/paypalme/MrJasonDEX/5" class="btn btn-purple mt-auto">Buy £5</a></div></div>
+              <div class="row g-3">
+                <div class="col-md-4">
+                  <div class="shop-card p-3 h-100">
+                    <h5>🔥 Custom Modded Classes</h5>
+                    <p class="small text-muted">Includes Ray Gun & modded weapons — Multiplayer & Zombies</p>
+                    <div class="d-flex justify-content-between mt-3">
+                      <div class="price">£15</div>
+                      <button class="buy-btn" onclick="addToCart('cw-classes','Custom Modded Classes (Cold War)',15)">Add to Cart</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="shop-card p-3 h-100">
+                    <h5>✅ DA Unlock All</h5>
+                    <p class="small text-muted">Full unlock across Cold War</p>
+                    <div class="d-flex justify-content-between mt-3">
+                      <div class="price">£10</div>
+                      <button class="buy-btn" onclick="addToCart('cw-da','DA Unlock All (Cold War)',10)">Add to Cart</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="shop-card p-3 h-100">
+                    <h5>💎 Crystals / Currency</h5>
+                    <p class="small text-muted">Boost your inventory (in-game currency)</p>
+                    <div class="d-flex justify-content-between mt-3">
+                      <div class="price">£5</div>
+                      <button class="buy-btn" onclick="addToCart('cw-credits','Crystals / Currency (Cold War)',5)">Add to Cart</button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Liquid Divinium -->
-        <div class="accordion-item">
+        <!-- Divinium -->
+        <div class="accordion-item mb-3">
           <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ld">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#divinium">
               🧪 BO3 Liquid Divinium Packs
             </button>
           </h2>
-          <div id="ld" class="accordion-collapse collapse" data-bs-parent="#shopAccordion">
+          <div id="divinium" class="accordion-collapse collapse" data-bs-parent="#shopAccordion">
             <div class="accordion-body">
-              <div class="row g-4">
-                <div class="col-md-4"><div class="card p-3 h-100"><h5>100k — £5</h5><a href="https://www.paypal.com/paypalme/MrJasonDEX/5" class="btn btn-purple">Buy £5</a></div></div>
-                <div class="col-md-4"><div class="card p-3 h-100"><h5>500k — £10</h5><a href="https://www.paypal.com/paypalme/MrJasonDEX/10" class="btn btn-purple">Buy £10</a></div></div>
-                <div class="col-md-4"><div class="card p-3 h-100"><h5>1 Million — £20</h5><a href="https://www.paypal.com/paypalme/MrJasonDEX/20" class="btn btn-purple">Buy £20</a></div></div>
+              <div class="row g-3">
+                <div class="col-md-4">
+                  <div class="shop-card p-3 h-100">
+                    <h5>100k</h5>
+                    <div class="d-flex justify-content-between mt-3">
+                      <div class="price">£5</div>
+                      <button class="buy-btn" onclick="addToCart('div-100k','100k Divinium',5)">Add to Cart</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="shop-card p-3 h-100">
+                    <h5>500k</h5>
+                    <div class="d-flex justify-content-between mt-3">
+                      <div class="price">£10</div>
+                      <button class="buy-btn" onclick="addToCart('div-500k','500k Divinium',10)">Add to Cart</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="shop-card p-3 h-100">
+                    <h5>1 Million</h5>
+                    <div class="d-flex justify-content-between mt-3">
+                      <div class="price">£20</div>
+                      <button class="buy-btn" onclick="addToCart('div-1m','1M Divinium',20)">Add to Cart</button>
+                    </div>
+                  </div>
+                </div>
               </div>
+              <p class="mt-3 small text-muted">Bonus: All trophies unlocked with any Liquid Divinium package.</p>
             </div>
           </div>
         </div>
 
         <!-- PSN Mods -->
-        <div class="accordion-item">
+        <div class="accordion-item mb-3">
           <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#psn">
-              🎭 Custom PSN Profile Mods
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#psnmods">
+              🎭 PSN Profile Mods & Trophies
             </button>
           </h2>
-          <div id="psn" class="accordion-collapse collapse" data-bs-parent="#shopAccordion">
+          <div id="psnmods" class="accordion-collapse collapse" data-bs-parent="#shopAccordion">
             <div class="accordion-body">
-              <div class="row g-4">
-                <div class="col-md-4"><div class="card p-3 h-100"><h5>✨ Custom Avatars (£2)</h5><a href="https://www.paypal.com/paypalme/MrJasonDEX/2" class="btn btn-purple">Buy £2</a></div></div>
-                <div class="col-md-4"><div class="card p-3 h-100"><h5>📝 About Me Mods (£2)</h5><a href="https://www.paypal.com/paypalme/MrJasonDEX/2" class="btn btn-purple">Buy £2</a></div></div>
-                <div class="col-md-4"><div class="card p-3 h-100"><h5>🏆 Trophy Level 999 (£50)</h5><a href="https://www.paypal.com/paypalme/MrJasonDEX/50" class="btn btn-purple">Buy £50</a></div></div>
+              <div class="row g-3">
+                <div class="col-md-4">
+                  <div class="shop-card p-3 h-100">
+                    <h5>Custom Avatars</h5>
+                    <p class="small text-muted">£2 each — ask for the available list</p>
+                    <div class="d-flex justify-content-between mt-3">
+                      <div class="price">£2</div>
+                      <button class="buy-btn" onclick="addToCart('avatar','Custom Avatar',2)">Add</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="shop-card p-3 h-100">
+                    <h5>Modded "About Me"</h5>
+                    <p class="small text-muted">£2 — provide text; emoji guidance included</p>
+                    <div class="d-flex justify-content-between mt-3">
+                      <div class="price">£2</div>
+                      <button class="buy-btn" onclick="addToCart('about','Modded About Me',2)">Add</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="shop-card p-3 h-100">
+                    <h5>Modded PSN Trophies</h5>
+                    <p class="small text-muted">Level 999 — £50 • Level 666 — £30 • Custom levels available</p>
+                    <div class="d-flex justify-content-between mt-3">
+                      <div class="price">from £30</div>
+                      <button class="buy-btn" onclick="addToCart('trophy','Modded PSN Trophies (custom)',30)">Add</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p class="mt-3 small text-muted">PS3 / PS Vita bulk unlocks or specific game trophies — message us on Telegram for details.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Other COD -->
+        <div class="accordion-item mb-3">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#othercod">
+              🎮 Other Call of Duty Modded Accounts
+            </button>
+          </h2>
+          <div id="othercod" class="accordion-collapse collapse" data-bs-parent="#shopAccordion">
+            <div class="accordion-body">
+              <div class="row g-3">
+                <div class="col-md-4"><div class="shop-card p-3 h-100"><h5>Call of Duty: Ghosts</h5><p class="small text-muted">Any Rank, Unlock All, Modded Classes</p><div class="d-flex justify-content-between mt-3"><div class="price">£15</div><button class="buy-btn" onclick="addToCart('ghosts','Call of Duty: Ghosts',15)">Add</button></div></div></div>
+                <div class="col-md-4"><div class="shop-card p-3 h-100"><h5>Advanced Warfare</h5><p class="small text-muted">Any Rank, Unlock All</p><div class="d-flex justify-content-between mt-3"><div class="price">£10</div><button class="buy-btn" onclick="addToCart('aw','Advanced Warfare',10)">Add</button></div></div></div>
+                <div class="col-md-4"><div class="shop-card p-3 h-100"><h5>Black Ops 4</h5><p class="small text-muted">Modded Classes — £10 • All Trophies — £5</p><div class="d-flex justify-content-between mt-3"><div class="price">£5–£10</div><a class="buy-btn" href="https://t.me/moddingcentral" target="_blank">Contact</a></div></div></div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Other COD + Services -->
-        <div class="accordion-item">
+        <!-- Other Services -->
+        <div class="accordion-item mb-3">
           <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#other">
-              🎮 Other Games & Services
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#otherservices">
+              🛠️ Other Modded Services & Subscriptions
             </button>
           </h2>
-          <div id="other" class="accordion-collapse collapse" data-bs-parent="#shopAccordion">
+          <div id="otherservices" class="accordion-collapse collapse" data-bs-parent="#shopAccordion">
             <div class="accordion-body">
-              <p>Ghosts (£15) • Advanced Warfare (£10) • Black Ops 4 Mods (£10) • NFS Heat (£10) • IPTV (£50) • Candy Crush Mods (£20)</p>
+              <div class="row g-3">
+                <div class="col-md-6"><div class="shop-card p-3 h-100"><h5>Need for Speed Heat</h5><p class="small text-muted">Unlock All & Modded Cars</p><div class="d-flex justify-content-between mt-3"><div class="price">£10</div><button class="buy-btn" onclick="addToCart('nfs-heat','NFS Heat Unlocks',10)">Add</button></div></div></div>
+                <div class="col-md-6"><div class="shop-card p-3 h-100"><h5>Need for Speed Hot Pursuit Remastered</h5><p class="small text-muted">Unlock All</p><div class="d-flex justify-content-between mt-3"><div class="price">£5</div><button class="buy-btn" onclick="addToCart('nfs-hp','NFS Hot Pursuit Unlocks',5)">Add</button></div></div></div>
+                <div class="col-md-6"><div class="shop-card p-3 h-100"><h5>Any Modded Save / Reassign Save Data</h5><p class="small text-muted">Only for PS4 games</p><div class="d-flex justify-content-between mt-3"><div class="price">£5</div><button class="buy-btn" onclick="addToCart('save','Modded Save / Reassign',5)">Add</button></div></div></div>
+                <div class="col-md-6"><div class="shop-card p-3 h-100"><h5>IPTV — 1 Year</h5><p class="small text-muted">Unlimited streaming; Firestick & Android</p><div class="d-flex justify-content-between mt-3"><div class="price">£50</div><button class="buy-btn" onclick="addToCart('iptv','IPTV 1 Year',50)">Add</button></div></div></div>
+                <div class="col-md-6"><div class="shop-card p-3 h-100"><h5>Candy Crush Saga — Unlimited Lives</h5><p class="small text-muted">Unlimited lives on any device</p><div class="d-flex justify-content-between mt-3"><div class="price">£20</div><button class="buy-btn" onclick="addToCart('candy','Candy Crush — Unlimited Lives',20)">Add</button></div></div></div>
+              </div>
             </div>
           </div>
         </div>
 
+      </div> <!-- shopAccordion -->
+    </section>
+
+    <!-- Cart & Checkout area (modal) -->
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content" style="background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.4)); color:#eef">
+          <div class="modal-header border-0">
+            <h5 class="modal-title">Your Cart</h5>
+            <button class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div id="cartItems"></div>
+            <div class="d-flex justify-content-between align-items-center mt-3"><strong>Total</strong><strong id="cartTotal">£0.00</strong></div>
+            <p class="small text-muted mt-2">After clicking Checkout you will be redirected to PayPal.me with the total (GBP). After payment, DM details on Telegram for delivery.</p>
+          </div>
+          <div class="modal-footer border-0">
+            <button class="btn btn-outline-light" data-bs-dismiss="modal">Continue Shopping</button>
+            <button class="btn" id="checkoutBtn" style="background:linear-gradient(90deg,var(--accent),var(--accent2)); color:#0b0710; font-weight:800;">Checkout via PayPal</button>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
 
-  <!-- How It Works -->
-  <section class="section bg-dark" id="how">
-    <div class="container">
-      <h2 class="text-center mb-4">🔗 How It Works</h2>
-      <div class="row text-center g-4">
-        <div class="col-md-3"><i class="fas fa-shopping-cart fa-2x mb-2 text-purple"></i><p>1️⃣ Choose your package</p></div>
-        <div class="col-md-3"><i class="fas fa-user-lock fa-2x mb-2 text-purple"></i><p>2️⃣ Provide account access</p></div>
-        <div class="col-md-3"><i class="fab fa-paypal fa-2x mb-2 text-purple"></i><p>3️⃣ Pay via PayPal</p></div>
-        <div class="col-md-3"><i class="fas fa-clock fa-2x mb-2 text-purple"></i><p>4️⃣ Delivery in 24–48h</p></div>
+    <!-- Product details modal -->
+    <div class="modal fade" id="prodModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="background:#0f0f18;color:#eef">
+          <div class="modal-header border-0">
+            <h5 class="modal-title" id="prodTitle"></h5>
+            <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <p id="prodDesc"></p>
+            <p><strong>Price:</strong> <span id="prodPrice"></span></p>
+          </div>
+          <div class="modal-footer border-0">
+            <button class="btn btn-outline-light" data-bs-dismiss="modal">Close</button>
+            <button class="btn" id="prodAdd" style="background:linear-gradient(90deg,var(--accent),var(--accent2)); color:#0b0710; font-weight:800;">Add to cart</button>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
 
-  <!-- FAQ -->
-  <section class="section" id="faq">
-    <div class="container">
-      <h2 class="text-center mb-4">❓ FAQ</h2>
-      <div class="accordion" id="faqAccordion">
+    <!-- HOW IT WORKS -->
+    <section id="how" class="mt-5" data-aos="fade-up">
+      <h2 class="section-title">🔗 How It Works</h2>
+      <div class="info-row mt-3">
+        <div class="info-box"><i class="fa-solid fa-clipboard-list fa-2x" style="color:var(--accent)"></i><div style="font-weight:700;margin-top:.5rem">1. Choose package</div><div class="small text-muted">Pick in the shop</div></div>
+        <div class="info-box"><i class="fa-solid fa-user-shield fa-2x" style="color:var(--accent)"></i><div style="font-weight:700;margin-top:.5rem">2. Provide access</div><div class="small text-muted">Email/password OR PSN app login code</div></div>
+        <div class="info-box"><i class="fa-brands fa-paypal fa-2x" style="color:var(--accent)"></i><div style="font-weight:700;margin-top:.5rem">3. Pay via PayPal</div><div class="small text-muted">GBP only — paypal.me/MrJasonDEX</div></div>
+        <div class="info-box"><i class="fa-solid fa-clock fa-2x" style="color:var(--accent)"></i><div style="font-weight:700;margin-top:.5rem">4. Delivery</div><div class="small text-muted">Usually 24–48 hours</div></div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="mt-5" data-aos="fade-up">
+      <h2 class="section-title">What people say</h2>
+      <div id="testCarousel" class="carousel slide mt-3" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="p-3" style="background:rgba(255,255,255,0.02); border-radius:10px;">
+              <p class="mb-1">“Fast delivery, exactly as described — top service.”</p>
+              <div class="small text-muted">— Verified buyer</div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="p-3" style="background:rgba(255,255,255,0.02); border-radius:10px;">
+              <p class="mb-1">“DA tool worked great — thanks!”</p>
+              <div class="small text-muted">— Community member</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="mt-5 faq" data-aos="fade-up">
+      <h2 class="section-title">❓ FAQ</h2>
+      <div class="accordion mt-3" id="faqAccordion">
         <div class="accordion-item">
           <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f1">What payments do you accept?</button></h2>
-          <div id="f1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">We accept PayPal (GBP only).</div></div>
+          <div id="f1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">PayPal (GBP only). Use the PayPal.me links on each product. After payment, DM your account details on Telegram for delivery.</div></div>
         </div>
         <div class="accordion-item">
-          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f2">How long does delivery take?</button></h2>
-          <div id="f2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">Usually within 24–48 hours after payment.</div></div>
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f2">Delivery time?</button></h2>
+          <div id="f2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">Typically 24–48 hours after payment and when login details are provided.</div></div>
         </div>
         <div class="accordion-item">
-          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f3">Refund policy?</button></h2>
-          <div id="f3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">🔰 Serious buyers only — No refunds after deal.</div></div>
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f3">Refunds?</button></h2>
+          <div id="f3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">🔰 Serious buyers only — No refunds after deal. Please ask questions on Telegram if unsure.</div></div>
         </div>
       </div>
+    </section>
+
+    <!-- Footer -->
+    <div class="footer">
+      © <span id="year"></span> Mods Central — Serious buyers only. No refunds after deal.
     </div>
-  </section>
 
-  <!-- Footer -->
-  <div class="footer">© <span id="year"></span> Mods Central | All rights reserved</div>
+  </main>
 
-  <!-- Floating Telegram -->
-  <a href="https://t.me/moddingcentral" target="_blank" class="fab-telegram"><i class="fab fa-telegram-plane"></i></a>
+  <!-- Floating -->
+  <a class="fab telegram" href="https://t.me/moddingcentral" target="_blank" aria-label="Telegram">
+    <i class="fab fa-telegram-plane" style="font-size:20px"></i>
+  </a>
+  <a class="fab tiktok" id="fabTikTok" href="https://www.tiktok.com/@modzcentral1?_t=ZN-90157LpqEB4&_r=1" target="_blank" aria-label="TikTok">
+    <i class="fab fa-tiktok" style="font-size:20px"></i>
+  </a>
 
-  <!-- Scripts -->
+  <!-- Cart floating button -->
+  <button id="cartBtn" class="btn" title="Open cart" onclick="openCart()">Cart (<span id="cartCount">0</span>)</button>
+  <button id="backToTop" class="btn btn-outline-light" title="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+  <!-- Toast -->
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index:20000">
+    <div id="siteToast" class="toast align-items-center text-bg-dark border-0" role="alert" aria-live="polite" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body" id="siteToastBody">Message</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts (CDN) -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
   <script>
-    AOS.init();
-    document.getElementById("year").textContent = new Date().getFullYear();
+    // Init AOS
+    AOS.init({ duration:700, once:true });
+
+    // particles
+    particlesJS("particles-js", {
+      "particles": {
+        "number": {"value":55,"density":{"enable":true,"value_area":900}},
+        "color":{"value":["#c084fc","#9333ea","#7c3aed"]},
+        "opacity":{"value":0.12},
+        "size":{"value":3},
+        "line_linked":{"enable":false},
+        "move":{"speed":0.7}
+      },
+      "interactivity":{"events":{"onhover":{"enable":true,"mode":"repulse"},"onclick":{"enable":true,"mode":"push"}},"modes":{"repulse":{"distance":100},"push":{"particles_nb":3}}}
+    });
+
+    // Typewriter
+    (function(){
+      const words = ["Tools","Bots","Modded Accounts","Community"];
+      let w=0,i=0,del=false,el=document.getElementById('typewriter');
+      (function t(){
+        const word = words[w];
+        if(!del) el.textContent = word.substring(0,++i);
+        else el.textContent = word.substring(0,--i);
+        if(!del && i===word.length) { del=true; setTimeout(t,900); }
+        else if(del && i===0) { del=false; w=(w+1)%words.length; setTimeout(t,300); }
+        else setTimeout(t,del?40:90);
+      })();
+    })();
+
+    // Live timer logic (BST assumed = UTC+1)
+    // Live window: 10:00 BST -> 14:00 BST (BST = UTC+1)
+    function getNextLiveUTC(now = new Date()){
+      // compute today's start and end in UTC:
+      const y = now.getUTCFullYear(), m = now.getUTCMonth(), d = now.getUTCDate();
+      // BST = UTC+1 -> 10:00 BST == 09:00 UTC; 14:00 BST == 13:00 UTC
+      const startUTC = new Date(Date.UTC(y,m,d,9,0,0,0));
+      const endUTC   = new Date(Date.UTC(y,m,d,13,0,0,0));
+      if(now < startUTC) return {start: startUTC, end: endUTC};
+      // if now between start and end, return today's
+      if(now >= startUTC && now <= endUTC) return {start: startUTC, end: endUTC};
+      // else next day
+      const nextDayStart = new Date(Date.UTC(y,m,d+1,9,0,0,0));
+      const nextDayEnd   = new Date(Date.UTC(y,m,d+1,13,0,0,0));
+      return {start: nextDayStart, end: nextDayEnd};
+    }
+
+    function updateLiveUI(){
+      const now = new Date();
+      const span = getNextLiveUTC(now);
+      const start = span.start, end = span.end;
+      const liveBadge = document.getElementById('liveBadge');
+      const countdownEl = document.getElementById('liveCountdown');
+      const localNext = document.getElementById('localNext');
+
+      // Show next live in user's local time (for clarity)
+      const opts = {weekday:'short', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit', hour12:false};
+      localNext.textContent = `Next live (BST) shown below — your local: ${start.toLocaleString(undefined, opts)}`;
+
+      if(now >= start && now <= end){
+        // LIVE NOW
+        liveBadge.innerHTML = '<span class="live-badge" style="background:linear-gradient(90deg,#ff5757,#ff8a6b); color:white">🔴 LIVE NOW — ends at 14:00 BST</span>';
+        // countdown to end
+        const diff = end - now;
+        countdownEl.innerHTML = `<div style="font-size:1.05rem;margin-top:.45rem"><strong>Ends in:</strong> ${formatDiff(diff)}</div>`;
+      } else {
+        // Not live — show countdown to start
+        liveBadge.innerHTML = '<span class="live-badge" style="background:linear-gradient(90deg,var(--accent),var(--accent2)); color:#0b0710">Next live (10:00 BST)</span>';
+        const diff = start - now;
+        countdownEl.innerHTML = `<div style="font-size:1.05rem;margin-top:.45rem"><strong>Starts in:</strong> ${formatDiff(diff)}</div>`;
+      }
+    }
+
+    function formatDiff(ms){
+      if(ms < 0) ms = 0;
+      const s = Math.floor(ms/1000)%60;
+      const m = Math.floor(ms/1000/60)%60;
+      const h = Math.floor(ms/1000/60/60);
+      return `${h}h ${m}m ${s}s`;
+    }
+    setInterval(updateLiveUI, 1000);
+    updateLiveUI();
+
+    // Basic cart implementation (client-side)
+    const CART = {}; // id -> {title, price, qty}
+    function addToCart(id,title,price){
+      if(!CART[id]) CART[id] = { title, price, qty:0 };
+      CART[id].qty++;
+      updateCartBadge();
+      showToast(`${title} added to cart`);
+    }
+    function updateCartBadge(){
+      const count = Object.values(CART).reduce((s,it)=>s+it.qty,0);
+      document.getElementById('cartCount').textContent = count;
+    }
+    function openCart(){
+      renderCart();
+      const cm = new bootstrap.Modal(document.getElementById('cartModal'));
+      cm.show();
+    }
+    function renderCart(){
+      const el = document.getElementById('cartItems');
+      el.innerHTML = '';
+      let total = 0;
+      if(Object.keys(CART).length === 0){
+        el.innerHTML = '<div class="text-muted">Your cart is empty.</div>';
+      } else {
+        for(const [id,item] of Object.entries(CART)){
+          const row = document.createElement('div');
+          row.className = 'd-flex justify-content-between align-items-center py-2 border-bottom';
+          row.innerHTML = `
+            <div>
+              <div style="font-weight:700">${item.title}</div>
+              <div class="small text-muted">£${item.price} each</div>
+            </div>
+            <div style="min-width:160px" class="text-end">
+              <div class="btn-group btn-group-sm" role="group">
+                <button class="btn btn-outline-light" onclick="changeQty('${id}', -1)">-</button>
+                <button class="btn btn-light" disabled>${item.qty}</button>
+                <button class="btn btn-outline-light" onclick="changeQty('${id}', 1)">+</button>
+              </div>
+              <div class="mt-1 small text-muted">Subtotal: £${(item.qty*item.price).toFixed(2)}</div>
+            </div>
+          `;
+          el.appendChild(row);
+          total += item.qty * item.price;
+        }
+      }
+      document.getElementById('cartTotal').textContent = '£' + total.toFixed(2);
+      updateCartBadge();
+    }
+    function changeQty(id,delta){
+      if(!CART[id]) return;
+      CART[id].qty += delta;
+      if(CART[id].qty <= 0) delete CART[id];
+      renderCart();
+    }
+
+    // Checkout opens paypal.me with exact total in GBP
+    document.getElementById('checkoutBtn').addEventListener('click', () => {
+      const total = Object.values(CART).reduce((s,it)=>s+it.price*it.qty, 0);
+      if(total <= 0){ showToast('Cart is empty'); return; }
+      // Format to 2 decimals, paypal.me supports decimal amounts
+      const url = 'https://www.paypal.com/paypalme/MrJasonDEX/' + encodeURIComponent(total.toFixed(2));
+      window.open(url, '_blank');
+    });
+
+    // Product details modal helper
+    function openDetails(title,desc,price){
+      document.getElementById('prodTitle').textContent = title;
+      document.getElementById('prodDesc').textContent = desc;
+      document.getElementById('prodPrice').textContent = '£' + (price || '—');
+      const addBtn = document.getElementById('prodAdd');
+      addBtn.onclick = function(){
+        addToCart('prod-' + Date.now(), title, price || 0);
+        bootstrap.Modal.getInstance(document.getElementById('prodModal')).hide();
+      };
+      const pm = new bootstrap.Modal(document.getElementById('prodModal'));
+      pm.show();
+    }
+
+    // Toast helper
+    function showToast(msg){
+      const toastEl = document.getElementById('siteToast');
+      document.getElementById('siteToastBody').textContent = msg;
+      bootstrap.Toast.getOrCreateInstance(toastEl).show();
+    }
+
+    // TikTok in-app warning and copy
+    function isTikTokBrowser(){ return navigator.userAgent.toLowerCase().includes('tiktok'); }
+    document.getElementById('tiktok-link').addEventListener('click', function(e){
+      if(isTikTokBrowser()){
+        e.preventDefault();
+        navigator.clipboard.writeText(this.href).catch(()=>{});
+        showToast('Opened inside TikTok app — link copied. Open in external browser for full experience.');
+      }
+    });
+    document.getElementById('fabTikTok').addEventListener('click', function(e){
+      if(isTikTokBrowser()){
+        e.preventDefault();
+        navigator.clipboard.writeText(this.href).catch(()=>{});
+        showToast('TikTok link copied. Open in external browser for full experience.');
+      }
+    });
+
+    // Back-to-top visibility
+    window.addEventListener('scroll', () => {
+      const b = document.getElementById('backToTop');
+      if(window.scrollY > 300) b.style.display = 'block'; else b.style.display = 'none';
+    });
+
+    // Navbar collapse on mobile after click
+    document.querySelectorAll('.nav-link').forEach(a => {
+      a.addEventListener('click', () => {
+        const bsCollapse = bootstrap.Collapse.getInstance(document.getElementById('navCollapse'));
+        if(bsCollapse && window.getComputedStyle(document.querySelector('.navbar-toggler')).display !== 'none') bsCollapse.hide();
+      });
+    });
+
+    // set year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // small polish: show a toast on page load
+    window.addEventListener('load', () => {
+      setTimeout(()=> showToast('Welcome — browse shop or join Telegram for orders'), 600);
+    });
+
+    // ensure AOS refresh for dynamic changes
+    setTimeout(()=> AOS.refresh(), 800);
   </script>
 </body>
 </html>
