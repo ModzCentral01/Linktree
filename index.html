@@ -4,298 +4,706 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Mods Central — Hub & Shop</title>
+  <meta name="description" content="Mods Central — Tools, Bot Lobbies, Modded Accounts & Shop.">
 
-  <!-- Google Font: Rubik -->
+  <!-- Rubik font -->
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;800&display=swap" rel="stylesheet">
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
+  <!-- AOS (Animate on Scroll) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
   <style>
-    body {
-      background: #0b0b12;
-      color: #f1f1f1;
-      font-family: 'Rubik', sans-serif;
+    :root{
+      --bg:#0b0b12;
+      --card:#121021;
+      --glass: rgba(255,255,255,0.04);
+      --accent:#9333ea;
+      --accent-2:#c084fc;
+      --muted:#9aa0b4;
+      --button-bg: #1f1f3a;
+      --button-hover: #9333ea;
     }
-    h1, h2, h3 {
-      font-weight: 800;
-      color: #c084fc;
-      text-shadow: 0 0 10px #9333ea;
+    html,body{height:100%}
+    body{
+      margin:0;
+      min-height:100%;
+      background: radial-gradient(ellipse at top left, rgba(147,51,234,0.08), transparent 20%), var(--bg);
+      color:#eaeaea;
+      font-family:'Rubik',sans-serif;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
-    .profile {
-      text-align: center;
-      padding: 2rem 1rem;
+
+    /* Particles container sits behind */
+    #particles-js{position:fixed; inset:0; z-index:0; pointer-events:none;}
+
+    /* Page container */
+    .page {
+      position:relative;
+      z-index:1;
+      padding:2rem 1rem;
+      max-width:1100px;
+      margin:0 auto 4rem;
     }
-    .profile img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 3px solid #9333ea;
-      box-shadow: 0 0 15px #9333ea;
-      margin-bottom: 1rem;
+
+    /* Hero / profile */
+    .hero {
+      text-align:center;
+      margin-bottom:1rem;
+      padding:1.25rem;
+      backdrop-filter: blur(6px);
+      background: linear-gradient(180deg, rgba(147,51,234,0.04), rgba(16,11,27,0.25));
+      border:1px solid rgba(147,51,234,0.12);
+      border-radius:14px;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.6);
     }
-    .countdown {
-      text-align: center;
-      font-size: 1.1rem;
-      margin: 1rem 0 2rem;
-      color: #a855f7;
-    }
+    .hero img{width:110px;height:110px;border-radius:50%;border:3px solid var(--accent);box-shadow:0 0 18px rgba(147,51,234,0.12)}
+    .hero h1{margin:.75rem 0 .25rem;color:var(--accent-2);font-weight:800;text-shadow:0 0 8px rgba(147,51,234,0.22)}
+    .hero p{margin:0;color:var(--muted)}
+    .typewriter{color:var(--accent-2);font-weight:600; margin-top:.5rem}
+
+    /* Countdown */
+    .countdown { text-align:center; color: #a78bfa; margin: 0.75rem 0 1.5rem; font-weight:600; }
+
+    /* Quick links (Linktree style) */
     .links .btn {
-      display: block;
-      width: 100%;
-      margin: 0.5rem auto;
-      padding: 0.9rem;
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: #fff;
-      background: #1f1f3a;
-      border: 1px solid #9333ea;
-      border-radius: 12px;
-      transition: all 0.2s ease-in-out;
-      box-shadow: 0 0 8px rgba(147, 51, 234, 0.4);
+      display:block;
+      width:100%;
+      margin:.45rem auto;
+      padding:.9rem;
+      font-size:1.02rem;
+      font-weight:700;
+      color:#fff;
+      background:var(--button-bg);
+      border:1px solid rgba(147,51,234,0.18);
+      border-radius:12px;
+      transition:all .18s ease-in-out;
+      box-shadow:0 8px 20px rgba(8,6,16,0.35);
+      text-align:left;
     }
-    .links .btn:hover {
-      background: #9333ea;
-      box-shadow: 0 0 18px #c084fc;
-      transform: translateY(-3px);
+    .links .btn .emoji { margin-right:.6rem; font-size:1.05rem; opacity:0.95 }
+    .links .btn:hover { background:var(--button-hover); box-shadow:0 10px 26px rgba(192,132,252,0.18); transform:translateY(-3px); }
+
+    /* Cards / shop */
+    .card-shop{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(147,51,234,0.12);
+      border-radius:14px;
+      padding:1rem;
+      transition:transform .18s ease, box-shadow .18s ease;
+      box-shadow: 0 6px 20px rgba(6,6,22,0.6);
+      height:100%;
     }
-    .card {
-      background: #1a1a2e;
-      border: 1px solid #9333ea;
-      border-radius: 12px;
-      color: #eaeaea;
-      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    }
-    .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 0 15px #9333ea;
-    }
-    .price {
-      font-weight: 700;
-      font-size: 1.2rem;
-      color: #c084fc;
-    }
-    .btn-pay {
-      background: #9333ea;
-      border: none;
-      color: #fff;
-      font-weight: 600;
-      transition: 0.2s;
-    }
-    .btn-pay:hover {
-      background: #c084fc;
-      box-shadow: 0 0 12px #c084fc;
-    }
+    .card-shop:hover{ transform:translateY(-6px); box-shadow: 0 10px 34px rgba(147,51,234,0.12); }
+    .card-shop h5{ color: var(--accent-2); font-weight:800; }
+    .price{ color:var(--accent-2); font-weight:800; font-size:1.15rem; }
+    .badge-sale{ background: linear-gradient(90deg,var(--accent),var(--accent-2)); color:#fff; box-shadow:0 6px 18px rgba(147,51,234,0.14) }
+
+    /* glass footer */
     .footer {
-      text-align: center;
-      padding: 1.5rem;
-      margin-top: 2rem;
-      border-top: 1px solid #333;
-      font-size: 0.85rem;
-      color: #aaa;
+      text-align:center; color:#bdbddf; font-size:.9rem; margin-top:2rem; padding-top:1rem;
     }
-    .fab-telegram {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #9333ea;
-      color: white;
-      border-radius: 50%;
-      width: 55px;
-      height: 55px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      text-decoration: none;
-      box-shadow: 0 0 12px #9333ea;
-      transition: transform 0.2s;
+
+    /* Floating FAB Telegram */
+    .fab {
+      position:fixed; right:18px; bottom:18px;
+      width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#fff; text-decoration:none;
+      box-shadow:0 12px 34px rgba(147,51,234,0.24); z-index:1050;
+      transition: transform .12s;
     }
-    .fab-telegram:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 18px #c084fc;
+    .fab:hover{ transform:scale(1.07) }
+
+    /* Back to top */
+    #backToTop { position:fixed; right:18px; bottom:90px; display:none; z-index:1050; }
+
+    /* Cart floating */
+    #cart-btn {
+      position:fixed; right:18px; bottom:130px; z-index:1050;
+      background: #111021; border:1px solid rgba(147,51,234,0.12); color:#fff; padding:.6rem .75rem; border-radius:12px;
+      box-shadow:0 8px 26px rgba(10,10,20,0.6);
     }
+
+    /* small screens */
+    @media (max-width:575px){
+      .hero img{width:90px;height:90px}
+      .links .btn{font-size:1rem;padding:.8rem}
+    }
+
+    /* spinner overlay */
+    #spinner { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(6,6,12,0.6); z-index:20000; }
   </style>
 </head>
 <body>
-  <!-- Hero/Profile -->
-  <div class="profile">
-    <img src="https://cdn-icons-png.flaticon.com/512/646/646094.png" alt="Mods Central Logo">
-    <h1>🚀 Mods Central</h1>
-    <p>Tools • Bots • Modded Accounts • Community</p>
+  <!-- Particles -->
+  <div id="particles-js"></div>
+
+  <!-- Loading Spinner -->
+  <div id="spinner">
+    <div class="spinner-border text-light" style="width:4rem;height:4rem" role="status"><span class="visually-hidden">Loading...</span></div>
   </div>
 
-  <!-- Countdown -->
-  <div class="countdown">
-    ⏳ Next Lobby Starts In: <span id="timer"></span>
-  </div>
+  <div class="page container">
+    <!-- HERO -->
+    <div class="hero" data-aos="fade-down">
+      <img src="https://cdn-icons-png.flaticon.com/512/646/646094.png" alt="logo">
+      <h1>🚀 Mods Central</h1>
+      <div class="typewriter" id="typewriter">Tools • Bots • Accounts • Community</div>
+      <p class="mt-2">Modded Account Services — PS4 / PS5 & All Platforms. PayPal (GBP) only. Delivery: 24–48 hrs.</p>
+    </div>
 
-  <!-- Linktree Section -->
-  <div class="container links mb-5">
-    <h2 class="mb-3 text-center">Quick Links</h2>
-    <a href="https://t.me/moddingcentral" target="_blank" class="btn">💬 Telegram Community</a>
-    <a href="https://github.com/MrJasonDEX/Cold-War-Mods" target="_blank" class="btn">🛠️ DA Tool</a>
-    <a href="https://github.com/ModzCentral01/Black-Ops-6-Bot-" target="_blank" class="btn">🎮 BO6 Bot Lobby Tool</a>
-    <a href="https://www.tiktok.com/@mrjasondex" target="_blank" class="btn">🎵 TikTok Updates</a>
-    <a href="https://www.paypal.com/paypalme/MrJasonDEX/5" target="_blank" class="btn">💰 Support — £5</a>
-    <a href="#shop" class="btn">🛒 Shop Modded Accounts</a>
-    <a href="#faq" class="btn">❓ FAQ</a>
-    <a href="#contact" class="btn">📩 Contact</a>
-    <a href="#feedback" class="btn">⭐ Leave Feedback</a>
-  </div>
+    <!-- Countdown -->
+    <div class="countdown" data-aos="fade-up">⏳ Next Lobby Starts In: <strong id="timer">--h --m --s</strong></div>
 
-  <!-- Shop Section -->
-  <div class="container" id="shop">
-    <h2>🛒 Modded Account Shop</h2>
-    <p class="text-center mb-4">Choose your package — safe, fast delivery, PayPal GBP only</p>
-
-    <!-- Black Ops 3 -->
-    <h3>🎮 Call of Duty: Black Ops 3</h3>
-    <div class="row g-4 mb-4">
-      <div class="col-md-6">
-        <div class="card p-3 h-100">
-          <div class="card-body">
-            <h5 class="card-title">🔥 Ultimate Modded Account</h5>
-            <p class="card-text">Prestige 1000, Unlock All, Zombies Mods, Unreleased Camos</p>
-            <p class="price">£15</p>
-            <a href="https://www.paypal.com/paypalme/MrJasonDEX/15" target="_blank" class="btn btn-pay">Buy Now</a>
-          </div>
+    <!-- Quick Links -->
+    <div class="links mb-4" data-aos="fade-up">
+      <h3 class="text-center mb-3">Quick Links</h3>
+      <div class="row gx-2">
+        <div class="col-12 col-md-6">
+          <a class="btn" href="https://t.me/moddingcentral" target="_blank"><span class="emoji">💬</span> Telegram Community <small class="text-muted float-end">Join</small></a>
         </div>
-      </div>
-      <div class="col-md-6">
-        <div class="card p-3 h-100">
-          <div class="card-body">
-            <h5 class="card-title">🔥 Maxed-Out Account</h5>
-            <p class="card-text">Prestige Master 1000, Modded Classes, God Mode</p>
-            <p class="price">£10</p>
-            <a href="https://www.paypal.com/paypalme/MrJasonDEX/10" target="_blank" class="btn btn-pay">Buy Now</a>
-          </div>
+        <div class="col-12 col-md-6">
+          <a class="btn" href="https://github.com/MrJasonDEX/Cold-War-Mods" target="_blank"><span class="emoji">🛠️</span> DA Tool <small class="text-muted float-end">GitHub</small></a>
+        </div>
+        <div class="col-12 col-md-6">
+          <a class="btn" href="https://github.com/ModzCentral01/Black-Ops-6-Bot-" target="_blank"><span class="emoji">🤖</span> BO6 Bot Lobby Tool <small class="text-muted float-end">GitHub</small></a>
+        </div>
+        <div class="col-12 col-md-6">
+          <a class="btn" id="tiktok-link" href="https://www.tiktok.com/@mrjasondex" target="_blank"><span class="emoji">🎵</span> TikTok Updates <small class="text-muted float-end">Follow</small></a>
+        </div>
+        <div class="col-12 col-md-6">
+          <a class="btn" href="https://www.paypal.com/paypalme/MrJasonDEX/5" target="_blank"><span class="emoji">💰</span> Support — £5 <small class="text-muted float-end">PayPal</small></a>
+        </div>
+        <div class="col-12 col-md-6">
+          <a class="btn" href="#shop"><span class="emoji">🛒</span> Shop Modded Accounts <small class="text-muted float-end">Browse</small></a>
+        </div>
+        <div class="col-12 col-md-6">
+          <button class="btn" data-bs-toggle="modal" data-bs-target="#faqModal"><span class="emoji">❓</span> FAQ <small class="text-muted float-end">Read</small></button>
+        </div>
+        <div class="col-12 col-md-6">
+          <button class="btn" data-bs-toggle="modal" data-bs-target="#contactModal"><span class="emoji">📩</span> Contact Host <small class="text-muted float-end">Message</small></button>
+        </div>
+        <div class="col-12">
+          <button class="btn" data-bs-toggle="modal" data-bs-target="#feedbackModal"><span class="emoji">⭐</span> Leave Feedback <small class="text-muted float-end">Send</small></button>
         </div>
       </div>
     </div>
 
-    <!-- Cold War -->
-    <h3>🎮 Call of Duty: Cold War</h3>
-    <div class="row g-4 mb-4">
-      <div class="col-md-4">
-        <div class="card p-3 h-100">
-          <div class="card-body">
-            <h5 class="card-title">🔥 Custom Modded Classes</h5>
-            <p class="card-text">Includes Ray Gun & Modded Weapons</p>
-            <p class="price">£15</p>
-            <a href="https://www.paypal.com/paypalme/MrJasonDEX/15" target="_blank" class="btn btn-pay">Buy Now</a>
+    <!-- SHOP -->
+    <div id="shop" class="mb-4" data-aos="fade-up">
+      <h3 class="mb-3">🛒 Modded Account Shop</h3>
+      <p class="text-muted">Choose a package, add to cart, then Checkout via PayPal (GBP only). Delivery 24–48 hrs.</p>
+
+      <!-- BO3 section -->
+      <div class="mb-3">
+        <h5 class="text-start">🎮 Call of Duty: Black Ops 3</h5>
+        <div class="row g-3">
+          <div class="col-12 col-md-6">
+            <div class="card-shop p-3 h-100">
+              <div class="d-flex justify-content-between align-items-start">
+                <h5>🔥 Ultimate Modded Account</h5>
+                <span class="badge badge-sale">Best</span>
+              </div>
+              <p class="small text-muted">Prestige 1000, Unlock All, Custom Avatars, Zombies Prestige 12, Unreleased Camos</p>
+              <div class="d-flex justify-content-between align-items-center mt-2">
+                <div class="price">£15</div>
+                <div>
+                  <button class="btn btn-sm btn-outline-light me-2" data-bs-toggle="modal" data-bs-target="#prodModal" data-prod='{"id":"bo3-ult","title":"Ultimate Modded Account (BO3)","price":15,"desc":"Prestige 1000, Unlock All, Custom Avatars, Zombies Prestige 12, Unreleased Camos. Video previews available."}'>Details</button>
+                  <button class="btn btn-sm" onclick="addToCart('bo3-ult','Ultimate Modded Account (BO3)',15)">Add to cart</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="card-shop p-3 h-100">
+              <h5>🔥 Maxed-Out Modded Account</h5>
+              <p class="small text-muted">Prestige Master 1000, Modded Classes, God Mode, Zombies Prestige Master</p>
+              <div class="d-flex justify-content-between align-items-center mt-2">
+                <div class="price">£10</div>
+                <div>
+                  <button class="btn btn-sm btn-outline-light me-2" data-bs-toggle="modal" data-bs-target="#prodModal" data-prod='{"id":"bo3-max","title":"Maxed-Out Modded Account (BO3)","price":10,"desc":"Prestige Master 1000, Modded Classes, God Mode, Zombies Prestige Master."}'>Details</button>
+                  <button class="btn btn-sm" onclick="addToCart('bo3-max','Maxed-Out Modded Account (BO3)',10)">Add to cart</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="card p-3 h-100">
-          <div class="card-body">
-            <h5 class="card-title">✅ DA Unlock All</h5>
-            <p class="card-text">Full unlock across Cold War</p>
-            <p class="price">£10</p>
-            <a href="https://www.paypal.com/paypalme/MrJasonDEX/10" target="_blank" class="btn btn-pay">Buy Now</a>
+
+      <!-- Cold War -->
+      <div class="mb-3">
+        <h5 class="text-start">🎮 Call of Duty: Cold War</h5>
+        <div class="row g-3">
+          <div class="col-12 col-md-4">
+            <div class="card-shop p-3 h-100">
+              <h5>🔥 Custom Modded Classes</h5>
+              <p class="small text-muted">Includes Ray Gun & Modded Weapons for Multiplayer & Zombies</p>
+              <div class="d-flex justify-content-between align-items-center mt-2">
+                <div class="price">£15</div>
+                <div>
+                  <button class="btn btn-sm btn-outline-light me-2" data-bs-toggle="modal" data-bs-target="#prodModal" data-prod='{"id":"cw-classes","title":"Custom Modded Classes (Cold War)","price":15,"desc":"Ray Gun & modded weapons for Multiplayer & Zombies."}'>Details</button>
+                  <button class="btn btn-sm" onclick="addToCart('cw-classes','Custom Modded Classes (Cold War)',15)">Add to cart</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="card-shop p-3 h-100">
+              <h5>✅ DA Unlock All</h5>
+              <p class="small text-muted">Full unlock across Cold War</p>
+              <div class="d-flex justify-content-between align-items-center mt-2">
+                <div class="price">£10</div>
+                <div>
+                  <button class="btn btn-sm btn-outline-light me-2" data-bs-toggle="modal" data-bs-target="#prodModal" data-prod='{"id":"cw-da","title":"DA Unlock All (Cold War)","price":10,"desc":"Full unlock across Cold War."}'>Details</button>
+                  <button class="btn btn-sm" onclick="addToCart('cw-da','DA Unlock All (Cold War)',10)">Add to cart</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="card-shop p-3 h-100">
+              <h5>✅ Crystals / Currency</h5>
+              <p class="small text-muted">In-game currency to boost your account</p>
+              <div class="d-flex justify-content-between align-items-center mt-2">
+                <div class="price">£5</div>
+                <div>
+                  <button class="btn btn-sm btn-outline-light me-2" data-bs-toggle="modal" data-bs-target="#prodModal" data-prod='{"id":"cw-credits","title":"Crystals / Currency (Cold War)","price":5,"desc":"In-game currency."}'>Details</button>
+                  <button class="btn btn-sm" onclick="addToCart('cw-credits','Crystals / Currency (Cold War)',5)">Add to cart</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="card p-3 h-100">
-          <div class="card-body">
-            <h5 class="card-title">✅ Crystals / In-Game Currency</h5>
-            <p class="card-text">Boost your Cold War loadout</p>
-            <p class="price">£5</p>
-            <a href="https://www.paypal.com/paypalme/MrJasonDEX/5" target="_blank" class="btn btn-pay">Buy Now</a>
+
+      <!-- Divinium -->
+      <div class="mb-3">
+        <h5 class="text-start">🧪 BO3 Liquid Divinium Packs</h5>
+        <div class="row g-3">
+          <div class="col-12 col-md-4">
+            <div class="card-shop p-3 h-100">
+              <h5>💰 100k Divinium</h5>
+              <div class="d-flex justify-content-between align-items-center mt-2">
+                <div class="price">£5</div>
+                <div><button class="btn btn-sm" onclick="addToCart('div-100k','100k Divinium',5)">Add to cart</button></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="card-shop p-3 h-100">
+              <h5>💰 500k Divinium</h5>
+              <div class="d-flex justify-content-between align-items-center mt-2">
+                <div class="price">£10</div>
+                <div><button class="btn btn-sm" onclick="addToCart('div-500k','500k Divinium',10)">Add to cart</button></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="card-shop p-3 h-100">
+              <h5>💰 1 Million Divinium</h5>
+              <div class="d-flex justify-content-between align-items-center mt-2">
+                <div class="price">£20</div>
+                <div><button class="btn btn-sm" onclick="addToCart('div-1m','1M Divinium',20)">Add to cart</button></div>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
+
+      <!-- Other Services -->
+      <div class="mb-3">
+        <h5 class="text-start">🎮 Other Games & Extras</h5>
+        <div class="row g-3">
+          <div class="col-12 col-md-6">
+            <div class="card-shop p-3 h-100">
+              <h5>Need for Speed Heat — Unlocks</h5>
+              <p class="small text-muted">Unlock All & Modded Cars</p>
+              <div class="d-flex justify-content-between align-items-center mt-2">
+                <div class="price">£10</div>
+                <div><button class="btn btn-sm" onclick="addToCart('nfs-heat','NFS Heat Unlocks',10)">Add to cart</button></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="card-shop p-3 h-100">
+              <h5>IPTV — 1 Year</h5>
+              <p class="small text-muted">Unlimited streaming on Firestick & Android</p>
+              <div class="d-flex justify-content-between align-items-center mt-2">
+                <div class="price">£50</div>
+                <div><button class="btn btn-sm" onclick="addToCart('iptv-1yr','IPTV 1-Year',50)">Add to cart</button></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Extras -->
+          <div class="col-12 col-md-4">
+            <div class="card-shop p-3 h-100">
+              <h5>Custom Avatars</h5>
+              <p class="small text-muted">Custom PSN avatars — ask for available list</p>
+              <div class="d-flex justify-content-between align-items-center mt-2">
+                <div class="price">£2</div>
+                <div><button class="btn btn-sm" onclick="addToCart('avatar','Custom Avatar',2)">Add to cart</button></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <div class="card-shop p-3 h-100">
+              <h5>Modded "About Me"</h5>
+              <p class="small text-muted">We write and style your profile text</p>
+              <div class="d-flex justify-content-between align-items-center mt-2">
+                <div class="price">£2</div>
+                <div><button class="btn btn-sm" onclick="addToCart('about','Modded About Me',2)">Add to cart</button></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <div class="card-shop p-3 h-100">
+              <h5>Modded PSN Trophies</h5>
+              <p class="small text-muted">Level 999 / Bulk PS3 unlocks available — enquire</p>
+              <div class="d-flex justify-content-between align-items-center mt-2">
+                <div class="price">from £30</div>
+                <div><button class="btn btn-sm" onclick="addToCart('trophy','Modded Trophies (custom)',30)">Add to cart</button></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Cart / Checkout hint -->
+      <div class="mt-3">
+        <small class="text-muted">Tip: Add items to cart (top-right cart) then Checkout to pay the exact total with PayPal.</small>
       </div>
     </div>
 
-    <!-- Divinium -->
-    <h3>🧪 BO3 Liquid Divinium Packs</h3>
-    <div class="row g-4 mb-4">
-      <div class="col-md-4">
-        <div class="card p-3 h-100">
-          <div class="card-body">
-            <h5 class="card-title">💰 100k Divinium</h5>
-            <p class="price">£5</p>
-            <a href="https://www.paypal.com/paypalme/MrJasonDEX/5" target="_blank" class="btn btn-pay">Buy Now</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card p-3 h-100">
-          <div class="card-body">
-            <h5 class="card-title">💰 500k Divinium</h5>
-            <p class="price">£10</p>
-            <a href="https://www.paypal.com/paypalme/MrJasonDEX/10" target="_blank" class="btn btn-pay">Buy Now</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card p-3 h-100">
-          <div class="card-body">
-            <h5 class="card-title">💰 1 Million Divinium</h5>
-            <p class="price">£20</p>
-            <a href="https://www.paypal.com/paypalme/MrJasonDEX/20" target="_blank" class="btn btn-pay">Buy Now</a>
-          </div>
-        </div>
-      </div>
+    <!-- Footer -->
+    <div class="footer">
+      📩 Custom bundles available — message anytime! &nbsp; • &nbsp; Serious buyers only — No refunds after deal.<br>
+      © <span id="year"></span> Mods Central
     </div>
+  </div>
 
-    <!-- Other Services -->
-    <h3>🎮 Other Games & Services</h3>
-    <div class="row g-4">
-      <div class="col-md-6">
-        <div class="card p-3 h-100">
-          <div class="card-body">
-            <h5 class="card-title">Need for Speed Heat</h5>
-            <p class="card-text">Unlock All & Modded Cars</p>
-            <p class="price">£10</p>
-            <a href="https://www.paypal.com/paypalme/MrJasonDEX/10" target="_blank" class="btn btn-pay">Buy Now</a>
-          </div>
+  <!-- Floating Buttons -->
+  <a class="fab" href="https://t.me/moddingcentral" target="_blank" title="Open Telegram">💬</a>
+
+  <button id="cart-btn" class="btn btn-sm" title="Open cart" onclick="openCart()">Cart (<span id="cart-count">0</span>)</button>
+  <button id="backToTop" class="btn btn-sm btn-outline-light" title="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+  <!-- Product Modal (Details) -->
+  <div class="modal fade" id="prodModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" style="background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.35)); color:#eaf;">
+        <div class="modal-header border-0">
+          <h5 class="modal-title" id="prodTitle"></h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-      </div>
-      <div class="col-md-6">
-        <div class="card p-3 h-100">
-          <div class="card-body">
-            <h5 class="card-title">IPTV 1-Year Subscription</h5>
-            <p class="card-text">Unlimited Streaming (Firestick & Android)</p>
-            <p class="price">£50</p>
-            <a href="https://www.paypal.com/paypalme/MrJasonDEX/50" target="_blank" class="btn btn-pay">Buy Now</a>
-          </div>
+        <div class="modal-body">
+          <p id="prodDesc" class="small"></p>
+          <p><strong>Price:</strong> <span id="prodPrice"></span></p>
+        </div>
+        <div class="modal-footer border-0">
+          <button class="btn btn-outline-light" data-bs-dismiss="modal">Close</button>
+          <button class="btn btn-pay" id="prodAddBtn">Add to cart</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Footer -->
-  <div class="footer">
-    📩 Custom bundles available — message anytime!<br>
-    © <span id="year"></span> Mods Central
+  <!-- Cart Modal -->
+  <div class="modal fade" id="cartModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content" style="background:#0f0f18;color:#eef">
+        <div class="modal-header">
+          <h5 class="modal-title">Your Cart</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div id="cartItems"></div>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <div><strong>Total:</strong></div>
+            <div><strong id="cartTotal">£0</strong></div>
+          </div>
+          <div class="small text-muted mt-2">Checkout will open PayPal.me with the total amount (GBP). Ensure you include your PSN/login details in Telegram after payment.</div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline-light" data-bs-dismiss="modal">Continue Shopping</button>
+          <button class="btn btn-pay" id="checkoutBtn">Checkout via PayPal</button>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- Floating Telegram FAB -->
-  <a href="https://t.me/moddingcentral" target="_blank" class="fab-telegram">💬</a>
+  <!-- FAQ Modal -->
+  <div class="modal fade" id="faqModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+      <div class="modal-content" style="background:#0f0f18;color:#eef">
+        <div class="modal-header">
+          <h5 class="modal-title">FAQ</h5>
+          <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="accordion" id="faqAccordion">
+            <div class="accordion-item" style="background:transparent;border:none;">
+              <h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#faq1">When are lobbies hosted?</button></h2>
+              <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">Every day at <strong>10:00 GMT</strong>. Use the countdown on the page.</div></div>
+            </div>
+            <div class="accordion-item" style="background:transparent;border:none;">
+              <h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#faq2">How do I pay?</button></h2>
+              <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">PayPal (GBP only) via the Checkout button. After payment message your details on Telegram to arrange delivery.</div></div>
+            </div>
+            <div class="accordion-item" style="background:transparent;border:none;">
+              <h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#faq3">Refunds?</button></h2>
+              <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">No refunds after the deal — please be certain before paying. Read product details carefully.</div></div>
+            </div>
+            <div class="accordion-item" style="background:transparent;border:none;">
+              <h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#faq4">Delivery time?</button></h2>
+              <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">Delivery typically within <strong>24–48 hours</strong> after payment and account access details provided.</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer"><button class="btn btn-outline-light" data-bs-dismiss="modal">Close</button></div>
+      </div>
+    </div>
+  </div>
 
-  <!-- Bootstrap JS -->
+  <!-- Contact Modal -->
+  <div class="modal fade" id="contactModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" style="background:#0f0f18;color:#eef">
+        <div class="modal-header"><h5 class="modal-title">Contact Host</h5><button class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div>
+        <div class="modal-body">
+          <form id="contactForm">
+            <div class="mb-2"><input class="form-control" id="contactName" placeholder="Your name" required></div>
+            <div class="mb-2"><input class="form-control" id="contactEmail" placeholder="Email" type="email" required></div>
+            <div class="mb-2"><textarea class="form-control" id="contactMsg" rows="3" placeholder="Message / enquiry" required></textarea></div>
+            <div class="text-end"><button class="btn btn-pay" type="submit">Send</button></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feedback Modal -->
+  <div class="modal fade" id="feedbackModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" style="background:#0f0f18;color:#eef">
+        <div class="modal-header"><h5 class="modal-title">Leave Feedback</h5><button class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div>
+        <div class="modal-body">
+          <form id="feedbackForm">
+            <div class="mb-2"><textarea class="form-control" id="feedbackMsg" rows="4" placeholder="Tell us what to improve..." required></textarea></div>
+            <div class="text-end"><button class="btn btn-outline-light" type="submit">Send Feedback</button></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index:20000">
+    <div id="siteToast" class="toast align-items-center text-bg-dark border-0" role="alert" aria-live="polite" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body" id="siteToastBody">Saved.</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts (CDN) -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    // Footer year
-    document.getElementById("year").textContent = new Date().getFullYear();
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
-    // Countdown to 10am GMT
-    function updateCountdown() {
+  <script>
+    // Initialization
+    AOS.init({ duration:700, once:true });
+
+    // Particles background (basic purple twinkle)
+    particlesJS("particles-js", {
+      "particles": {
+        "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+        "color": { "value": ["#c084fc","#9333ea","#7c3aed"] },
+        "opacity": { "value": 0.12 },
+        "size": { "value": 3 },
+        "line_linked": { "enable": false },
+        "move": { "speed": 0.8 }
+      },
+      "interactivity": {
+        "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" } },
+        "modes": { "repulse": { "distance": 100 }, "push": { "particles_nb": 4 } }
+      }
+    });
+
+    // Hide spinner on load
+    window.addEventListener('load', () => {
+      setTimeout(()=>{ document.getElementById('spinner').style.display='none'; }, 450);
+    });
+
+    // Typewriter words
+    const words = ["Tools", "Bots", "Modded Accounts", "Community"];
+    let wI = 0, cI = 0, deleting=false;
+    const tw = document.getElementById('typewriter');
+    (function type(){
+      const word = words[wI];
+      if(!deleting) tw.textContent = word.substring(0, ++cI);
+      else tw.textContent = word.substring(0, --cI);
+      if(!deleting && cI === word.length){ deleting=true; setTimeout(type, 900); }
+      else if(deleting && cI === 0){ deleting=false; wI = (wI+1) % words.length; setTimeout(type, 300); }
+      else setTimeout(type, deleting ? 40 : 90);
+    })();
+
+    // Countdown to 10:00 GMT
+    function updateCountdown(){
       const now = new Date();
-      let target = new Date();
-      target.setUTCHours(10, 0, 0, 0);
-      if (now > target) target.setUTCDate(target.getUTCDate() + 1);
+      const target = new Date();
+      target.setUTCHours(10,0,0,0);
+      if(now.getTime() > target.getTime()) target.setUTCDate(target.getUTCDate()+1);
       const diff = target - now;
-      const hours = Math.floor(diff / 1000 / 60 / 60);
-      const minutes = Math.floor((diff / 1000 / 60) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-      document.getElementById("timer").textContent = `${hours}h ${minutes}m ${seconds}s`;
+      const hrs = Math.floor(diff/1000/60/60)%24;
+      const min = Math.floor(diff/1000/60)%60;
+      const sec = Math.floor(diff/1000)%60;
+      document.getElementById('timer').textContent = `${hrs}h ${min}m ${sec}s`;
     }
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
+    setInterval(updateCountdown,1000); updateCountdown();
+
+    // Products & Cart (client-side)
+    let CART = {}; // id -> {title, price, qty}
+    function addToCart(id,title,price){
+      if(!CART[id]) CART[id] = { title, price, qty:0 };
+      CART[id].qty++;
+      showToast(`${title} added to cart`);
+      updateCartUI();
+    }
+    function updateCartUI(){
+      const count = Object.values(CART).reduce((s,it)=>s+it.qty,0);
+      document.getElementById('cart-count').textContent = count;
+    }
+    function openCart(){
+      renderCart();
+      const cartModal = new bootstrap.Modal(document.getElementById('cartModal'));
+      cartModal.show();
+    }
+    function renderCart(){
+      const el = document.getElementById('cartItems');
+      el.innerHTML = '';
+      let total = 0;
+      if(Object.keys(CART).length===0){
+        el.innerHTML = '<div class="text-muted">Your cart is empty.</div>';
+      } else {
+        const list = document.createElement('div');
+        for(const [id,item] of Object.entries(CART)){
+          const row = document.createElement('div');
+          row.className = 'd-flex justify-content-between align-items-center py-2 border-bottom';
+          row.innerHTML = `<div>
+            <div style="font-weight:700">${item.title}</div>
+            <div class="small text-muted">£${item.price} each</div>
+          </div>
+          <div style="min-width:160px" class="text-end">
+            <div class="btn-group btn-group-sm" role="group">
+              <button class="btn btn-outline-light" onclick="decreaseQty('${id}')">-</button>
+              <button class="btn btn-light" disabled>${item.qty}</button>
+              <button class="btn btn-outline-light" onclick="increaseQty('${id}')">+</button>
+            </div>
+            <div class="mt-1 small text-muted">Subtotal: £${(item.price*item.qty).toFixed(2)}</div>
+          </div>`;
+          list.appendChild(row);
+          total += item.price*item.qty;
+        }
+        el.appendChild(list);
+      }
+      document.getElementById('cartTotal').textContent = '£' + total.toFixed(2);
+      document.getElementById('cart-count').textContent = Object.values(CART).reduce((s,it)=>s+it.qty,0);
+    }
+    function increaseQty(id){ if(CART[id]){ CART[id].qty++; renderCart(); updateCartUI(); } }
+    function decreaseQty(id){ if(CART[id]){ CART[id].qty--; if(CART[id].qty<=0) delete CART[id]; renderCart(); updateCartUI(); } }
+
+    // Checkout -> build paypal.me URL with amount (PayPal.me supports decimals: e.g. /MrJasonDEX/12.50)
+    document.getElementById('checkoutBtn').addEventListener('click', () => {
+      const total = Object.values(CART).reduce((s,it)=>s+it.price*it.qty,0);
+      if(total <= 0){ showToast('Cart empty'); return; }
+      // open PayPal.me in new tab with exact amount (GBP)
+      const base = 'https://www.paypal.com/paypalme/MrJasonDEX/';
+      const formatted = total.toFixed(2);
+      const url = base + encodeURIComponent(formatted);
+      window.open(url, '_blank');
+    });
+
+    // Product details modal population
+    const prodModalEl = document.getElementById('prodModal');
+    prodModalEl.addEventListener('show.bs.modal', function (evt){
+      const trigger = evt.relatedTarget;
+      if(!trigger) return;
+      const data = JSON.parse(trigger.getAttribute('data-prod'));
+      document.getElementById('prodTitle').textContent = data.title;
+      document.getElementById('prodDesc').textContent = data.desc || '';
+      document.getElementById('prodPrice').textContent = '£' + (data.price||'—');
+      const addBtn = document.getElementById('prodAddBtn');
+      addBtn.onclick = function(){ addToCart(data.id,data.title,data.price); bootstrap.Modal.getInstance(prodModalEl).hide(); };
+    });
+
+    // Site toast helper
+    function showToast(msg){
+      const toastEl = document.getElementById('siteToast');
+      document.getElementById('siteToastBody').textContent = msg;
+      bootstrap.Toast.getOrCreateInstance(toastEl).show();
+    }
+
+    // Contact form
+    document.getElementById('contactForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const name = document.getElementById('contactName').value.trim();
+      const email = document.getElementById('contactEmail').value.trim();
+      const msg = document.getElementById('contactMsg').value.trim();
+      // No backend: just confirm & suggest Telegram DM
+      bootstrap.Modal.getInstance(document.getElementById('contactModal')).hide();
+      showToast('Message received — please DM on Telegram for faster replies.');
+      this.reset();
+    });
+
+    // Feedback form
+    document.getElementById('feedbackForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const fb = document.getElementById('feedbackMsg').value.trim();
+      bootstrap.Modal.getInstance(document.getElementById('feedbackModal')).hide();
+      showToast('Thanks for the feedback!');
+      this.reset();
+    });
+
+    // Prepopulate product modal add button when triggered by `Details`
+    // (already wired above)
+
+    // TikTok browser detection: show toast advising to open in browser
+    function isTikTokBrowser(){ return navigator.userAgent.toLowerCase().includes('tiktok'); }
+    document.getElementById('tiktok-link').addEventListener('click', function(e){
+      if(isTikTokBrowser()){
+        e.preventDefault();
+        showToast('Open this link in Chrome/Safari for best experience. Link copied to clipboard.');
+        navigator.clipboard.writeText(this.href).catch(()=>{});
+      }
+    });
+
+    // Back to top visibility
+    window.addEventListener('scroll', () => {
+      const b = document.getElementById('backToTop');
+      if(window.scrollY > 300) b.style.display = 'block'; else b.style.display = 'none';
+    });
+
+    // Product quick add buttons with data-bs-target not used: simple addToCart already wired.
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // small UX: show cart when clicking floating cart button
+    window.openCart = openCart;
+
+    // Toast default instance
+    bootstrap.Toast.getOrCreateInstance(document.getElementById('siteToast'));
   </script>
 </body>
 </html>
