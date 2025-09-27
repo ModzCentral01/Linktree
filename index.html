@@ -5,794 +5,1032 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Modding Central — Shop & Links</title>
 
-  <!-- Bootstrap CSS -->
+  <!-- SEO / Social -->
+  <meta name="description" content="Modding Central — Modded accounts, tools, and services. Pay with PayPal. Contact: t.me/moddingcentral" />
+  <meta property="og:title" content="Modding Central — Shop & Links" />
+  <meta property="og:description" content="Modded accounts, tools, and services. Pay with PayPal. Contact: t.me/moddingcentral" />
+  <meta property="og:image" content="" />
+
+  <!-- Google Rubik font -->
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Rubik font -->
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <!-- Tiny inline favicon (svg) -->
+  <link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill="%23120a2b" width="100" height="100"/><text x="50" y="58" font-size="50" text-anchor="middle" fill="%23c77dff" font-family="Rubik">%20MC%20</text></svg>'>
 
   <style>
     :root{
-      --bg-1:#06060a;
-      --bg-2:#120016;
-      --accent-1:#c77dff;
-      --accent-2:#9d4edd;
-      --muted:#9aa0b4;
-      --card:#0f0f16;
+      --bg-a:#07060a;
+      --bg-b:#1b0027;
       --glass: rgba(255,255,255,0.03);
+      --muted: #9aa0b4;
+      --accent1: #c77dff;
+      --accent2: #7b2cbf;
       --radius:14px;
     }
-
-    html,body{
-      height:100%;
-      background: linear-gradient(180deg,var(--bg-1),var(--bg-2));
-      font-family: 'Rubik', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      color: #e9e9ef;
+    html,body { height:100%; }
+    body {
+      margin:0;
+      font-family: 'Rubik', system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+      background: linear-gradient(120deg, var(--bg-a), var(--bg-b));
+      color:#eaeaf2;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
+      overflow-y:scroll;
+      scroll-behavior:smooth;
+    }
+
+    /* animated gradient background (subtle) */
+    body::before{
+      content:"";
+      position:fixed; inset:0; z-index:-1;
+      background: radial-gradient(600px 600px at 10% 10%, rgba(199,125,255,0.06), transparent 10%),
+                  radial-gradient(500px 500px at 90% 80%, rgba(125,44,191,0.04), transparent 10%);
+      animation: bgmove 20s linear infinite;
+      pointer-events:none;
+    }
+    @keyframes bgmove { from { transform:translateY(0); } to { transform:translateY(-20px); } }
+
+    /* NAV BAR */
+    .navbar {
+      background: linear-gradient(180deg, rgba(10,6,12,0.6), rgba(10,6,12,0.35));
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(199,125,255,0.04);
+    }
+    .navbar-brand { font-weight:700; color:#fff; letter-spacing:0.2px; }
+    .nav-link { color:#fff !important; font-weight:500; }
+    .nav-link:hover { color:var(--accent1) !important; }
+
+    /* HERO */
+    .hero {
+      padding: 90px 16px 40px;
+      text-align:center;
+      background: linear-gradient(160deg, rgba(22,10,34,0.12), rgba(255,255,255,0.00));
+      border-bottom: 1px solid rgba(199,125,255,0.03);
+      position:relative;
+    }
+    .hero .title {
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
+      font-weight:900;
+      background: linear-gradient(90deg,var(--accent2),var(--accent1));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      background-size:200% auto;
+      animation: shine 4s linear infinite;
+    }
+    @keyframes shine { to { background-position:200% center; } }
+    .hero .subtitle { color:var(--muted); margin-top:8px; font-weight:400; }
+
+    /* LINKTREE */
+    .linktree { max-width:1000px; margin:26px auto 6px; display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
+    .link-btn {
+      min-width: 200px;
+      max-width: 420px;
+      display:flex; align-items:center; gap:12px;
+      padding:12px 18px; border-radius:999px; border:1px solid rgba(255,255,255,0.04);
+      text-decoration:none; color:#fff; background:linear-gradient(90deg, rgba(199,125,255,0.10), rgba(157,78,221,0.06));
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+      transition: transform .18s ease, box-shadow .18s ease;
+      font-weight:700;
+    }
+    .link-btn:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(157,78,221,0.12); }
+
+    .link-icon {
+      width:40px;height:40px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;
+      background:linear-gradient(135deg,var(--accent2),var(--accent1)); color:#0b0710; font-weight:800;
+      box-shadow: 0 8px 22px rgba(157,78,221,0.12);
     }
 
     /* Layout */
-    .app {
-      min-height:100%;
-      display:flex;
-      gap:28px;
-    }
-    aside.sidebar {
-      width:260px;
-      padding:28px;
-      background: linear-gradient(180deg, rgba(127,82,255,0.06), rgba(0,0,0,0.12));
-      border-right: 1px solid rgba(199,125,255,0.08);
-      backdrop-filter: blur(6px);
-    }
-    main.content {
-      flex:1;
-      padding:32px;
-    }
+    .container-xl { max-width:1200px; margin:0 auto; padding: 28px 16px; }
+    .two-col { display:grid; grid-template-columns: 1fr 420px; gap:22px; align-items:start; }
+    @media(max-width:991px){ .two-col { grid-template-columns: 1fr; } }
 
-    /* Sidebar content */
-    .brand {
-      display:flex;
-      align-items:center;
-      gap:12px;
-      margin-bottom:18px;
-    }
-    .logo {
-      width:48px; height:48px; border-radius:10px;
-      background: linear-gradient(135deg,var(--accent-2),var(--accent-1));
-      display:flex; align-items:center; justify-content:center; font-weight:700;
-      box-shadow: 0 6px 18px rgba(157,78,221,0.18);
-      color:#0a0a0f;
-      font-size:18px;
-    }
-    .brand h4{ margin:0; font-size:16px; font-weight:600; color:#fff;}
-    .brand p{ margin:0; font-size:12px; color:var(--muted); }
-
-    .nav-cat { margin-top:18px; display:flex; flex-direction:column; gap:8px; }
-    .nav-cat a {
-      display:flex; align-items:center; gap:10px;
-      padding:10px 12px; border-radius:10px; color:var(--muted); text-decoration:none;
-      transition: .18s; font-weight:500; font-size:14px;
-    }
-    .nav-cat a:hover, .nav-cat a.active {
-      background: linear-gradient(90deg, rgba(199,125,255,0.08), rgba(157,78,221,0.03));
-      color: #fff;
-      transform: translateX(6px);
-      box-shadow: 0 8px 24px rgba(199,125,255,0.05);
-    }
-
-    .sidebar-foot { margin-top:28px; font-size:13px; color:var(--muted); }
-    .small-link { color:var(--muted); text-decoration:none; display:block; margin-top:8px; font-size:13px; }
-    .small-link:hover { color:#fff; text-decoration:underline; }
-
-    /* Mobile: collapse sidebar */
-    @media (max-width: 991px){
-      aside.sidebar { position:fixed; left:-320px; top:0; bottom:0; z-index:40; transition:.28s; }
-      aside.sidebar.open { left:0; box-shadow: 20px 0 80px rgba(0,0,0,0.6); }
-      .app { padding-left:0; }
-      main.content { padding:18px; }
-      .mobile-toggle { display:inline-flex; }
-    }
-
-    .mobile-toggle { display:none; align-items:center; gap:8px; cursor:pointer; color:var(--muted); }
-
-    /* Header / hero */
-    .hero {
-      border-radius:16px;
-      padding:22px;
-      display:flex;
-      gap:18px;
-      align-items:center;
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
-      border: 1px solid rgba(199,125,255,0.06);
-      box-shadow: 0 10px 30px rgba(12,6,20,0.6);
-    }
-    .hero-left { flex:1; }
-    .hero-title {
-      font-size:20px; font-weight:700; color:transparent;
-      background: linear-gradient(90deg,var(--accent-2),var(--accent-1), #7b2cbf);
-      -webkit-background-clip:text; background-clip:text;
-      background-size:200% auto; animation: slide 3.5s linear infinite;
-      margin:0;
-    }
-    @keyframes slide { to { background-position:200% center; } }
-    .hero-sub { color:var(--muted); margin-top:6px; font-size:13px; }
-
-    .links-row { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:12px; }
-    .chip {
-      border-radius:999px; padding:8px 12px; font-size:13px;
-      background: rgba(255,255,255,0.03); border:1px solid rgba(199,125,255,0.06); color:#fff;
-      text-decoration:none;
-    }
-    .chip .badge { margin-left:8px; font-size:11px; opacity:.9; }
-
-    /* Search */
-    .controls { display:flex; gap:12px; align-items:center; margin-top:16px; flex-wrap:wrap; }
-    .search {
-      flex:1;
-      background: var(--glass);
-      border-radius:999px;
-      padding:10px 12px;
-      display:flex; align-items:center; gap:10px;
-      border:1px solid rgba(255,255,255,0.02);
-    }
-    .search input{ background:transparent; border:none; outline:none; color:#fff; width:100%; font-size:14px; }
-
-    /* Product grid & card */
-    .section-title { margin-top:30px; font-size:18px; color:var(--accent-1); font-weight:600; display:flex; align-items:center; gap:10px; }
-    .products { margin-top:14px; display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; }
-    @media (max-width: 1200px){ .products { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 720px){ .products { grid-template-columns: 1fr; } }
+    /* Cards / product grid */
+    .section-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; }
+    .section-title { color:var(--accent1); font-weight:700; font-size:1.05rem; }
+    .products { display:grid; grid-template-columns: repeat(3, 1fr); gap:14px; }
+    @media(max-width:1100px){ .products { grid-template-columns: repeat(2,1fr); } }
+    @media(max-width:680px){ .products { grid-template-columns: 1fr; } }
 
     .product {
       background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
       border-radius: var(--radius);
-      padding:14px;
+      padding:12px;
       border: 1px solid rgba(199,125,255,0.04);
-      transition: transform .22s, box-shadow .22s;
       display:flex; flex-direction:column; gap:10px;
+      transition: transform .18s ease, box-shadow .18s ease;
     }
-    .product:hover{ transform: translateY(-6px); box-shadow: 0 16px 36px rgba(121,58,172,0.12); }
-    .product h5 { margin:0; color:#fff; font-size:16px; }
-    .product .meta { color:var(--muted); font-size:13px; }
-    .price {
-      margin-left:auto;
-      background: linear-gradient(90deg,var(--accent-2),var(--accent-1));
-      padding:8px 12px; border-radius:999px; font-weight:700; color:#07060a; font-size:14px;
+    .product:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(121,58,172,0.10); }
+    .prd-head { display:flex; align-items:center; gap:12px; }
+    .prd-title { font-weight:700; font-size:1rem; color:#fff; margin:0; }
+    .prd-meta { color:var(--muted); font-size:13px; }
+    .price-badge {
+      margin-left:auto; background:linear-gradient(90deg,var(--accent2),var(--accent1)); color:#07060a; padding:6px 10px; border-radius:999px; font-weight:800;
     }
-    .product .btn-row { display:flex; gap:8px; align-items:center; margin-top:auto; }
+    .btn-row { display:flex; gap:8px; align-items:center; margin-top:auto; }
 
     .btn-buy {
-      border:none; padding:8px 12px; border-radius:10px; cursor:pointer; font-weight:700;
-      background: linear-gradient(90deg,var(--accent-2),var(--accent-1)); color:#07060a;
+      border:none; padding:8px 12px; border-radius:10px; cursor:pointer;
+      background: linear-gradient(90deg,var(--accent2),var(--accent1)); color:#07060a; font-weight:800;
     }
-    .btn-details { background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--muted); padding:7px 10px; border-radius:8px; }
+    .btn-ghost { background:transparent; border:1px solid rgba(255,255,255,0.04); color:var(--muted); padding:8px 12px; border-radius:10px; font-weight:600; }
 
-    .badge-ghost { background: rgba(255,255,255,0.03); padding:6px 8px; border-radius:8px; color:var(--muted); font-size:12px; }
+    /* Sidebar / purchase panel */
+    .side-panel {
+      position:sticky; top:88px; align-self:start; padding:16px; border-radius:12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(0,0,0,0.06));
+      border:1px solid rgba(199,125,255,0.04);
+    }
+    .order-title { font-weight:800; color:var(--accent1); margin-bottom:8px; }
+    .order-row { display:flex; gap:8px; align-items:center; margin-bottom:8px; }
+    .qty { width:100%; display:flex; gap:8px; align-items:center; }
+    input[type=number] { width:80px; padding:8px; border-radius:8px; background:transparent; border:1px solid rgba(255,255,255,0.04); color:#fff; }
 
-    /* footer */
-    footer.sitefoot { margin-top:40px; padding:20px; color:var(--muted); font-size:13px; text-align:center; border-top:1px solid rgba(199,125,255,0.03); }
+    /* modal styling */
+    .modal-content { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06)); color:#fff; border-radius:12px; border:none; }
 
-    /* tiny helpers */
+    /* floating Telegram FAB */
+    .fab {
+      position: fixed;
+      right: 18px;
+      bottom: 88px;
+      z-index: 2000;
+      background: linear-gradient(135deg,var(--accent2),var(--accent1));
+      color:#07060a; font-weight:800; padding:14px 16px; border-radius:999px;
+      box-shadow: 0 12px 34px rgba(157,78,221,0.14);
+      display:flex; align-items:center; gap:10px; text-decoration:none;
+    }
+    .fab small { color:#07060a; font-weight:800; }
+
+    /* mobile quickbar */
+    .mobile-quick {
+      display:none;
+    }
+    @media(max-width:767px){
+      .fab { bottom:78px; right:12px; padding:12px; }
+      .mobile-quick { display:flex; position:fixed; left:0; right:0; bottom:0; z-index:2099; gap:12px; justify-content:space-around; padding:10px; background:linear-gradient(180deg, rgba(10,6,12,0.8), rgba(10,6,12,0.9)); border-top:1px solid rgba(199,125,255,0.04);}
+      .mobile-quick a { color:var(--accent1); font-weight:800; text-decoration:none; }
+      .side-panel { position:static; margin-top:18px; }
+      .container-xl { padding-bottom:120px; }
+    }
+
+    /* Availability badge */
+    .avail {
+      display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; font-weight:800; font-size:0.95rem;
+      background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03)); border:1px solid rgba(199,125,255,0.03);
+    }
+    .avail .dot { width:10px; height:10px; border-radius:50%; display:inline-block; }
+
+    /* small helpers */
     .muted { color:var(--muted); font-size:13px; }
-    .coming { color:#ffd580; font-weight:700; font-size:12px; background:rgba(255,210,120,0.06); padding:6px 8px; border-radius:8px; }
+    .hot { color:#ffd580; font-weight:800; font-size:12px; }
+    .coming { color:#ffd6d6; font-weight:700; font-size:12px; background: rgba(255,210,120,0.04); padding:6px 8px; border-radius:8px; }
 
+    /* tiny animation for reveal */
+    .reveal { opacity:0; transform: translateY(8px); transition: all 0.5s cubic-bezier(.2,.9,.2,1); }
+    .reveal.visible { opacity:1; transform:none; }
   </style>
 </head>
 <body>
-  <div class="app">
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar" id="sidebar">
-      <div class="brand">
-        <div class="logo">MC</div>
-        <div>
-          <h4>Modding Central</h4>
-          <p>Shop • Tools • Community</p>
+  <!-- NAV -->
+  <nav class="navbar navbar-expand-lg navbar-dark py-2">
+    <div class="container">
+      <a class="navbar-brand" href="#">Modding Central</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item"><a class="nav-link" href="#links">Links</a></li>
+          <li class="nav-item"><a class="nav-link" href="#shop">Shop</a></li>
+          <li class="nav-item"><a class="nav-link" href="#how">How It Works</a></li>
+          <li class="nav-item ms-2"><a class="btn btn-sm" href="https://t.me/moddingcentral" target="_blank" style="background:linear-gradient(90deg,var(--accent2),var(--accent1)); color:#07060a; font-weight:800; border-radius:999px;">Telegram</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container-xl">
+      <div style="display:flex; align-items:center; justify-content:center; gap:14px; flex-direction:column;">
+        <div class="title">🚀 Modded Account Services — PS4 / PS5 & All Platforms</div>
+        <div class="subtitle">Unlock exclusive mods, max ranks, and dominate your favourite games • PayPal (GBP) • Delivery 24–48 hours</div>
+
+        <!-- AVAILABILITY BADGE -->
+        <div style="margin-top:12px;">
+          <span id="availBadge" class="avail" title="Live availability (UK time)">
+            <span id="availDot" class="dot" style="background:#ffd6d6;"></span>
+            <span id="availText">Checking availability...</span>
+            <span style="margin-left:12px; color:var(--muted); font-weight:600;" id="londonTime"></span>
+          </span>
+        </div>
+
+        <div class="linktree" aria-label="quick links">
+          <a class="link-btn" href="https://github.com/ModzCentral01/Black-Ops-6-Bot-" target="_blank"><span class="link-icon">B6</span><div><div style="font-weight:800">Black Ops 6 Bot</div><div class="muted" style="font-size:12px">Repo • PC</div></div></a>
+          <a class="link-btn" href="https://github.com/ModzCentral01/Cold-war-Mods" target="_blank"><span class="link-icon">CW</span><div><div style="font-weight:800">Cold War Mods</div><div class="muted" style="font-size:12px">Repo • PC</div></div></a>
+          <a class="link-btn" href="https://github.com/MrJasonDEX/Black-ops-3-Mod-Menu-" target="_blank"><span class="link-icon">BO3</span><div><div style="font-weight:800">BO3 GSC Injector</div><div class="muted" style="font-size:12px">PS4 ≤12.02</div></div></a>
+          <a class="link-btn" href="https://t.me/moddingcentral" target="_blank"><span class="link-icon">TG</span><div><div style="font-weight:800">Telegram</div><div class="muted" style="font-size:12px">@moddingcentral</div></div></a>
+          <a class="link-btn" href="https://www.paypal.com/paypalme/MrJasonDEX" target="_blank"><span class="link-icon">£</span><div><div style="font-weight:800">PayPal</div><div class="muted" style="font-size:12px">paypal.me/MrJasonDEX</div></div></a>
         </div>
       </div>
+    </div>
+  </header>
 
-      <nav class="nav-cat">
-        <a href="#hero" class="active" data-target="all">🏠 Home</a>
-        <a href="#bo6" data-target="bo6">🛠 BO6 Tools (Coming Soon)</a>
-        <a href="#bo3" data-target="bo3">🎮 BO3 Accounts</a>
-        <a href="#coldwar" data-target="coldwar">❄️ Cold War</a>
-        <a href="#liquid" data-target="liquid">🧪 Liquid Divinium</a>
-        <a href="#psn" data-target="psn">🎭 PSN Profile Mods</a>
-        <a href="#othercod" data-target="othercod">⚔️ Other COD</a>
-        <a href="#other" data-target="other">🧩 Other Modded Services</a>
-        <a href="#iptv" data-target="iptv">📺 IPTV</a>
-        <a href="#mobile" data-target="mobile">📱 Mobile Mods</a>
-        <a href="#links" data-target="links">🔗 GitHub & Telegram</a>
-      </nav>
+  <!-- MAIN -->
+  <main class="container-xl" id="main">
+    <div class="two-col">
 
-      <div class="sidebar-foot">
-        <div><strong>PayPal:</strong></div>
-        <div style="margin-top:6px;"><a class="small-link" href="https://www.paypal.com/paypalme/MrJasonDEX" target="_blank">paypal.me/MrJasonDEX</a></div>
+      <!-- LEFT: SHOP & CATEGORIES -->
+      <div>
 
-        <div style="margin-top:10px;"><strong>Contact</strong></div>
-        <a class="small-link" href="https://t.me/moddingcentral" target="_blank">Telegram: @moddingcentral</a>
-
-        <div style="margin-top:12px; font-size:12px; color: #f5d6ff;">Serious buyers only • No refunds after deal</div>
-      </div>
-    </aside>
-
-    <!-- MAIN -->
-    <main class="content">
-
-      <!-- Mobile toggle -->
-      <div style="display:flex; justify-content:space-between; align-items:center; gap:12px;">
-        <div style="display:flex; align-items:center; gap:12px;">
-          <div class="mobile-toggle" id="openSidebar" title="Open menu" style="display:none;">
-            ☰
-          </div>
-          <h2 style="margin:0; color:#fff; font-size:18px;">Modding Central — Shop</h2>
-        </div>
-        <div style="display:flex; gap:10px; align-items:center;">
-          <a class="chip" href="https://t.me/moddingcentral" target="_blank">Telegram <span class="badge">Chat</span></a>
-          <a class="chip" href="https://github.com/ModzCentral01/Black-Ops-6-Bot-" target="_blank">BO6 Bot Repo <span class="badge-ghost">Repo</span></a>
-        </div>
-      </div>
-
-      <!-- HERO -->
-      <section id="hero" class="hero mt-3">
-        <div class="hero-left">
-          <h3 class="hero-title">🚀 Modded Account Services — PS4 / PS5 & All Platforms</h3>
-          <p class="hero-sub">Unlock exclusive mods, max out ranks, and dominate your favourite games. PayPal (GBP only) • Delivery: 24–48 hours</p>
-
-          <div class="links-row">
-            <a class="chip" href="https://github.com/ModzCentral01/Black-Ops-6-Bot-" target="_blank">Black Ops 6 Bot Lobby Tool <span class="badge">PC (Coming Soon)</span></a>
-            <a class="chip" href="https://github.com/ModzCentral01/Cold-war-Mods" target="_blank">Cold War Mods • PC</a>
-            <a class="chip" href="https://github.com/MrJasonDEX/Black-ops-3-Mod-Menu-" target="_blank">BO3 PS4 GSC Injector (≤12.02)</a>
-            <a class="chip" href="https://t.me/moddingcentral" target="_blank">Telegram • Contact</a>
-          </div>
-
-          <div class="controls">
-            <div class="search" role="search">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="opacity:.8"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <input id="q" placeholder="Search products or features (eg. 'prestige', 'trophies', 'liquid')" />
-            </div>
-            <div>
-              <select id="filterPlatform" class="form-select" style="min-width:160px; background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.04);">
-                <option value="">Platform: All</option>
-                <option value="ps4">PS4</option>
-                <option value="ps5">PS5</option>
-                <option value="pc">PC</option>
-                <option value="any">Any</option>
-              </select>
+        <!-- SEARCH & FILTER -->
+        <div style="display:flex; gap:12px; align-items:center; margin-bottom:18px; flex-wrap:wrap;">
+          <div style="flex:1; min-width:160px;">
+            <div style="background:var(--glass); border-radius:999px; padding:8px 12px; display:flex; align-items:center; gap:8px; border:1px solid rgba(255,255,255,0.02);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <input id="search" placeholder="Search products, e.g. 'prestige', 'trophies', 'liquid'" style="background:transparent; border:none; outline:none; color:#fff; width:100%;" />
             </div>
           </div>
+          <div style="min-width:160px;">
+            <select id="filterPlatform" class="form-select" style="background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.03);">
+              <option value="">Platform: All</option>
+              <option value="ps4">PS4</option>
+              <option value="ps5">PS5</option>
+              <option value="pc">PC</option>
+              <option value="any">Any</option>
+            </select>
+          </div>
+
+          <div style="margin-left:auto; display:flex; gap:8px;">
+            <button id="btn-bundles" class="btn btn-ghost" type="button">Bundles</button>
+            <a class="btn btn-ghost" href="#links">Quick Links</a>
+          </div>
         </div>
 
-        <div style="width:320px;">
-          <div style="background:linear-gradient(180deg, rgba(157,78,221,0.06), rgba(199,125,255,0.03)); padding:14px; border-radius:12px;">
-            <div style="display:flex; align-items:center; gap:12px;">
-              <div style="width:64px;height:64px;border-radius:10px;background:linear-gradient(135deg,var(--accent-2),var(--accent-1)); display:flex;align-items:center;justify-content:center; color:#0a0a0f; font-weight:700;">MC</div>
-              <div>
-                <div style="font-weight:700;">Fast Delivery • Secure PayPal</div>
-                <div style="color:var(--muted); font-size:13px;">Provide account or app code upon purchase</div>
+        <!-- SECTION: Black Ops 6 & Tools -->
+        <section id="bo6" class="reveal">
+          <div class="section-head">
+            <div class="section-title">🛠 Black Ops 6 — Tools & Bots</div>
+            <div class="muted">Tools & repos</div>
+          </div>
+          <div class="products">
+            <div class="product" data-tags="bo6 pc tool coming soon">
+              <div class="prd-head">
+                <h4 class="prd-title">Black Ops 6 - Bot Lobby Tool</h4>
+                <div class="price-badge">—</div>
+              </div>
+              <div class="prd-meta">PC only • Coming Soon</div>
+              <div class="muted">Repo: <a href="https://github.com/ModzCentral01/Black-Ops-6-Bot-" target="_blank" style="color:var(--accent1)">ModzCentral01/Black-Ops-6-Bot-</a></div>
+              <div class="btn-row">
+                <a class="btn-ghost" href="https://github.com/ModzCentral01/Black-Ops-6-Bot-" target="_blank">View Repo</a>
               </div>
             </div>
 
-            <div style="margin-top:12px; display:flex; gap:8px;">
-              <a class="chip" href="#psn">Profile Mods</a>
-              <a class="chip" href="#liquid">Liquid Divinium</a>
+            <div class="product" data-tags="bo3 ps4 injector gsc free repo">
+              <div class="prd-head">
+                <h4 class="prd-title">BO3 PS4 GSC Injector (≤12.02)</h4>
+                <div class="price-badge">Free</div>
+              </div>
+              <div class="prd-meta">PS4 • GSC Injector</div>
+              <div class="muted">Repo: <a href="https://github.com/MrJasonDEX/Black-ops-3-Mod-Menu-" target="_blank" style="color:var(--accent1)">MrJasonDEX/Black-ops-3-Mod-Menu-</a></div>
+              <div class="btn-row">
+                <a class="btn-ghost" href="https://github.com/MrJasonDEX/Black-ops-3-Mod-Menu-" target="_blank">View Repo</a>
+              </div>
             </div>
-            <div style="margin-top:12px;">
-              <a class="chip" href="https://www.paypal.com/paypalme/MrJasonDEX" target="_blank">PayPal • paypal.me/MrJasonDEX</a>
+
+            <div class="product" data-tags="coldwar pc repo mods">
+              <div class="prd-head">
+                <h4 class="prd-title">Cold War Mods (Repo)</h4>
+                <div class="price-badge">Repo</div>
+              </div>
+              <div class="prd-meta">PC • Mods & tools</div>
+              <div class="muted">Repo: <a href="https://github.com/ModzCentral01/Cold-war-Mods" target="_blank" style="color:var(--accent1)">ModzCentral01/Cold-war-Mods</a></div>
+              <div class="btn-row">
+                <a class="btn-ghost" href="https://github.com/ModzCentral01/Cold-war-Mods" target="_blank">View Repo</a>
+              </div>
             </div>
+          </div>
+        </section>
+
+        <!-- SECTION: BO3 -->
+        <section id="bo3" class="reveal" style="margin-top:20px;">
+          <div class="section-head">
+            <div class="section-title">🎮 Black Ops 3 — Modded Accounts</div>
+            <div class="muted">Accounts • Gumballs • Extras</div>
+          </div>
+
+          <div class="products">
+            <div class="product" data-tags="bo3 ultimate prestige 1000 zombies easter eggs">
+              <div class="prd-head">
+                <h4 class="prd-title">Ultimate Modded Account</h4>
+                <div class="price-badge">£15</div>
+              </div>
+              <div class="prd-meta">Multiplayer & Zombies • PS4 / PS5</div>
+              <ul style="margin:6px 0; color:var(--muted); font-size:13px; padding-left:14px;">
+                <li>Multiplayer: Prestige 1000, Level 35, Modded Classes, Unlock All, Custom Avatars</li>
+                <li>Zombies: Prestige 12, All Easter Eggs, Unlimited Death Machine & Beast Mode, Unreleased Camos</li>
+              </ul>
+              <div class="btn-row">
+                <button class="btn-buy" onclick="quickBuy(15,'Ultimate Modded Account')">Buy £15</button>
+                <button class="btn-ghost" data-title="Ultimate Modded Account" data-desc="Prestige 1000 multiplayer; Zombies Prestige 12; includes video previews on request." onclick="openModal(this)">Details</button>
+              </div>
+            </div>
+
+            <div class="product" data-tags="bo3 maxed prestige master 1000 unlimited death machine">
+              <div class="prd-head">
+                <h4 class="prd-title">Maxed-Out Modded Account</h4>
+                <div class="price-badge">£10</div>
+              </div>
+              <div class="prd-meta">Prestige Master, Level 1,000 • Multiplayer & Zombies</div>
+              <ul style="margin:6px 0; color:var(--muted); font-size:13px; padding-left:14px;">
+                <li>Unlimited Death Machine, God Mode / Modded Classes</li>
+              </ul>
+              <div class="btn-row">
+                <button class="btn-buy" onclick="quickBuy(10,'Maxed-Out Modded Account')">Buy £10</button>
+                <button class="btn-ghost" data-title="Maxed-Out Modded Account" data-desc="Prestige Master accounts with modded classes and unlimited Death Machine." onclick="openModal(this)">Details</button>
+              </div>
+            </div>
+
+            <div class="product" data-tags="bo3 zombies gumballs 5x video">
+              <div class="prd-head">
+                <h4 class="prd-title">Zombies Gumballs — 5x Each (Slots)</h4>
+                <div class="price-badge">£5</div>
+              </div>
+              <div class="prd-meta">No stats transfer • Video previews available</div>
+              <div class="btn-row">
+                <button class="btn-buy" onclick="quickBuy(5,'Zombies Gumballs (5x)')">Buy £5</button>
+                <button class="btn-ghost" data-title="Zombies Gumballs" data-desc="5x each gumball on slots. Video previews provided on request." onclick="openModal(this)">Details</button>
+              </div>
+            </div>
+
+            <div class="product" data-tags="bo3 zombies extras death machine beast mode">
+              <div class="prd-head">
+                <h4 class="prd-title">Zombies Extras — Unlimited Death Machine / Beast Mode</h4>
+                <div class="price-badge">£3</div>
+              </div>
+              <div class="prd-meta">Small extras add-on</div>
+              <div class="btn-row">
+                <button class="btn-buy" onclick="quickBuy(3,'Zombies Extras')">Buy £3</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Cold War section -->
+        <section id="coldwar" class="reveal" style="margin-top:18px;">
+          <div class="section-head">
+            <div class="section-title">❄️ Call of Duty: Cold War</div>
+            <div class="muted">Classes • Currency • Unlocks</div>
+          </div>
+          <div class="products">
+            <div class="product" data-tags="coldwar modded classes ray gun multiplayer zombies">
+              <div class="prd-head">
+                <h4 class="prd-title">Custom Modded Classes</h4>
+                <div class="price-badge">£15</div>
+              </div>
+              <div class="prd-meta">Includes Ray Gun & modded weapons for Multiplayer & Zombies</div>
+              <div class="btn-row">
+                <button class="btn-buy" onclick="quickBuy(15,'Cold War — Custom Modded Classes')">Buy £15</button>
+              </div>
+            </div>
+
+            <div class="product" data-tags="coldwar da unlock all">
+              <div class="prd-head">
+                <h4 class="prd-title">DA Unlock All</h4>
+                <div class="price-badge">£10</div>
+              </div>
+              <div class="btn-row">
+                <button class="btn-buy" onclick="quickBuy(10,'Cold War — DA Unlock All')">Buy £10</button>
+              </div>
+            </div>
+
+            <div class="product" data-tags="coldwar crystals currency items trophies">
+              <div class="prd-head">
+                <h4 class="prd-title">Crystals / In-Game Currency</h4>
+                <div class="price-badge">£5</div>
+              </div>
+              <div class="prd-meta">Trophies included where applicable</div>
+              <div class="btn-row">
+                <button class="btn-buy" onclick="quickBuy(5,'Cold War — Crystals/Currency')">Buy £5</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Liquid Divinium -->
+        <section id="liquid" class="reveal" style="margin-top:18px;">
+          <div class="section-head">
+            <div class="section-title">🧪 Black Ops 3 — Liquid Divinium</div>
+            <div class="muted">Trophy bonus with packages</div>
+          </div>
+          <div class="products">
+            <div class="product" data-tags="liquid 100k">
+              <div class="prd-head">
+                <h4 class="prd-title">100k Liquid Divinium</h4>
+                <div class="price-badge">£5</div>
+              </div>
+              <div class="btn-row">
+                <button class="btn-buy" onclick="quickBuy(5,'100k Liquid Divinium')">Buy £5</button>
+              </div>
+            </div>
+
+            <div class="product" data-tags="liquid 500k">
+              <div class="prd-head">
+                <h4 class="prd-title">500k Liquid Divinium</h4>
+                <div class="price-badge">£10</div>
+              </div>
+              <div class="btn-row">
+                <button class="btn-buy" onclick="quickBuy(10,'500k Liquid Divinium')">Buy £10</button>
+              </div>
+            </div>
+
+            <div class="product" data-tags="liquid 1m million">
+              <div class="prd-head">
+                <h4 class="prd-title">1,000,000 Liquid Divinium</h4>
+                <div class="price-badge">£20</div>
+              </div>
+              <div class="btn-row">
+                <button class="btn-buy" onclick="quickBuy(20,'1,000,000 Liquid Divinium')">Buy £20</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PSN Mods -->
+        <section id="psn" class="reveal" style="margin-top:18px;">
+          <div class="section-head">
+            <div class="section-title">🎭 PSN Profile Mods</div>
+            <div class="muted">Avatars • About • Trophies • Colours</div>
+          </div>
+
+          <div class="products">
+            <div class="product" data-tags="psn avatar custom avatar">
+              <div class="prd-head">
+                <h4 class="prd-title">Custom Avatar</h4>
+                <div class="price-badge">£2</div>
+              </div>
+              <div class="btn-row">
+                <button class="btn-buy" onclick="quickBuy(2,'Custom Avatar')">Buy £2</button>
+              </div>
+            </div>
+
+            <div class="product" data-tags="psn aboutme modded about me">
+              <div class="prd-head">
+                <h4 class="prd-title">Modded "About Me"</h4>
+                <div class="price-badge">£2</div>
+              </div>
+              <div class="muted">Provide text & we'll format with allowed emojis</div>
+              <div class="btn-row">
+                <button class="btn-buy" onclick="quickBuy(2,'Modded About Me')">Buy £2</button>
+              </div>
+            </div>
+
+            <div class="product" data-tags="psn trophies 999 666">
+              <div class="prd-head">
+                <h4 class="prd-title">Modded PSN Trophies — Level 999</h4>
+                <div class="price-badge">£50</div>
+              </div>
+              <div class="muted">Contact for custom trophy levels & PS3/Vita bulk unlocks</div>
+              <div class="btn-row">
+                <button class="btn-buy" onclick="quickBuy(50,'Trophies Level 999')">Buy £50</button>
+              </div>
+            </div>
+
+            <div class="product" data-tags="psn colour profile hex">
+              <div class="prd-head">
+                <h4 class="prd-title">Any Profile Colour (Clear/White/HEX)</h4>
+                <div class="price-badge">£2</div>
+              </div>
+              <div class="btn-row">
+                <button class="btn-buy" onclick="quickBuy(2,'Profile Colour')">Buy £2</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Other CODs -->
+        <section id="othercod" class="reveal" style="margin-top:18px;">
+          <div class="section-head">
+            <div class="section-title">⚔️ Other Call of Duty Services</div>
+            <div class="muted">Ghosts • AW • BO4</div>
+          </div>
+          <div class="products">
+            <div class="product" data-tags="ghosts cod ghosts">
+              <div class="prd-head">
+                <h4 class="prd-title">Call of Duty: Ghosts</h4>
+                <div class="price-badge">£15</div>
+              </div>
+              <div class="btn-row">
+                <button class="btn-buy" onclick="quickBuy(15,'COD Ghosts')">Buy £15</button>
+              </div>
+            </div>
+
+            <div class="product" data-tags="advanced warfare aw">
+              <div class="prd-head">
+                <h4 class="prd-title">Call of Duty: Advanced Warfare</h4>
+                <div class="price-badge">£10</div>
+              </div>
+              <div class="btn-row">
+                <button class="btn-buy" onclick="quickBuy(10,'COD Advanced Warfare')">Buy £10</button>
+              </div>
+            </div>
+
+            <div class="product" data-tags="bo4 modded classes trophies">
+              <div class="prd-head">
+                <h4 class="prd-title">Black Ops 4 — Modded Classes</h4>
+                <div class="price-badge">£10</div>
+              </div>
+              <div class="btn-row">
+                <button class="btn-buy" onclick="quickBuy(10,'BO4 Modded Classes')">Buy £10</button>
+              </div>
+            </div>
+
+            <div class="product" data-tags="bo4 trophies unlock">
+              <div class="prd-head">
+                <h4 class="prd-title">Black Ops 4 — All Trophies Unlocked</h4>
+                <div class="price-badge">£5</div>
+              </div>
+              <div class="btn-row">
+                <button class="btn-buy" onclick="quickBuy(5,'BO4 All Trophies')">Buy £5</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Other Modded Services -->
+        <section id="other" class="reveal" style="margin-top:18px;">
+          <div class="section-head">
+            <div class="section-title">🧩 Other Modded Services</div>
+            <div class="muted">NFS • Saves • More</div>
+          </div>
+          <div class="products">
+            <div class="product" data-tags="nfs heat unlock cars">
+              <div class="prd-head">
+                <h4 class="prd-title">Need for Speed Heat — Unlock All</h4>
+                <div class="price-badge">£10</div>
+              </div>
+              <div class="btn-row">
+                <button class="btn-buy" onclick="quickBuy(10,'NFS Heat Unlock All')">Buy £10</button>
+              </div>
+            </div>
+
+            <div class="product" data-tags="nfs hot pursuit remastered">
+              <div class="prd-head">
+                <h4 class="prd-title">Need for Speed Hot Pursuit Remastered — Unlock All</h4>
+                <div class="price-badge">£5</div>
+              </div>
+              <div class="btn-row">
+                <button class="btn-buy" onclick="quickBuy(5,'NFS Hot Pursuit Unlock All')">Buy £5</button>
+              </div>
+            </div>
+
+            <div class="product" data-tags="save reassign ps4 save data">
+              <div class="prd-head">
+                <h4 class="prd-title">Any Modded Save / Reassign Save Data</h4>
+                <div class="price-badge">£5</div>
+              </div>
+              <div class="muted">Only for PS4 games — inquire for details</div>
+              <div class="btn-row">
+                <button class="btn-buy" onclick="quickBuy(5,'Modded Save / Reassign')">Buy £5</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- IPTV -->
+        <section id="iptv" class="reveal" style="margin-top:18px;">
+          <div class="section-head">
+            <div class="section-title">📺 IPTV Subscription</div>
+            <div class="muted">Firestick & Android</div>
+          </div>
+          <div class="products">
+            <div class="product" data-tags="iptv subscription firestick android">
+              <div class="prd-head">
+                <h4 class="prd-title">1-Year IPTV Subscription — Unlimited</h4>
+                <div class="price-badge">£50</div>
+              </div>
+              <div class="muted">Works on Firestick & Android devices • Bulk packages available</div>
+              <div class="btn-row">
+                <button class="btn-buy" onclick="quickBuy(50,'1-Year IPTV (Unlimited)')">Buy £50</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Mobile Games -->
+        <section id="mobile" class="reveal" style="margin-top:18px;">
+          <div class="section-head">
+            <div class="section-title">📱 Mobile Game Mods</div>
+            <div class="muted">Candy Crush etc.</div>
+          </div>
+          <div class="products">
+            <div class="product" data-tags="candy crush unlimited lives mobile">
+              <div class="prd-head">
+                <h4 class="prd-title">Candy Crush Saga — Unlimited Lives</h4>
+                <div class="price-badge">£20</div>
+              </div>
+              <div class="btn-row">
+                <button class="btn-buy" onclick="quickBuy(20,'Candy Crush — Unlimited Lives')">Buy £20</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Links / repos block -->
+        <section id="links" class="reveal" style="margin-top:18px;">
+          <div class="section-head">
+            <div class="section-title">🔗 Repositories & Contact</div>
+            <div class="muted">Source code & chat</div>
+          </div>
+          <div style="display:grid; gap:12px; grid-template-columns: repeat(3,1fr);">
+            <div style="background:var(--glass); padding:12px; border-radius:12px;"><strong>Black Ops 6 Bot</strong><div class="muted">PC (Coming Soon)</div><a class="link-btn" href="https://github.com/ModzCentral01/Black-Ops-6-Bot-" target="_blank" style="margin-top:8px; display:inline-flex; padding:8px 12px; border-radius:999px;">View Repo</a></div>
+            <div style="background:var(--glass); padding:12px; border-radius:12px;"><strong>Cold War Mods</strong><div class="muted">PC</div><a class="link-btn" href="https://github.com/ModzCentral01/Cold-war-Mods" target="_blank" style="margin-top:8px; display:inline-flex; padding:8px 12px; border-radius:999px;">View Repo</a></div>
+            <div style="background:var(--glass); padding:12px; border-radius:12px;"><strong>BO3 GSC Injector</strong><div class="muted">PS4</div><a class="link-btn" href="https://github.com/MrJasonDEX/Black-ops-3-Mod-Menu-" target="_blank" style="margin-top:8px; display:inline-flex; padding:8px 12px; border-radius:999px;">View Repo</a></div>
+          </div>
+        </section>
+
+        <!-- How it works -->
+        <section id="how" class="reveal" style="margin-top:20px;">
+          <div class="section-head">
+            <div class="section-title">🔗 How It Works</div>
+            <div class="muted">Delivery & payments</div>
+          </div>
+          <div style="color:var(--muted); line-height:1.6;">
+            <ol>
+              <li><strong>Choose your package</strong> — click Buy and pay via PayPal (GBP only)</li>
+              <li><strong>Account access</strong> — provide email/password or PSN app login code in Telegram</li>
+              <li><strong>Payment</strong> — PayPal via paypal.me/MrJasonDEX (use prefilled amount link)</li>
+              <li><strong>Delivery time</strong> — Typically 24–48 hours after access received</li>
+            </ol>
+            <p style="margin-top:8px; color:#ffd6e8;"><strong>Custom orders & bundles available — message on Telegram</strong></p>
+            <p style="color:#ffd6e8;"><strong>🔰 Serious buyers only — No refunds after deal</strong></p>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- RIGHT: Sidebar / Order panel -->
+      <aside class="side-panel">
+        <div class="order-title">Quick Checkout</div>
+        <div class="muted" style="margin-bottom:8px;">Pick product & quantity, then Pay with PayPal</div>
+
+        <div style="display:flex; gap:8px; align-items:center; margin-bottom:8px;">
+          <select id="selectedProduct" class="form-select" style="background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.03);">
+            <option value="" data-price="0">— Select product —</option>
+            <option value="Ultimate Modded Account" data-price="15">Ultimate Modded Account — £15</option>
+            <option value="Maxed-Out Modded Account" data-price="10">Maxed-Out Modded Account — £10</option>
+            <option value="Zombies Gumballs (5x)" data-price="5">Zombies Gumballs — £5</option>
+            <option value="Zombies Extras" data-price="3">Zombies Extras — £3</option>
+            <option value="Cold War — Custom Modded Classes" data-price="15">Cold War Modded Classes — £15</option>
+            <option value="Cold War — DA Unlock All" data-price="10">Cold War DA Unlock — £10</option>
+            <option value="Cold War — Crystals" data-price="5">Cold War Crystals — £5</option>
+            <option value="100k Liquid Divinium" data-price="5">100k Liquid — £5</option>
+            <option value="500k Liquid Divinium" data-price="10">500k Liquid — £10</option>
+            <option value="1,000,000 Liquid Divinium" data-price="20">1,000,000 Liquid — £20</option>
+            <option value="Custom Avatar" data-price="2">Custom Avatar — £2</option>
+            <option value="Modded About Me" data-price="2">Modded About Me — £2</option>
+            <option value="Trophies Level 999" data-price="50">Trophies Level 999 — £50</option>
+            <option value="Profile Colour" data-price="2">Profile Colour — £2</option>
+            <option value="COD Ghosts" data-price="15">COD Ghosts — £15</option>
+            <option value="COD Advanced Warfare" data-price="10">COD Advanced Warfare — £10</option>
+            <option value="BO4 Modded Classes" data-price="10">BO4 Modded Classes — £10</option>
+            <option value="BO4 All Trophies" data-price="5">BO4 All Trophies — £5</option>
+            <option value="NFS Heat Unlock All" data-price="10">NFS Heat — £10</option>
+            <option value="NFS Hot Pursuit Unlock All" data-price="5">NFS Hot Pursuit — £5</option>
+            <option value="Modded Save / Reassign" data-price="5">Modded Save / Reassign — £5</option>
+            <option value="1-Year IPTV (Unlimited)" data-price="50">IPTV 1-Year — £50</option>
+            <option value="Candy Crush — Unlimited Lives" data-price="20">Candy Crush — £20</option>
+          </select>
+        </div>
+
+        <div class="order-row">
+          <div class="muted">Qty</div>
+          <div class="qty">
+            <button class="btn btn-ghost" id="qtyDec">-</button>
+            <input id="qty" type="number" min="1" value="1" />
+            <button class="btn btn-ghost" id="qtyInc">+</button>
           </div>
         </div>
-      </section>
 
-      <!-- PRODUCTS: Black Ops 6 Tools (coming soon) -->
-      <section id="bo6">
-        <div class="section-title">🛠 Black Ops 6 — Tools & Bots</div>
-        <div class="products" style="margin-top:12px;">
-          <div class="product" data-tags="bo6 pc tool coming soon">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <h5>🎮 Black Ops 6 Bot Lobby Tool</h5>
-              <div class="coming">Coming Soon</div>
-              <div class="price">—</div>
-            </div>
-            <div class="meta">PC only • Repo available</div>
-            <div class="muted">Repo: <a href="https://github.com/ModzCentral01/Black-Ops-6-Bot-" target="_blank" style="color:#d3b7ff; text-decoration:underline;">github.com/ModzCentral01/Black-Ops-6-Bot-</a></div>
-            <div class="btn-row" style="margin-top:8px;">
-              <a class="btn-details" href="https://github.com/ModzCentral01/Black-Ops-6-Bot-" target="_blank">View Repo</a>
-            </div>
+        <div style="margin-top:8px;">
+          <div class="muted">Notes (after payment send in Telegram)</div>
+          <textarea id="orderNote" rows="3" style="width:100%; margin-top:8px; background:transparent; border:1px solid rgba(255,255,255,0.03); color:#fff; border-radius:8px; padding:8px;" placeholder="Email / PSN app login code / details..."></textarea>
+        </div>
+
+        <div style="margin-top:12px; display:flex; gap:8px; align-items:center;">
+          <div>
+            <div class="muted">Total</div>
+            <div style="font-weight:900; font-size:1.25rem;" id="totalAmount">£0</div>
           </div>
-
-          <div class="product" data-tags="bo3 ps4 injector gsc">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <h5>🔥 BO3 PS4 GSC Injector</h5>
-              <div class="price">Free / Repo</div>
-            </div>
-            <div class="meta">PS4 • GSC Injector (12.02 or lower)</div>
-            <div class="muted">Repo: <a href="https://github.com/MrJasonDEX/Black-ops-3-Mod-Menu-" target="_blank" style="color:#d3b7ff; text-decoration:underline;">github.com/MrJasonDEX/Black-ops-3-Mod-Menu-</a></div>
-            <div class="btn-row">
-              <a class="btn-details" href="https://github.com/MrJasonDEX/Black-ops-3-Mod-Menu-" target="_blank">View Repo</a>
-            </div>
-          </div>
-
-          <div class="product" data-tags="coldwar pc mods">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <h5>❄️ Cold War Mods (Repo)</h5>
-              <div class="price">Repo</div>
-            </div>
-            <div class="meta">PC only • Mods & tools</div>
-            <div class="muted">Repo: <a href="https://github.com/ModzCentral01/Cold-war-Mods" target="_blank" style="color:#d3b7ff; text-decoration:underline;">github.com/ModzCentral01/Cold-war-Mods</a></div>
-            <div class="btn-row">
-              <a class="btn-details" href="https://github.com/ModzCentral01/Cold-war-Mods" target="_blank">View Repo</a>
-            </div>
+          <div style="margin-left:auto;">
+            <button id="payNow" class="btn btn-buy" style="padding:10px 14px;">Pay with PayPal</button>
           </div>
         </div>
-      </section>
 
-      <!-- BO3 -->
-      <section id="bo3" style="margin-top:16px;">
-        <div class="section-title">🎮 Call of Duty: Black Ops 3 — Modded Accounts</div>
-        <div class="products">
-          <div class="product" data-tags="bo3 account prestige 1000 zombies easter eggs">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <h5>🔥 Ultimate Modded Account</h5>
-              <div class="price">£15</div>
-            </div>
-            <div class="meta">Multiplayer & Zombies • PS4 / PS5 (or platform on request)</div>
-            <ul style="margin:8px 0 0 16px; padding:0; color:var(--muted);">
-              <li>Multiplayer: Prestige 1000, Level 35, Modded Classes, Unlock All, Custom Avatars</li>
-              <li>Zombies: Prestige 12, Level 35, All Easter Eggs Complete, Unlimited Death Machine & Beast Mode (Shadows of Evil), Unreleased Camos, Green Clan Tag</li>
-            </ul>
-            <div class="btn-row">
-              <a class="btn-buy" href="https://www.paypal.com/paypalme/MrJasonDEX/15" target="_blank">Buy £15</a>
-              <button class="btn-details" data-title="Ultimate Modded Account" data-desc="Includes Prestige 1000 (Multiplayer), Level 35, Modded Classes, Unlock All; Zombies Prestige 12, All Easter Eggs complete and special camos. Video previews available on request." onclick="openModal(this)">Details</button>
-            </div>
-          </div>
+        <div style="margin-top:12px;" class="muted">PayPal: <a href="https://www.paypal.com/paypalme/MrJasonDEX" target="_blank" style="color:var(--accent1)">paypal.me/MrJasonDEX</a></div>
+        <div style="margin-top:8px;" class="muted">Contact: <a href="https://t.me/moddingcentral" target="_blank" style="color:var(--accent1)">@moddingcentral</a></div>
+      </aside>
+    </div>
 
-          <div class="product" data-tags="bo3 account prestige master 1000 unlimited death machine">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <h5>🔥 Maxed-Out Modded Account</h5>
-              <div class="price">£10</div>
-            </div>
-            <div class="meta">Multiplayer & Zombies • PS4 / PS5</div>
-            <ul style="margin:8px 0 0 16px; padding:0; color:var(--muted);">
-              <li>Multiplayer: Prestige Master, Level 1,000, Unlimited Death Machine, God Mode / Modded Classes</li>
-              <li>Zombies: Prestige Master, Level 1,000, Unlimited Death Machine</li>
-            </ul>
-            <div class="btn-row">
-              <a class="btn-buy" href="https://www.paypal.com/paypalme/MrJasonDEX/10" target="_blank">Buy £10</a>
-              <button class="btn-details" data-title="Maxed-Out Modded Account" data-desc="Prestige Master accounts, modded classes, unlimited Death Machine in multiplayer and zombies." onclick="openModal(this)">Details</button>
-            </div>
-          </div>
+  </main>
 
-          <div class="product" data-tags="bo3 zombies gumballs video preview 5x">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <h5>💀 Zombies Gumballs — 5x Each (Slots)</h5>
-              <div class="price">£5</div>
-            </div>
-            <div class="meta">No stats transfer • Video previews available</div>
-            <div class="btn-row">
-              <a class="btn-buy" href="https://www.paypal.com/paypalme/MrJasonDEX/5" target="_blank">Buy £5</a>
-              <button class="btn-details" data-title="Zombies Gumballs" data-desc="5x each gumball on slots. No stats transfer. Video previews supplied on request." onclick="openModal(this)">Details</button>
-            </div>
-          </div>
+  <!-- Floating Telegram FAB -->
+  <a href="https://t.me/moddingcentral" class="fab" target="_blank" aria-label="Chat on Telegram">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 4L2 13l5 2 2 6 2-6 9-6z" fill="#07060a"></path></svg>
+    <small>Chat</small>
+  </a>
 
-          <div class="product" data-tags="bo3 zombies death machine beast mode extras">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <h5>💣 Zombies Extras — Unlimited Death Machine / Beast Mode</h5>
-              <div class="price">£3</div>
-            </div>
-            <div class="meta">Small extras add-on</div>
-            <div class="btn-row">
-              <a class="btn-buy" href="https://www.paypal.com/paypalme/MrJasonDEX/3" target="_blank">Buy £3</a>
-              <button class="btn-details" data-title="Zombies Extras" data-desc="Unlimited Death Machine / Beast Mode classes add-on." onclick="openModal(this)">Details</button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Cold War -->
-      <section id="coldwar">
-        <div class="section-title">🎮 Call of Duty: Cold War — Modded Accounts</div>
-        <div class="products">
-          <div class="product" data-tags="coldwar modded classes ray gun multiplayer zombies">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <h5>🔥 Custom Modded Classes</h5>
-              <div class="price">£15</div>
-            </div>
-            <div class="meta">Includes Ray Gun & modded weapons for Multiplayer & Zombies</div>
-            <div class="btn-row">
-              <a class="btn-buy" href="https://www.paypal.com/paypalme/MrJasonDEX/15" target="_blank">Buy £15</a>
-              <button class="btn-details" data-title="Cold War — Custom Modded Classes" data-desc="Custom modded classes include Ray Gun & modded weapons across Multiplayer & Zombies." onclick="openModal(this)">Details</button>
-            </div>
-          </div>
-
-          <div class="product" data-tags="coldwar da unlock all">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <h5>✅ DA Unlock All</h5>
-              <div class="price">£10</div>
-            </div>
-            <div class="meta">Unlock all Digital Arsenal / DA items</div>
-            <div class="btn-row">
-              <a class="btn-buy" href="https://www.paypal.com/paypalme/MrJasonDEX/10" target="_blank">Buy £10</a>
-            </div>
-          </div>
-
-          <div class="product" data-tags="coldwar crystals currency trophies">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <h5>✅ Crystals / In-Game Currency</h5>
-              <div class="price">£5</div>
-            </div>
-            <div class="meta">In-game currency / crystals • Trophies included where applicable</div>
-            <div class="btn-row">
-              <a class="btn-buy" href="https://www.paypal.com/paypalme/MrJasonDEX/5" target="_blank">Buy £5</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Liquid Divinium -->
-      <section id="liquid">
-        <div class="section-title">🧪 Black Ops 3 — Liquid Divinium Packs</div>
-        <div class="products">
-          <div class="product" data-tags="liquid 100k">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <h5>💰 100k Liquid Divinium</h5>
-              <div class="price">£5</div>
-            </div>
-            <div class="meta">Bonus: All trophies unlocked with any Liquid Divinium package</div>
-            <div class="btn-row">
-              <a class="btn-buy" href="https://www.paypal.com/paypalme/MrJasonDEX/5" target="_blank">Buy £5</a>
-            </div>
-          </div>
-
-          <div class="product" data-tags="liquid 500k">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <h5>💰 500k Liquid Divinium</h5>
-              <div class="price">£10</div>
-            </div>
-            <div class="meta">Trophies bonus included</div>
-            <div class="btn-row">
-              <a class="btn-buy" href="https://www.paypal.com/paypalme/MrJasonDEX/10" target="_blank">Buy £10</a>
-            </div>
-          </div>
-
-          <div class="product" data-tags="liquid 1m million">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <h5>💰 1,000,000 Liquid Divinium</h5>
-              <div class="price">£20</div>
-            </div>
-            <div class="meta">Includes trophy unlocks with package</div>
-            <div class="btn-row">
-              <a class="btn-buy" href="https://www.paypal.com/paypalme/MrJasonDEX/20" target="_blank">Buy £20</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- PSN Profile Mods -->
-      <section id="psn">
-        <div class="section-title">🎭 Custom PSN Profile Mods</div>
-        <div class="products">
-          <div class="product" data-tags="psn avatar custom avatar">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <h5>✨ Custom Avatar</h5>
-              <div class="price">£2</div>
-            </div>
-            <div class="meta">Custom avatars — ask for list or request your own</div>
-            <div class="btn-row">
-              <a class="btn-buy" href="https://www.paypal.com/paypalme/MrJasonDEX/2" target="_blank">Buy £2</a>
-            </div>
-          </div>
-
-          <div class="product" data-tags="psn about me modded about me">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <h5>📝 Modded “About Me”</h5>
-              <div class="price">£2</div>
-            </div>
-            <div class="meta">Provide text and we’ll confirm allowed emojis & formatting</div>
-            <div class="btn-row">
-              <a class="btn-buy" href="https://www.paypal.com/paypalme/MrJasonDEX/2" target="_blank">Buy £2</a>
-            </div>
-          </div>
-
-          <div class="product" data-tags="psn trophies 999 666">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <h5>🏆 Modded PSN Trophies — Level 999</h5>
-              <div class="price">£50</div>
-            </div>
-            <div class="meta">Custom trophy levels available • PS3 / PS Vita bulk unlocks by request</div>
-            <div class="btn-row">
-              <a class="btn-buy" href="https://www.paypal.com/paypalme/MrJasonDEX/50" target="_blank">Buy £50</a>
-              <button class="btn-details" data-title="Trophies Level 999" data-desc="Level 999 trophy package. Contact for custom trophy levels, PS3 / PS Vita bulk unlocks available." onclick="openModal(this)">Details</button>
-            </div>
-          </div>
-
-          <div class="product" data-tags="psn trophies 666">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <h5>🏆 Modded PSN Trophies — Level 666</h5>
-              <div class="price">£30</div>
-            </div>
-            <div class="meta">Custom trophy levels available — contact for specifics</div>
-            <div class="btn-row">
-              <a class="btn-buy" href="https://www.paypal.com/paypalme/MrJasonDEX/30" target="_blank">Buy £30</a>
-            </div>
-          </div>
-
-          <div class="product" data-tags="psn colour profile hex">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <h5>🎨 Any Profile Colour (Clear/White/HEX)</h5>
-              <div class="price">£2</div>
-            </div>
-            <div class="meta">Clear / White / Custom HEX • applied to profile</div>
-            <div class="btn-row">
-              <a class="btn-buy" href="https://www.paypal.com/paypalme/MrJasonDEX/2" target="_blank">Buy £2</a>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- Other COD -->
-      <section id="othercod">
-        <div class="section-title">🎮 Other Call of Duty Modded Accounts</div>
-        <div class="products">
-          <div class="product" data-tags="ghosts cod ghosts">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <h5>Call of Duty: Ghosts</h5>
-              <div class="price">£15</div>
-            </div>
-            <div class="meta">Any Rank, Unlock All, Modded Classes & Clan Tag</div>
-            <div class="btn-row">
-              <a class="btn-buy" href="https://www.paypal.com/paypalme/MrJasonDEX/15" target="_blank">Buy £15</a>
-            </div>
-          </div>
-
-          <div class="product" data-tags="advanced warfare aw">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <h5>Call of Duty: Advanced Warfare</h5>
-              <div class="price">£10</div>
-            </div>
-            <div class="meta">Any rank, Unlock All, Custom & Modded Classes</div>
-            <div class="btn-row">
-              <a class="btn-buy" href="https://www.paypal.com/paypalme/MrJasonDEX/10" target="_blank">Buy £10</a>
-            </div>
-          </div>
-
-          <div class="product" data-tags="bo4 modded classes trophies">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <h5>Black Ops 4 — Modded Classes</h5>
-              <div class="price">£10</div>
-            </div>
-            <div class="meta">Modded classes for BO4</div>
-            <div class="btn-row">
-              <a class="btn-buy" href="https://www.paypal.com/paypalme/MrJasonDEX/10" target="_blank">Buy £10</a>
-            </div>
-          </div>
-
-          <div class="product" data-tags="bo4 trophies">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <h5>Black Ops 4 — All Trophies Unlocked</h5>
-              <div class="price">£5</div>
-            </div>
-            <div class="meta">Full trophy unlock package</div>
-            <div class="btn-row">
-              <a class="btn-buy" href="https://www.paypal.com/paypalme/MrJasonDEX/5" target="_blank">Buy £5</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Other Modded Services -->
-      <section id="other">
-        <div class="section-title">🎮 Other Modded Services & Saves</div>
-        <div class="products">
-          <div class="product" data-tags="nfs heat unlock all modded cars">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <h5>Need for Speed Heat — Unlock All</h5>
-              <div class="price">£10</div>
-            </div>
-            <div class="meta">Unlocks & modded cars</div>
-            <div class="btn-row">
-              <a class="btn-buy" href="https://www.paypal.com/paypalme/MrJasonDEX/10" target="_blank">Buy £10</a>
-            </div>
-          </div>
-
-          <div class="product" data-tags="nfs hot pursuit remastered unlock all">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <h5>Need for Speed Hot Pursuit Remastered — Unlock All</h5>
-              <div class="price">£5</div>
-            </div>
-            <div class="meta">Unlock all content</div>
-            <div class="btn-row">
-              <a class="btn-buy" href="https://www.paypal.com/paypalme/MrJasonDEX/5" target="_blank">Buy £5</a>
-            </div>
-          </div>
-
-          <div class="product" data-tags="modded save reassign ps4 save data">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <h5>💾 Any Modded Save / Reassign Save Data</h5>
-              <div class="price">£5</div>
-            </div>
-            <div class="meta">Only for PS4 games — inquire for details</div>
-            <div class="btn-row">
-              <a class="btn-buy" href="https://www.paypal.com/paypalme/MrJasonDEX/5" target="_blank">Buy £5</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- IPTV -->
-      <section id="iptv">
-        <div class="section-title">📺 IPTV Subscription</div>
-        <div class="products">
-          <div class="product" data-tags="iptv subscription firestick android">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <h5>🔥 1-Year IPTV Subscription — Unlimited</h5>
-              <div class="price">£50</div>
-            </div>
-            <div class="meta">Works on Firestick & Android devices. Bulk packages available — message for pricing.</div>
-            <div class="btn-row">
-              <a class="btn-buy" href="https://www.paypal.com/paypalme/MrJasonDEX/50" target="_blank">Buy £50</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Mobile -->
-      <section id="mobile">
-        <div class="section-title">📱 Mobile Game Mods</div>
-        <div class="products">
-          <div class="product" data-tags="candy crush unlimited lives mobile">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <h5>Candy Crush Saga — Unlimited Lives</h5>
-              <div class="price">£20</div>
-            </div>
-            <div class="meta">Unlimited lives on any device</div>
-            <div class="btn-row">
-              <a class="btn-buy" href="https://www.paypal.com/paypalme/MrJasonDEX/20" target="_blank">Buy £20</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- LINKS -->
-      <section id="links">
-        <div class="section-title">🔗 Repositories & Contact</div>
-        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:12px;">
-          <div style="background:var(--card); padding:14px; border-radius:12px;">
-            <strong>Black Ops 6 Bot Lobby Tool</strong>
-            <div class="muted" style="margin-top:8px;">PC • Coming Soon</div>
-            <div style="margin-top:10px;"><a class="chip" href="https://github.com/ModzCentral01/Black-Ops-6-Bot-" target="_blank">View Repo</a></div>
-          </div>
-
-          <div style="background:var(--card); padding:14px; border-radius:12px;">
-            <strong>Cold War Mods</strong>
-            <div class="muted" style="margin-top:8px;">PC mods & assets</div>
-            <div style="margin-top:10px;"><a class="chip" href="https://github.com/ModzCentral01/Cold-war-Mods" target="_blank">View Repo</a></div>
-          </div>
-
-          <div style="background:var(--card); padding:14px; border-radius:12px;">
-            <strong>BO3 PS4 GSC Injector</strong>
-            <div class="muted" style="margin-top:8px;">GSC Injector (≤12.02)</div>
-            <div style="margin-top:10px;"><a class="chip" href="https://github.com/MrJasonDEX/Black-ops-3-Mod-Menu-" target="_blank">View Repo</a></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- How it works -->
-      <section style="margin-top:36px;">
-        <div class="section-title">🔗 How It Works</div>
-        <div style="margin-top:12px; color:var(--muted); line-height:1.6;">
-          <ol>
-            <li><strong>Choose Your Package</strong> — Click Buy and pay through PayPal (GBP only).</li>
-            <li><strong>Account Access</strong> — Provide email/password OR a PSN app login code when prompted in Telegram (do not DM sensitive info on open platforms).</li>
-            <li><strong>Payment</strong> — PayPal via paypal.me/MrJasonDEX. Use the prefilled amount link from the Buy button.</li>
-            <li><strong>Delivery Time</strong> — Typically 24–48 hours after receiving access info.</li>
-          </ol>
-          <p style="margin-top:8px; color:#ffd6e8;"><strong>Custom Orders & Bundles Available — message on Telegram for custom requests.</strong></p>
-          <p style="margin-top:6px; color:#ffd6e8;"><strong>🔰 Serious buyers only — No refunds after deal.</strong></p>
-        </div>
-      </section>
-
-      <footer class="sitefoot">
-        © 2025 Modding Central — Built with Bootstrap • PayPal: paypal.me/MrJasonDEX
-      </footer>
-
-    </main>
+  <!-- Mobile quick bar -->
+  <div class="mobile-quick d-md-none">
+    <a href="#shop">🛒 Shop</a>
+    <a href="https://t.me/moddingcentral" target="_blank">📲 Telegram</a>
+    <a id="mobile-pay" href="https://www.paypal.com/paypalme/MrJasonDEX" target="_blank">💰 Pay</a>
   </div>
 
-  <!-- Product detail modal -->
+  <!-- PRODUCT DETAILS MODAL -->
   <div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content" style="background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.06)); color:#fff; border-radius:12px; border:none;">
-        <div class="modal-header" style="border-bottom:1px solid rgba(255,255,255,0.03);">
+      <div class="modal-content">
+        <div class="modal-header">
           <h5 class="modal-title" id="pmTitle">Product</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body" id="pmBody" style="color:var(--muted);"></div>
-        <div class="modal-footer" style="border-top:1px solid rgba(255,255,255,0.03);">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <div class="modal-body" id="pmBody" style="color:var(--muted)"></div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button class="btn btn-buy" id="modalBuy">Buy</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Bootstrap JS (bundle) -->
+  <!-- BUNDLE MODAL -->
+  <div class="modal fade" id="bundleModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Bundles — Save & Checkout</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" style="color:var(--muted)">
+          <p>Create bundles by selecting multiple items. (Use these sample bundles or contact on Telegram for custom bundles.)</p>
+          <div style="display:grid; gap:12px;">
+            <div style="display:flex; gap:12px; align-items:center; justify-content:space-between; padding:10px; background:var(--glass); border-radius:8px;">
+              <div>
+                <strong>BO3 Mega Pack</strong><div class="muted">Ultimate Modded Account + 100k Liquid + Zombies Gumballs</div>
+              </div>
+              <div style="display:flex; gap:8px; align-items:center;">
+                <div style="font-weight:900">£20</div>
+                <button class="btn btn-buy" onclick="quickBuy(20,'BO3 Mega Pack')">Buy Pack</button>
+              </div>
+            </div>
+
+            <div style="display:flex; gap:12px; align-items:center; justify-content:space-between; padding:10px; background:var(--glass); border-radius:8px;">
+              <div>
+                <strong>PSN Profile Bundle</strong><div class="muted">Avatar + About Me + Profile Colour</div>
+              </div>
+              <div style="display:flex; gap:8px; align-items:center;">
+                <div style="font-weight:900">£6</div>
+                <button class="btn btn-buy" onclick="quickBuy(6,'PSN Profile Bundle')">Buy Bundle</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-    // Mobile sidebar toggle (show icon only on small screens)
-    const sidebar = document.getElementById('sidebar');
-    const openSidebarBtn = document.getElementById('openSidebar');
-    function updateMobileToggle(){
-      if(window.innerWidth <= 991){ openSidebarBtn.style.display = 'inline-flex'; } else { openSidebarBtn.style.display = 'none'; sidebar.classList.remove('open'); }
+    // constants
+    const paypalBase = 'https://www.paypal.com/paypalme/MrJasonDEX/';
+
+    // UTIL: get London time parts using Intl
+    function getLondonParts() {
+      // Use formatToParts with Europe/London timezone
+      const dtf = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/London', hour12: false, weekday: 'short', hour: 'numeric', minute: 'numeric' });
+      const parts = dtf.formatToParts(new Date());
+      const weekday = parts.find(p=>p.type==='weekday')?.value || '';
+      const hour = parseInt(parts.find(p=>p.type==='hour')?.value || '0',10);
+      const minute = parseInt(parts.find(p=>p.type==='minute')?.value || '0',10);
+      return { weekday, hour, minute };
     }
-    updateMobileToggle();
-    window.addEventListener('resize', updateMobileToggle);
-    openSidebarBtn.addEventListener('click', ()=> sidebar.classList.toggle('open'));
 
-    // Activate nav links scrolling
-    document.querySelectorAll('.nav-cat a').forEach(a=>{
-      a.addEventListener('click', (e)=>{
-        e.preventDefault();
-        document.querySelectorAll('.nav-cat a').forEach(x=>x.classList.remove('active'));
-        a.classList.add('active');
-        const target = a.getAttribute('href').slice(1);
-        const el = document.getElementById(target);
-        if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
-        if(window.innerWidth <= 991) sidebar.classList.remove('open');
+    // AVAILABILITY: Mon-Fri 10:00 - 14:00 (UK time)
+    function updateAvailability() {
+      const { weekday, hour, minute } = getLondonParts();
+      const days = ['Mon','Tue','Wed','Thu','Fri'];
+      const isWeekday = days.includes(weekday);
+      const open = isWeekday && (hour >= 10 && hour < 14);
+      const dot = document.getElementById('availDot');
+      const text = document.getElementById('availText');
+      const londonTimeEl = document.getElementById('londonTime');
+
+      // show formatted London time
+      const nowLondon = new Date().toLocaleString('en-GB', { timeZone: 'Europe/London', hour12: false, hour: '2-digit', minute: '2-digit' });
+      londonTimeEl.innerText = `• London: ${nowLondon}`;
+
+      if (open) {
+        dot.style.background = '#2ee06d';
+        text.innerText = '🟢 Online — Available now (Mon–Fri 10:00–14:00 UK)';
+      } else {
+        dot.style.background = '#ff6b6b';
+        // compute next opening or closing time
+        // if weekday but before 10 -> opens today 10:00; if after or weekend -> next Monday or next day
+        const dayIndex = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(weekday);
+        let nextOpen = null;
+        if (isWeekday && hour < 10) {
+          nextOpen = 'today 10:00';
+        } else {
+          // find next weekday (Mon-Fri) at 10:00
+          let daysAhead = 1;
+          for (let i=1;i<=7;i++){
+            const check = (dayIndex + i) % 7; // 0 Sun ... 6 Sat
+            const checkName = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][check];
+            if ( ['Mon','Tue','Wed','Thu','Fri'].includes(checkName) ) { daysAhead = i; break; }
+          }
+          nextOpen = 'in ' + daysAhead + (daysAhead===1 ? ' day' : ' days') + ' at 10:00';
+        }
+        text.innerText = `🔴 Offline — Next: ${nextOpen}`;
+      }
+    }
+
+    // run availability update immediately and every 30s
+    updateAvailability();
+    setInterval(updateAvailability, 30000);
+
+    // SHOW reveal effects on load / scroll
+    function revealOnScroll(){
+      document.querySelectorAll('.reveal').forEach(el=>{
+        const rect = el.getBoundingClientRect();
+        if(rect.top < (window.innerHeight - 120)) el.classList.add('visible');
       });
-    });
+    }
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
 
-    // Search & platform filter
-    const q = document.getElementById('q');
-    const filter = document.getElementById('filterPlatform');
-    q.addEventListener('input', filterProducts);
-    filter.addEventListener('change', filterProducts);
+    // SEARCH + FILTER
+    const searchInput = document.getElementById('search');
+    const filterPlatform = document.getElementById('filterPlatform');
+    searchInput.addEventListener('input', filterProducts);
+    filterPlatform.addEventListener('change', filterProducts);
 
     function filterProducts(){
-      const val = q.value.trim().toLowerCase();
-      const platform = filter.value;
+      const q = (searchInput.value || '').trim().toLowerCase();
+      const plat = filterPlatform.value;
       document.querySelectorAll('.product').forEach(card=>{
-        const text = (card.innerText || card.textContent).toLowerCase();
-        const matchesQ = !val || text.includes(val);
-        let matchesPlatform = true;
-        if(platform && platform !== '') {
-          matchesPlatform = text.includes(platform) || text.includes('any');
-        }
-        card.style.display = (matchesQ && matchesPlatform) ? '' : 'none';
+        const text = ((card.dataset.tags || '') + ' ' + (card.innerText || '')).toLowerCase();
+        const matchesQ = !q || text.includes(q);
+        const matchesPlat = !plat || plat === '' || text.includes(plat) || text.includes('any');
+        card.style.display = (matchesQ && matchesPlat) ? '' : 'none';
       });
     }
 
-    // Modal open (details)
-    const productModal = new bootstrap.Modal(document.getElementById('productModal'));
-    function openModal(btn){
-      const title = btn.getAttribute('data-title') || 'Details';
-      const desc = btn.getAttribute('data-desc') || 'No extra info';
+    // PRODUCT DETAILS modal
+    const productModalEl = document.getElementById('productModal');
+    const productModal = new bootstrap.Modal(productModalEl);
+    window.openModal = function(btn){
+      const title = btn.dataset.title || 'Details';
+      const desc = btn.dataset.desc || 'No extra details';
       document.getElementById('pmTitle').innerText = title;
       document.getElementById('pmBody').innerText = desc;
+      document.getElementById('modalBuy').onclick = ()=> {
+        // parse price from selected option or fallback to ask
+        const priceMatch = desc.match(/£([0-9]+(\.[0-9]+)?)/);
+        const p = priceMatch ? parseFloat(priceMatch[1]) : 0;
+        if(p>0) quickBuy(p,title);
+        else alert('Use the Buy button on the product or the Checkout panel.');
+      };
       productModal.show();
+    };
+
+    // QUICK BUY — opens PayPal.me link with given amount multiplied by qty (if specified)
+    function quickBuy(price, name){
+      const qty = Number(document.getElementById('qty').value) || 1;
+      const final = (price * qty).toFixed(2);
+      const note = encodeURIComponent(`${name} x${qty} — Note: ${document.getElementById('orderNote').value || ''}`);
+      const url = paypalBase + final;
+      window.open(url, '_blank');
+      showToast(`Opened PayPal for £${final}. After payment, message on Telegram with details.`);
     }
 
-    // Small UX: highlight product on search match
-    q.addEventListener('keyup', ()=>{
-      const val = q.value.trim();
-      document.querySelectorAll('.product').forEach(card=>{
-        card.style.boxShadow = '';
-        if(val && (card.innerText || '').toLowerCase().includes(val.toLowerCase())){
-          card.style.boxShadow = '0 12px 32px rgba(157,78,221,0.12)';
+    // ORDER PANEL controls
+    const selectedProduct = document.getElementById('selectedProduct');
+    const qtyInput = document.getElementById('qty');
+    const qtyInc = document.getElementById('qtyInc'), qtyDec = document.getElementById('qtyDec');
+    const totalAmount = document.getElementById('totalAmount');
+    function updateTotal(){
+      const opt = selectedProduct.options[selectedProduct.selectedIndex];
+      const price = parseFloat(opt.dataset.price || 0);
+      const qty = Math.max(1, Number(qtyInput.value || 1));
+      const total = (price * qty).toFixed(2);
+      totalAmount.innerText = `£${total}`;
+    }
+    selectedProduct.addEventListener('change', updateTotal);
+    qtyInput.addEventListener('input', updateTotal);
+    qtyInc.addEventListener('click', ()=> { qtyInput.value = Number(qtyInput.value || 1) + 1; updateTotal(); });
+    qtyDec.addEventListener('click', ()=> { qtyInput.value = Math.max(1, Number(qtyInput.value || 1) - 1); updateTotal(); });
+
+    // Pay button in sidebar
+    document.getElementById('payNow').addEventListener('click', ()=>{
+      const opt = selectedProduct.options[selectedProduct.selectedIndex];
+      const price = parseFloat(opt.dataset.price || 0);
+      if(!price || price <= 0){ alert('Please select a product to checkout from the dropdown.'); return; }
+      const qty = Math.max(1, Number(qtyInput.value || 1));
+      const total = (price * qty).toFixed(2);
+      window.open(paypalBase + total, '_blank');
+      showToast(`Opened PayPal for £${total} — After payment message @moddingcentral with your order details.`);
+    });
+
+    // Bundle modal
+    document.getElementById('btn-bundles').addEventListener('click', ()=>{
+      const bundleModal = new bootstrap.Modal(document.getElementById('bundleModal'));
+      bundleModal.show();
+    });
+
+    // Simple toast (temporary)
+    function showToast(msg){
+      const toast = document.createElement('div');
+      toast.style.position = 'fixed';
+      toast.style.right = '18px';
+      toast.style.top = '92px';
+      toast.style.background = 'linear-gradient(90deg,var(--accent2),var(--accent1))';
+      toast.style.color = '#07060a';
+      toast.style.padding = '10px 14px';
+      toast.style.borderRadius = '10px';
+      toast.style.fontWeight = '800';
+      toast.style.boxShadow = '0 10px 30px rgba(157,78,221,0.12)';
+      toast.innerText = msg;
+      document.body.appendChild(toast);
+      setTimeout(()=>{ toast.style.transition='all .4s'; toast.style.opacity=0; toast.style.transform='translateY(-8px)'; }, 2500);
+      setTimeout(()=> toast.remove(), 3000);
+    }
+
+    // UX: clicking product rows preselects product in side panel
+    document.querySelectorAll('.product').forEach(card=>{
+      card.addEventListener('click', (e)=>{
+        if(e.target.closest('button') || e.target.closest('a')) return;
+        const title = (card.querySelector('.prd-title') || {}).innerText || '';
+        for(let i=0;i<selectedProduct.options.length;i++){
+          if(selectedProduct.options[i].value.toLowerCase().startsWith(title.trim().toLowerCase())) {
+            selectedProduct.selectedIndex = i;
+            updateTotal();
+            selectedProduct.style.boxShadow = '0 8px 20px rgba(157,78,221,0.12)';
+            setTimeout(()=> selectedProduct.style.boxShadow = '', 900);
+            break;
+          }
         }
       });
     });
 
-    // Close sidebar if clicked outside (mobile)
-    document.addEventListener('click', (e)=>{
-      if(window.innerWidth <= 991 && sidebar.classList.contains('open')){
-        if(!sidebar.contains(e.target) && !openSidebarBtn.contains(e.target)){
-          sidebar.classList.remove('open');
-        }
-      }
+    // keyboard search: press "/" to focus search
+    window.addEventListener('keydown', e=>{
+      if(e.key === '/') { e.preventDefault(); searchInput.focus(); }
     });
+
+    // set mobile pay quick link default
+    document.getElementById('mobile-pay').href = 'https://www.paypal.com/paypalme/MrJasonDEX';
+
+    // persist user inputs
+    window.addEventListener('beforeunload', ()=>{
+      localStorage.setItem('mc_qty', qtyInput.value);
+      localStorage.setItem('mc_selected', selectedProduct.selectedIndex);
+      localStorage.setItem('mc_note', document.getElementById('orderNote').value);
+    });
+    window.addEventListener('load', ()=>{
+      if(localStorage.getItem('mc_qty')) qtyInput.value = localStorage.getItem('mc_qty');
+      if(localStorage.getItem('mc_selected')) selectedProduct.selectedIndex = localStorage.getItem('mc_selected');
+      if(localStorage.getItem('mc_note')) document.getElementById('orderNote').value = localStorage.getItem('mc_note');
+      updateTotal();
+    });
+
+    // smooth nav highlight while scrolling (simple)
+    const navLinks = document.querySelectorAll('.nav-link');
+    function highlightNav(){
+      const sections = ['links','shop','how','bo3','psn'];
+      let found = null;
+      sections.forEach(id=>{
+        const el = document.getElementById(id);
+        if(!el) return;
+        if(el.getBoundingClientRect().top <= 120) found = id;
+      });
+      navLinks.forEach(a=>{
+        if(found && a.getAttribute('href') === '#'+found) a.classList.add('active');
+        else a.classList.remove('active');
+      });
+    }
+    window.addEventListener('scroll', highlightNav);
+    highlightNav();
+
+    // run reveal once on load
+    revealOnScroll();
   </script>
 </body>
 </html>
