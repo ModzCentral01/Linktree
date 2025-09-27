@@ -1,244 +1,129 @@
-// Typewriter effect
-const words = ["Tools", "Bots", "Community"];
-let i = 0, j = 0, currentWord = "", isDeleting = false;
-function type() {
-  currentWord = words[i];
-  const display = document.getElementById("typewriter");
-  if (isDeleting) {
-    display.textContent = currentWord.substring(0, j--);
-    if (j < 0) {
-      isDeleting = false;
-      i = (i + 1) % words.length;
-      setTimeout(type, 500);
-    } else setTimeout(type, 50);
-  } else {
-    display.textContent = currentWord.substring(0, j++);
-    if (j > currentWord.length) {
-      isDeleting = true;
-      setTimeout(type, 1200);
-    } else setTimeout(type, 120);
-  }
-}
-type();
+// assets/main.js
+// Small, dependency-free JS for availability, search, typewriter and reveals.
 
-// Year in footer
-document.getElementById("year").textContent = new Date().getFullYear();
-
-// Countdown timer to 10am GMT
-function updateCountdown() {
+/* ---------- Availability (Mon–Fri 10:00–14:00 UK) ---------- */
+function getLondonParts() {
   const now = new Date();
-  let target = new Date();
-  target.setUTCHours(10, 0, 0, 0);
-  if (now.getTime() > target.getTime()) {
-    target.setUTCDate(target.getUTCDate() + 1);
-  }
-  const diff = target - now;
-  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-  const minutes = Math.floor((diff / (1000 * 60)) % 60);
-  const seconds = Math.floor((diff / 1000) % 60);
-  document.getElementById("timer").textContent =
-    `${hours}h ${minutes}m ${seconds}s`;
+  const fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/London', weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false });
+  const parts = fmt.formatToParts(now);
+  const weekday = parts.find(p => p.type === 'weekday')?.value || '';
+  const hour = parseInt(parts.find(p => p.type === 'hour')?.value || '0', 10);
+  const minute = parseInt(parts.find(p => p.type === 'minute')?.value || '0', 10);
+  return { weekday, hour, minute, formatted: fmt.format(now) };
 }
-setInterval(updateCountdown, 1000);
-updateCountdown();
 
-// Preloader animation
-window.addEventListener('load', function() {
-  const preloader = document.getElementById('spinner');
-  preloader.classList.add('fade-out');
-  setTimeout(() => {
-    preloader.style.display = 'none';
-    // Reveal content with smooth fade
-    document.body.classList.add('content-loaded');
-  }, 800);
-});
+function updateAvailability() {
+  const elDot = document.getElementById('availDot');
+  const elText = document.getElementById('availText');
+  const elTime = document.getElementById('availTime');
+  if (!elDot || !elText || !elTime) return;
 
-// TikTok browser detection and Toast
-function isTikTokBrowser() {
-  return navigator.userAgent.toLowerCase().includes('tiktok');
-}
-var tiktokToast = new bootstrap.Toast(document.getElementById('tiktokToast'));
-document.getElementById('tiktok-link').addEventListener('click', function(e) {
-  if (isTikTokBrowser()) {
-    e.preventDefault();
-    tiktokToast.show();
-  }
-});
-document.getElementById('copyTikTok').addEventListener('click', function() {
-  navigator.clipboard.writeText(document.getElementById('tiktokUrl').textContent);
-  this.textContent = 'Copied!';
-  setTimeout(() => { this.textContent = 'Copy Link'; }, 1200);
-});
+  const { weekday, hour, formatted } = getLondonParts();
+  elTime.textContent = `• London: ${formatted}`;
 
-// Smooth scroll for FAQ and modal triggers
-document.querySelectorAll('button[data-bs-toggle="collapse"], button[data-bs-toggle="modal"]').forEach(function(btn) {
-  btn.addEventListener('click', function(e) {
-    setTimeout(function() {
-      var targetId = btn.getAttribute('data-bs-target');
-      if (targetId && targetId.startsWith('#')) {
-        var el = document.querySelector(targetId);
-        if (el) el.scrollIntoView({behavior:'smooth',block:'center'});
-      }
-    }, 400);
-  });
-});
-
-// Copy Link buttons for all social and card links
-const copyBtns = document.querySelectorAll('.copy-link');
-copyBtns.forEach(btn => {
-  btn.addEventListener('click', function() {
-    navigator.clipboard.writeText(btn.getAttribute('data-link'));
-    btn.textContent = 'Copied!';
-    setTimeout(() => { btn.textContent = 'Copy Link'; }, 1200);
-  });
-});
-
-// Dark/Light mode toggle
-const themeToggle = document.getElementById('themeToggle');
-const themeIcon = document.getElementById('themeIcon');
-themeToggle.addEventListener('click', () => {
-  document.body.classList.toggle('light-mode');
-  if (document.body.classList.contains('light-mode')) {
-    themeIcon.textContent = '☀️';
+  const open = ['Mon','Tue','Wed','Thu','Fri'].includes(weekday) && hour >= 10 && hour < 14;
+  if (open) {
+    elDot.style.background = '#2ee06d';
+    elText.textContent = '🟢 Online — Available now (Mon–Fri 10:00–14:00 UK)';
   } else {
-    themeIcon.textContent = '🌙';
+    elDot.style.background = '#ff6b6b';
+    // quick next open calc
+    let dayIndex = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(weekday);
+    let daysAhead = 1;
+    if (['Mon','Tue','Wed','Thu','Fri'].includes(weekday) && hour < 10) daysAhead = 0;
+    else {
+      for (let i = 1; i <= 7; i++) {
+        const c = (dayIndex + i) % 7;
+        if (['Mon','Tue','Wed','Thu','Fri'].includes(['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][c])) { daysAhead = i; break; }
+      }
+    }
+    elText.textContent = daysAhead === 0 ? '🔴 Offline — Next: today 10:00' : `🔴 Offline — Next: in ${daysAhead} day${daysAhead > 1 ? 's' : ''} at 10:00 (UK)`;
   }
-});
+}
 
-// Share button functionality
-const shareBtn = document.getElementById('shareBtn');
-shareBtn.addEventListener('click', () => {
-  if (navigator.share) {
-    navigator.share({
-      title: document.title,
-      url: window.location.href
+updateAvailability();
+setInterval(updateAvailability, 30000);
+
+/* ---------- Typewriter (subtle) ---------- */
+(function typeWriterSetup() {
+  const lines = [
+    'Unlock mods. Keep it clean. Delivered fast.',
+    'Professional modding services — PS4, PS5, PC.',
+    'Pay via PayPal. Contact via Telegram.'
+  ];
+  const el = document.getElementById('typewriterLine');
+  if (!el) return;
+  let li = 0, ci = 0, forward = true;
+
+  function tick() {
+    const line = lines[li];
+    if (forward) {
+      ci++;
+      if (ci >= line.length) { forward = false; setTimeout(tick, 900); return; }
+    } else {
+      ci--;
+      if (ci <= 0) { forward = true; li = (li + 1) % lines.length; setTimeout(tick, 400); return; }
+    }
+    el.textContent = line.slice(0, ci);
+    setTimeout(tick, forward ? 40 + Math.random()*30 : 24 + Math.random()*30);
+  }
+  tick();
+})();
+
+/* ---------- Simple reveal-on-scroll (lightweight) ---------- */
+function revealOnScroll() {
+  document.querySelectorAll('.reveal').forEach(el => {
+    const r = el.getBoundingClientRect();
+    if (r.top < window.innerHeight - 80) el.classList.add('visible');
+  });
+}
+window.addEventListener('scroll', revealOnScroll);
+window.addEventListener('load', revealOnScroll);
+
+/* ---------- Accessible details polyfill (optional) ----------
+   Some older browsers show different default behavior for <details>.
+   We ensure keyboard accessibility and allow only one open on mobile if desired.
+*/
+(function detailsEnhance() {
+  const details = document.querySelectorAll('details.category');
+  if (!details.length) return;
+
+  function adapt() {
+    if (window.innerWidth <= 720) {
+      // collapse all by default on small screens
+      details.forEach(d => d.open = false);
+    } else {
+      // expand categories on larger screens for overview
+      details.forEach(d => d.open = true);
+    }
+  }
+  window.addEventListener('resize', adapt);
+  adapt();
+
+  // optional: close other categories when opening one on small screens
+  details.forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (window.innerWidth <= 720 && d.open) {
+        details.forEach(other => { if (other !== d) other.open = false; });
+      }
     });
-  } else {
-    navigator.clipboard.writeText(window.location.href);
-    shareBtn.textContent = 'Copied!';
-    setTimeout(() => { shareBtn.innerHTML = '<span>🔗 Share</span>'; }, 1200);
-  }
-});
-
-// Back to top button
-const backToTopBtn = document.getElementById('backToTop');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 300) {
-    backToTopBtn.style.display = 'block';
-  } else {
-    backToTopBtn.style.display = 'none';
-  }
-});
-backToTopBtn.addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-// Contact form submission
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-  contactForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    alert('Message sent!');
-    contactForm.reset();
-    var modal = bootstrap.Modal.getInstance(document.getElementById('contactModal'));
-    modal.hide();
   });
-}
+})();
 
-// Feedback form submission
-const feedbackForm = document.getElementById('feedbackForm');
-if (feedbackForm) {
-  feedbackForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    alert('Feedback sent! Thank you for your suggestion.');
-    feedbackForm.reset();
-    var modal = bootstrap.Modal.getInstance(document.getElementById('feedbackModal'));
-    modal.hide();
+/* ---------- Search (very small) ---------- */
+(function searchSetup() {
+  const input = document.getElementById('search');
+  if (!input) return;
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    document.querySelectorAll('.product-card').forEach(card => {
+      const text = (card.innerText || '').toLowerCase();
+      card.closest('.col-12')?.classList.toggle('d-none', q ? !text.includes(q) : false);
+    });
   });
-}
 
-// Initialize particles
-particlesJS('particles-js',
-  {
-    "particles": {
-      "number": {
-        "value": 80,
-        "density": {
-          "enable": true,
-          "value_area": 800
-        }
-      },
-      "color": {
-        "value": "#a855f7"
-      },
-      "shape": {
-        "type": "circle"
-      },
-      "opacity": {
-        "value": 0.2,
-        "random": true
-      },
-      "size": {
-        "value": 3,
-        "random": true
-      },
-      "line_linked": {
-        "enable": true,
-        "distance": 150,
-        "color": "#9333ea",
-        "opacity": 0.1,
-        "width": 1
-      },
-      "move": {
-        "enable": true,
-        "speed": 2,
-        "direction": "none",
-        "random": false,
-        "straight": false,
-        "out_mode": "out",
-        "bounce": false
-      }
-    },
-    "interactivity": {
-      "detect_on": "canvas",
-      "events": {
-        "onhover": {
-          "enable": true,
-          "mode": "grab"
-        },
-        "onclick": {
-          "enable": true,
-          "mode": "push"
-        },
-        "resize": true
-      }
-    },
-    "retina_detect": true
-  }
-);
-
-// Initialize AOS
-AOS.init({
-  duration: 800,
-  once: true,
-  offset: 100
-});
-
-// Add data-aos attributes to cards
-document.querySelectorAll('.card').forEach((card, index) => {
-  card.setAttribute('data-aos', 'fade-up');
-  card.setAttribute('data-aos-delay', (index * 100).toString());
-});
-
-// Add hover effect to cards
-document.querySelectorAll('.card').forEach(card => {
-  card.addEventListener('mouseenter', function() {
-    this.style.transform = 'translateY(-10px) scale(1.02)';
-    this.style.boxShadow = '0 20px 40px rgba(168,85,247,0.25)';
+  // "/" focuses search
+  window.addEventListener('keydown', (e) => {
+    if (e.key === '/') { e.preventDefault(); input.focus(); }
   });
-  
-  card.addEventListener('mouseleave', function() {
-    this.style.transform = 'translateY(0) scale(1)';
-    this.style.boxShadow = '0 8px 32px rgba(31, 38, 135, 0.15)';
-  });
-});
+})();
