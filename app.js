@@ -55,19 +55,72 @@ function adaptLayout(){
 }
 window.addEventListener('resize', adaptLayout);
 
-// SEARCH
-const searchInput = document.getElementById('search');
-if(searchInput){
-  searchInput.addEventListener('input', filterProducts);
+// Debounce helper
+function debounce(fn, wait){ let t; return function(...args){ clearTimeout(t); t = setTimeout(()=>fn.apply(this,args), wait); } }
+
+// SEARCH wiring with debounce
+const searchEl = document.getElementById('search');
+if(searchEl){
+  searchEl.setAttribute('aria-label','Search products');
+  searchEl.addEventListener('input', debounce(filterProducts, 180));
 }
-function filterProducts(){
-  const q = (document.getElementById('search').value || '').trim().toLowerCase();
+
+// Make product cards keyboard-activatable and accessible
+function makeProductsAccessible(){
   document.querySelectorAll('.product').forEach(card=>{
-    const text = ((card.dataset.tags || '') + ' ' + (card.innerText || '')).toLowerCase();
-    const matches = !q || text.includes(q);
-    card.style.display = matches ? '' : 'none';
+    card.setAttribute('tabindex','0');
+    card.setAttribute('role','article');
+    // allow pressing Enter to open first buy link
+    card.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter' || e.key === ' '){
+        const a = card.querySelector('.btn-buy');
+        if(a){ a.click(); }
+      }
+    });
   });
 }
+
+// Update availability aria status and run on load
+function setAvailabilityAria(){
+  const badge = document.getElementById('availBadge');
+  if(!badge) return;
+  badge.setAttribute('role','status');
+}
+
+// FAQ aria setup
+function setupFaqAria(){
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    const q = item.querySelector('.question');
+    const a = item.querySelector('.answer');
+    if(!q || !a) return;
+    q.setAttribute('role','button');
+    q.setAttribute('tabindex','0');
+    q.setAttribute('aria-expanded', item.classList.contains('open') ? 'true' : 'false');
+  });
+}
+
+// enhance click handler to toggle aria-expanded
+document.addEventListener('click', (e)=>{
+  const q = e.target.closest('.faq-item .question');
+  if(q){
+    const item = q.parentElement;
+    item.classList.toggle('open');
+    q.setAttribute('aria-expanded', item.classList.contains('open') ? 'true' : 'false');
+  }
+});
+// keyboard toggle for FAQ questions
+document.addEventListener('keydown', (e)=>{
+  if(e.key === 'Enter' || e.key === ' '){
+    const q = document.activeElement.closest && document.activeElement.closest('.faq-item .question');
+    if(q){ e.preventDefault(); q.click(); }
+  }
+});
+
+// init on DOMContentLoaded
+document.addEventListener('DOMContentLoaded', ()=>{
+  updateAvailability(); setInterval(updateAvailability, 30000);
+  revealOnScroll(); highlightNav(); makeProductsAccessible(); setAvailabilityAria(); setupFaqAria();
+});
 
 // keyboard 
 window.addEventListener('keydown', e=>{
