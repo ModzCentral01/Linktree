@@ -1,0 +1,19 @@
+name: CI - HTML Validation
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate-html:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run vnu HTML validator
+        uses: crazy-max/ghaction-docker-run@v5
+        with:
+          image: 'validator/vnu:latest'
+          options: '--rm'
+          run: 'java -jar /vnu.jar --errors-only . || true'
