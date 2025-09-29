@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1">
+      <stop offset="0" stop-color="#7b2cbf"/>
+      <stop offset="1" stop-color="#c77dff"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#07060a" />
+  <rect width="1200" height="630" fill="url(#g)" opacity="0.06" />
+  <g fill="#fff" font-family="Rubik, Arial, sans-serif">
+    <text x="60" y="210" font-size="48" font-weight="700">Modding Central</text>
+    <text x="60" y="300" font-size="28" fill="#cfc9de">Shop • Modded Accounts • PS / PC</text>
+    <text x="60" y="360" font-size="20" fill="#b7aee0">Contact: t.me/moddingcentral • PayPal: paypal.me/MrJasonDEX</text>
+  </g>
+</svg>
