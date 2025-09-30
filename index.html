@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Modding Central — Links & Shop</title>
+  <meta name="description" content="Modding Central — Modded accounts, tools, and services. Pay with PayPal. Contact: t.me/moddingcentral" />
+  <meta name="theme-color" content="#1b0027">
+  <link rel="canonical" href="/">
+
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content="Modding Central — Shop & Links">
+  <meta property="og:description" content="Modded accounts, tools and services. Pay with PayPal. Contact via Telegram @moddingcentral">
+  <meta property="og:image" content="/assets/og-image.svg">
+
+  <!-- JSON-LD: Organization & sameAs -->
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Organization","name":"Modding Central","url":"/","sameAs":["https://t.me/moddingcentral","https://github.com/ModzCentral01","https://www.paypal.com/paypalme/MrJasonDEX"],"logo":"/assets/favicon.svg"}
+  </script>
+
+  <!-- Rubik font -->
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <!-- Bootstrap CSS (keeps layout simple) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    :root{ --bg:#07060a; --panel:#0f0b12; --muted:#9aa0b4; --accent:#7b2cbf; --accent2:#c77dff; --maxw:1100px }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Rubik,system-ui,-apple-system,"Segoe UI",Roboto,Arial;background:linear-gradient(120deg,#07060a,#1b0027);color:#eaeaf2;min-height:100vh}
+    .container{max-width:var(--maxw);padding:18px}
+    nav{padding:12px 0}
+    .brand{font-weight:800;color:#fff}
+    .hero{padding:36px 12px;text-align:center}
+    .hero h1{margin:0;font-size:clamp(1.4rem,4vw,2rem);font-weight:900;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+    .hero .subtitle{color:var(--muted);margin-top:8px}
+    .type{font-weight:500;color:var(--muted)}
+    /* accessible focus ring for keyboard users */
+    :focus-visible{outline:3px solid rgba(199,125,255,0.14);outline-offset:3px}
+    .avail{display:inline-flex;align-items:center;gap:10px;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,0.02);border:1px solid rgba(199,125,255,0.03);font-weight:700}
+    .dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+    .links{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;align-items:start;margin:18px 0}
+    .links a{display:flex;gap:12px;align-items:center;padding:12px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.03);text-decoration:none;color:#fff;font-weight:700;transition:transform .18s ease,box-shadow .18s ease;box-shadow:0 2px 6px rgba(0,0,0,0.35)}
+    .links a:hover,.links a:focus{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,0.5)}
+    .links .icon{width:48px;height:48px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;font-weight:900;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
+    .links .meta{display:flex;flex-direction:column}
+    .links .meta .title{font-weight:800}
+    .links .meta small{color:var(--muted);font-weight:400;margin-top:4px}
+    @media(max-width:480px){.links{grid-template-columns:1fr}}
+    main{display:grid;grid-template-columns:1fr;gap:18px}
+    @media(min-width:980px){main{grid-template-columns:1fr 320px}}
+    .panel{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.04));padding:14px;border-radius:12px;border:1px solid rgba(199,125,255,0.03)}
+    .controls{display:flex;gap:10px;align-items:center}
+    .search{flex:1;display:flex;align-items:center;background:rgba(255,255,255,0.02);padding:8px;border-radius:999px}
+    .search input{background:transparent;border:none;outline:none;color:#fff;width:100%}
+    .products{display:grid;gap:12px}
+    @media(min-width:720px){.products{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:1100px){.products{grid-template-columns:repeat(3,1fr)}}
+    .product{display:flex;flex-direction:column;background:transparent;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+    .price{margin-left:auto;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#07060a;padding:6px 10px;border-radius:999px;font-weight:800}
+    .btn-pay{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#07060a;padding:8px 12px;border-radius:10px;text-decoration:none;display:inline-block;font-weight:800}
+    .faq .question{cursor:pointer;display:flex;justify-content:space-between}
+    footer{padding:18px 0;color:var(--muted);text-align:center}
+    .fab{position:fixed;right:14px;bottom:86px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#07060a;padding:10px 12px;border-radius:999px;text-decoration:none;font-weight:800}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="d-flex align-items-center justify-content-between">
+      <div class="brand">Modding Central</div>
+      <div class="d-none d-md-flex" style="gap:10px;align-items:center">
+        <a class="btn btn-sm btn-light" href="https://t.me/moddingcentral" target="_blank" style="font-weight:700">Telegram</a>
+        <a class="btn btn-sm btn-outline-light" href="https://www.paypal.com/paypalme/MrJasonDEX" target="_blank">PayPal</a>
+      </div>
+    </nav>
+
+    <header class="hero panel">
+      <h1>Modding services for PS & PC</h1>
+      <div class="subtitle type"><span class="typewriter">Unlock exclusive mods, ranks & in‑game currency • Pay with PayPal • Delivery 24–48h</span></div>
+
+      <div style="margin-top:12px">
+        <span id="availBadge" class="avail" role="status" aria-live="polite" aria-atomic="true">
+           <span id="availDot" class="dot" style="background:#ffd6d6"></span>
+           <span id="availText">Checking availability…</span>
+           <small id="londonTime" style="margin-left:8px;color:var(--muted)"></small>
+         </span>
+       </div>
+
+      <div style="margin-top:12px;display:flex;gap:8px;justify-content:center">
+        <a class="btn btn-sm btn-light" href="#shop" style="font-weight:800">Enter Shop</a>
+        <a class="btn btn-sm btn-outline-light" href="#faq" style="font-weight:800">FAQ</a>
+      </div>
+    </header>
+
+    <section class="links" aria-label="quick links" role="list">
+      <a role="listitem" href="https://github.com/ModzCentral01/Black-Ops-6-Bot-" target="_blank">
+        <span class="icon" aria-hidden="true">B6</span>
+        <div class="meta"><span class="title">Black Ops 6 Bot</span><small>GitHub • PC</small></div>
+      </a>
+
+      <a role="listitem" href="https://github.com/ModzCentral01/Cold-war-Mods" target="_blank">
+        <span class="icon" aria-hidden="true">CW</span>
+        <div class="meta"><span class="title">Cold War Mods</span><small>GitHub • PC</small></div>
+      </a>
+
+      <a role="listitem" href="https://github.com/MrJasonDEX/Black-ops-3-Mod-Menu-" target="_blank">
+        <span class="icon" aria-hidden="true">BO3</span>
+        <div class="meta"><span class="title">BO3 GSC Injector</span><small>GitHub • PS4</small></div>
+      </a>
+
+      <a role="listitem" href="https://github.com/MrJasonDEX/Puplic-Repo-for-Mods/tree/main/black-ops-3" target="_blank">
+        <span class="icon" aria-hidden="true">BO3</span>
+        <div class="meta"><span class="title">Black Ops 3 — Free PC Menus</span><small>GitHub • PC</small></div>
+      </a>
+
+      <a role="listitem" href="https://github.com/MrJasonDEX/Puplic-Repo-for-Mods/tree/main/MW2" target="_blank">
+        <span class="icon" aria-hidden="true">MW2</span>
+        <div class="meta"><span class="title">MW2 Mods (2009)</span><small>GitHub • PC</small></div>
+      </a>
+
+      <a role="listitem" href="https://github.com/MrJasonDEX/Puplic-Repo-for-Mods/tree/main/MW3" target="_blank">
+        <span class="icon" aria-hidden="true">MW3</span>
+        <div class="meta"><span class="title">MW3 Mods</span><small>GitHub • PC</small></div>
+      </a>
+
+      <a role="listitem" href="https://github.com/MrJasonDEX/Puplic-Repo-for-Mods/tree/main/COD%204" target="_blank">
+        <span class="icon" aria-hidden="true">COD4</span>
+        <div class="meta"><span class="title">Cold4 — PC Steam</span><small>GitHub • PC</small></div>
+      </a>
+
+      <a role="listitem" href="https://t.me/moddingcentral" target="_blank">
+        <span class="icon" aria-hidden="true">TG</span>
+        <div class="meta"><span class="title">Telegram</span><small>@moddingcentral</small></div>
+      </a>
+
+      <a role="listitem" href="https://www.paypal.com/paypalme/MrJasonDEX" target="_blank">
+        <span class="icon" aria-hidden="true">£</span>
+        <div class="meta"><span class="title">PayPal</span><small>paypal.me/MrJasonDEX</small></div>
+      </a>
+    </section>
+
+    <main>
+      <div>
+        <div class="panel mb-2">
+          <div class="d-flex controls">
+            <div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="opacity:.8;margin-right:8px"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><input id="search" placeholder="Search products…" aria-label="Search products"></div>
+            <div style="margin-left:8px"><a class="btn btn-sm btn-outline-light" href="#faq">FAQ</a></div>
+          </div>
+        </div>
+
+        <section id="shop" class="products" aria-labelledby="shop-heading">
+          <!-- BO3 Packages -->
+          <div class="product panel" data-tags="bo3 ultimate prestige zombies">
+            <div class="d-flex align-items-start"><div>
+              <strong>BO3 — Ultimate Modded Account</strong>
+              <div style="color:var(--muted);margin-top:6px">£15 — Multiplayer: Prestige 1000, Level 35, Modded Classes, Unlock All, Custom Avatars, special classes. Zombies: Prestige 12, Level 35, All Easter Eggs Complete, Unlimited Death Machine & Beast Mode, Unreleased Camos, Green Clan Tag.</div>
+            </div><span class="price">£15</span></div>
+            <div style="margin-top:12px"><a class="btn-pay" href="https://www.paypal.com/paypalme/MrJasonDEX/15" target="_blank">Buy £15</a></div>
+          </div>
+
+          <div class="product panel" data-tags="bo3 maxed prestige">
+            <div class="d-flex align-items-start"><div>
+              <strong>BO3 — Maxed-Out Modded Account</strong>
+              <div style="color:var(--muted);margin-top:6px">£10 — Prestige Master • Level 1,000. Multiplayer & Zombies maxed, Unlimited Death Machine, God Mode / Modded Classes.</div>
+            </div><span class="price">£10</span></div>
+            <div style="margin-top:12px"><a class="btn-pay" href="https://www.paypal.com/paypalme/MrJasonDEX/10" target="_blank">Buy £10</a></div>
+          </div>
+
+          <div class="product panel" data-tags="bo3 zombies gumballs">
+            <div class="d-flex align-items-start"><div>
+              <strong>Zombies Gumballs — 5x Each Gumball</strong>
+              <div style="color:var(--muted);margin-top:6px">£5 — Apply 5x of each gumball on requested slots. (No stats transfer). Video previews available on request.</div>
+            </div><span class="price">£5</span></div>
+            <div style="margin-top:12px"><a class="btn-pay" href="https://www.paypal.com/paypalme/MrJasonDEX/5" target="_blank">Buy £5</a></div>
+          </div>
+
+          <div class="product panel" data-tags="bo3 zombies extras deathmachine">
+            <div class="d-flex align-items-start"><div>
+              <strong>Zombies Extras — Unlimited Death Machine / Beast Mode Classes</strong>
+              <div style="color:var(--muted);margin-top:6px">£3 — Add unlimited Death Machine / Beast Mode classes to accounts. Useful for challenge and fun builds.</div>
+            </div><span class="price">£3</span></div>
+            <div style="margin-top:12px"><a class="btn-pay" href="https://www.paypal.com/paypalme/MrJasonDEX/3" target="_blank">Buy £3</a></div>
+          </div>
+
+          <!-- Cold War -->
+          <div class="product panel" data-tags="coldwar classes raygun">
+            <div class="d-flex align-items-start"><div>
+              <strong>Cold War — Custom Modded Classes</strong>
+              <div style="color:var(--muted);margin-top:6px">£15 — Includes Ray Gun & modded weapons for Multiplayer & Zombies.</div>
+            </div><span class="price">£15</span></div>
+            <div style="margin-top:12px"><a class="btn-pay" href="https://www.paypal.com/paypalme/MrJasonDEX/15" target="_blank">Buy £15</a></div>
+          </div>
+
+          <div class="product panel" data-tags="coldwar da unlock">
+            <div class="d-flex align-items-start"><div>
+              <strong>Cold War — DA Unlock All</strong>
+              <div style="color:var(--muted);margin-top:6px">£10 — DA unlock all request for accounts.</div>
+            </div><span class="price">£10</span></div>
+            <div style="margin-top:12px"><a class="btn-pay" href="https://www.paypal.com/paypalme/MrJasonDEX/10" target="_blank">Buy £10</a></div>
+          </div>
+
+          <div class="product panel" data-tags="coldwar crystals currency">
+            <div class="d-flex align-items-start"><div>
+              <strong>Cold War — Crystals / In-Game Currency</strong>
+              <div style="color:var(--muted);margin-top:6px">£5 — Fixed currency packs. Contact for custom amounts.</div>
+            </div><span class="price">£5</span></div>
+            <div style="margin-top:12px"><a class="btn-pay" href="https://www.paypal.com/paypalme/MrJasonDEX/5" target="_blank">Buy £5</a></div>
+          </div>
+
+          <!-- Liquid Divinium -->
+          <div class="product panel" data-tags="liquid 100k">
+            <div class="d-flex align-items-start"><div>
+              <strong>100k Liquid Divinium</strong>
+              <div style="color:var(--muted);margin-top:6px">£5 — Bonus: All trophies unlocked with any Liquid Divinium package.</div>
+            </div><span class="price">£5</span></div>
+            <div style="margin-top:12px"><a class="btn-pay" href="https://www.paypal.com/paypalme/MrJasonDEX/5" target="_blank">Buy £5</a></div>
+          </div>
+
+          <div class="product panel" data-tags="liquid 500k">
+            <div class="d-flex align-items-start"><div>
+              <strong>500k Liquid Divinium</strong>
+              <div style="color:var(--muted);margin-top:6px">£10</div>
+            </div><span class="price">£10</span></div>
+            <div style="margin-top:12px"><a class="btn-pay" href="https://www.paypal.com/paypalme/MrJasonDEX/10" target="_blank">Buy £10</a></div>
+          </div>
+
+          <div class="product panel" data-tags="liquid 1m">
+            <div class="d-flex align-items-start"><div>
+              <strong>1,000,000 Liquid Divinium</strong>
+              <div style="color:var(--muted);margin-top:6px">£20</div>
+            </div><span class="price">£20</span></div>
+            <div style="margin-top:12px"><a class="btn-pay" href="https://www.paypal.com/paypalme/MrJasonDEX/20" target="_blank">Buy £20</a></div>
+          </div>
+
+          <!-- PSN Mods -->
+          <div class="product panel" data-tags="psn avatar aboutme">
+            <div class="d-flex align-items-start"><div>
+              <strong>Custom PSN Avatar</strong>
+              <div style="color:var(--muted);margin-top:6px">£2 — Ask for available avatars or request a custom image.</div>
+            </div><span class="price">£2</span></div>
+            <div style="margin-top:12px"><a class="btn-pay" href="https://www.paypal.com/paypalme/MrJasonDEX/2" target="_blank">Buy £2</a></div>
+          </div>
+
+          <div class="product panel" data-tags="psn aboutme">
+            <div class="d-flex align-items-start"><div>
+              <strong>Modded “About Me”</strong>
+              <div style="color:var(--muted);margin-top:6px">£2 — Provide text; we will format within allowed emoji and character limits.</div>
+            </div><span class="price">£2</span></div>
+            <div style="margin-top:12px"><a class="btn-pay" href="https://www.paypal.com/paypalme/MrJasonDEX/2" target="_blank">Buy £2</a></div>
+          </div>
+
+          <div class="product panel" data-tags="psn trophies">
+            <div class="d-flex align-items-start"><div>
+              <strong>Modded PSN Trophies</strong>
+              <div style="color:var(--muted);margin-top:6px">Level 999 — £50; Level 666 — £30. PS3 / Vita bulk unlocks available — inquire.</div>
+            </div><span class="price">£30–£50</span></div>
+            <div style="margin-top:12px"><a class="btn-pay" href="https://www.paypal.com/paypalme/MrJasonDEX/50" target="_blank">Buy £50</a></div>
+          </div>
+
+          <div class="product panel" data-tags="psn colour">
+            <div class="d-flex align-items-start"><div>
+              <strong>Any Profile Colour</strong>
+              <div style="color:var(--muted);margin-top:6px">£2 — Clear, White, or custom HEX colour applied to profile.</div>
+            </div><span class="price">£2</span></div>
+            <div style="margin-top:12px"><a class="btn-pay" href="https://www.paypal.com/paypalme/MrJasonDEX/2" target="_blank">Buy £2</a></div>
+          </div>
+
+          <!-- Other CODs -->
+          <div class="product panel" data-tags="ghosts aw bo4">
+            <div class="d-flex align-items-start"><div>
+              <strong>Other Call of Duty Modded Accounts</strong>
+              <div style="color:var(--muted);margin-top:6px">Ghosts — £15; Advanced Warfare — £10; Black Ops 4 (Modded Classes) — £10; BO4 trophies unlock — £5. Contact for specifics.</div>
+            </div><span class="price">£5–£15</span></div>
+            <div style="margin-top:12px"><a class="btn-pay" href="https://www.paypal.com/paypalme/MrJasonDEX/15" target="_blank">Contact/Pay</a></div>
+          </div>
+
+          <!-- Other services -->
+          <div class="product panel" data-tags="nfs heat hotpursuit saves">
+            <div class="d-flex align-items-start"><div>
+              <strong>Need for Speed & Save Services</strong>
+              <div style="color:var(--muted);margin-top:6px">NFS Heat — Unlock All (£10); NFS Hot Pursuit — Unlock All (£5); Any modded save / reassign (PS4 only) — £5.</div>
+            </div><span class="price">var</span></div>
+            <div style="margin-top:12px"><a class="btn-pay" href="https://www.paypal.com/paypalme/MrJasonDEX/10" target="_blank">Contact/Pay</a></div>
+          </div>
+
+          <div class="product panel" data-tags="iptv candy">
+            <div class="d-flex align-items-start"><div>
+              <strong>IPTV & Mobile Game Mods</strong>
+              <div style="color:var(--muted);margin-top:6px">IPTV 1‑Year Subscription — £50 (Firestick & Android). Candy Crush — Unlimited Lives (£20). Bulk IPTV pricing available — contact.</div>
+            </div><span class="price">£20–£50</span></div>
+            <div style="margin-top:12px"><a class="btn-pay" href="https://www.paypal.com/paypalme/MrJasonDEX/50" target="_blank">Buy / Contact</a></div>
+          </div>
+
+          <!-- How it works panel -->
+          <div class="product panel" data-tags="how it works info">
+            <div>
+              <strong>How it works</strong>
+              <ul style="color:var(--muted);margin-top:8px;padding-left:18px">
+                <li>1) Choose your package on this page.</li>
+                <li>2) Provide account access: email/password OR PSN app login code.</li>
+                <li>3) Pay via PayPal (GBP) using the product links.</li>
+                <li>4) Delivery: typically 24–48 hours after we receive access.</li>
+              </ul>
+              <div style="margin-top:8px;color:var(--muted)"><strong>Note:</strong> Custom orders available — message on Telegram before payment for bundles or special requests. No refunds after deal.</div>
+              <div style="margin-top:12px"><a class="btn-pay" href="https://www.paypal.com/paypalme/MrJasonDEX" target="_blank">PayPal — paypal.me/MrJasonDEX</a></div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <aside class="panel">
+        <div style="font-weight:800;color:var(--accent)">Contact & Pay</div>
+        <div style="margin-top:8px;color:var(--muted)">PayPal: <a href="https://www.paypal.com/paypalme/MrJasonDEX" target="_blank">paypal.me/MrJasonDEX</a></div>
+        <div style="margin-top:8px;color:var(--muted)">Telegram: <a href="https://t.me/moddingcentral" target="_blank">@moddingcentral</a></div>
+        <div style="margin-top:12px;color:var(--muted)"><strong>Delivery:</strong> 24–48 hours after access received. <br><strong>No refunds after service.</strong></div>
+        <div style="margin-top:12px;color:var(--muted)">Contact before payment for special requests.</div>
+      </aside>
+    </main>
+
+    <section id="faq" class="panel" style="margin-top:18px">
+      <h3 style="margin-top:0">FAQ</h3>
+      <div class="faq">
+        <div class="mb-2"><div class="question d-flex justify-content-between" tabindex="0">What services do you offer?<span>▾</span></div><div class="answer" style="display:none;color:var(--muted);margin-top:6px">Modded accounts, custom classes, in-game currency, PSN profile mods, trophy boosts, saves & reassignments, IPTV subscriptions and mobile game mods. See Shop.</div></div>
+        <div class="mb-2"><div class="question d-flex justify-content-between" tabindex="0">How do I order?<span>▾</span></div><div class="answer" style="display:none;color:var(--muted);margin-top:6px">Choose a package → Pay via PayPal link on the product → After payment message @moddingcentral on Telegram with access details (email/pass or PSN app code).</div></div>
+        <div class="mb-2"><div class="question d-flex justify-content-between" tabindex="0">Delivery & refunds?<span>▾</span></div><div class="answer" style="display:none;color:var(--muted);margin-top:6px">Typical delivery 24–48h after access. No refunds after the deal — confirm details before payment.</div></div>
+
+        <!-- New: How it works -->
+        <div class="mb-2">
+          <div class="question d-flex justify-content-between" tabindex="0">How it works?<span>▾</span></div>
+          <div class="answer" style="display:none;color:var(--muted);margin-top:6px">
+            <ol style="padding-left:18px;margin:0 0 8px 0">
+              <li>Choose your package on this page.</li>
+              <li>Provide account access: email/password OR PSN app login code.</li>
+              <li>Pay via PayPal (GBP) using the product links.</li>
+              <li>Delivery: typically 24–48 hours after we receive access.</li>
+            </ol>
+            <div><strong>Note:</strong> Custom orders available — message on Telegram before payment for bundles or special requests. No refunds after deal.</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <footer>
+      <div>© <strong>Modding Central</strong> — 2025</div>
+      <div style="margin-top:6px;color:var(--muted)">Contact: <a href="https://t.me/moddingcentral" target="_blank">@moddingcentral</a> • PayPal: <a href="https://www.paypal.com/paypalme/MrJasonDEX" target="_blank">paypal.me/MrJasonDEX</a></div>
+    </footer>
+
+  </div>
+
+  <a class="fab" href="https://t.me/moddingcentral" target="_blank">Chat</a>
+
+  <script>  
+    // Accessibility & UI enhancements: set roles, aria-labels and respect reduced motion
+    document.addEventListener('DOMContentLoaded', ()=>{
+      // FAQ: set role and aria-expanded
+      document.querySelectorAll('.faq .question').forEach(q=>{ q.setAttribute('role','button'); q.setAttribute('aria-expanded','false'); q.setAttribute('tabindex','0'); });
+
+      // Add ARIA labels to PayPal buttons based on nearby product info
+      document.querySelectorAll('.product').forEach(product=>{
+        const btn = product.querySelector('.btn-pay');
+        if(btn){
+          const title = product.querySelector('strong')?.innerText?.trim() || 'Product';
+          const price = product.querySelector('.price')?.innerText?.trim() || '';
+          btn.setAttribute('aria-label', `${title} ${price} — pay via PayPal`);
+        }
+      });
+    });
+
+    // Availability (London time)
+    function getLondonParts(){
+      const dt=new Date();
+      const fmt=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/London',weekday:'short',hour:'2-digit',minute:'2-digit',hour12:false});
+      const parts=fmt.formatToParts(dt);
+      const weekday = parts.find(p=>p.type==='weekday')?.value||'';
+      const hour = parseInt(parts.find(p=>p.type==='hour')?.value||'0',10);
+      const minute = parseInt(parts.find(p=>p.type==='minute')?.value||'0',10);
+      return {weekday,hour,minute,formatted:fmt.format(dt)};
+    }
+    function updateAvailability(){
+      const {weekday,hour,formatted}=getLondonParts();
+      const days=['Mon','Tue','Wed','Thu','Fri'];
+      const isWeekday=days.includes(weekday);
+      const open = isWeekday && (hour>=10 && hour<14);
+      const dot=document.getElementById('availDot');
+      const txt=document.getElementById('availText');
+      const lt=document.getElementById('londonTime');
+      if(lt) lt.innerText = `• London: ${formatted}`;
+      if(!dot||!txt) return;
+      if(open){ dot.style.background='#2ee06d'; txt.innerText='🟢 Online — Available now (Mon–Fri 10:00–14:00 UK)'; }
+      else{ dot.style.background='#ff6b6b'; txt.innerText='🔴 Offline — Check Telegram for response times'; }
+    }
+    updateAvailability(); setInterval(updateAvailability,30000);
+
+    // Typewriter
+    function typewriter(el, text, speed=18){ if(!el) return; let i=0; el.textContent=''; function step(){ if(i<=text.length){ el.textContent=text.slice(0,i); i++; setTimeout(step,speed); } } step(); }
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const el=document.querySelector('.typewriter');
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(el && !prefersReduced) typewriter(el, 'Unlock exclusive mods, ranks & in‑game currency • Pay with PayPal • Delivery 24–48h',18);
+      else if(el) el.textContent = 'Unlock exclusive mods, ranks & in‑game currency • Pay with PayPal • Delivery 24–48h';
+    });
+
+    // Search filter
+    function filterProducts(q){ q=q.trim().toLowerCase(); document.querySelectorAll('.product').forEach(p=>{ const tags=(p.getAttribute('data-tags')||'')+' '+(p.innerText||''); const show = !q || tags.toLowerCase().includes(q); p.style.display = show ? '' : 'none'; }); }
+    document.getElementById('search')?.addEventListener('input', (e)=>{ filterProducts(e.target.value); });
+
+    // FAQ toggle
+    document.querySelectorAll('.faq .question').forEach(q=>{
+      q.addEventListener('click', ()=>{ const a=q.nextElementSibling; if(!a) return; const open = a.style.display==='block'; a.style.display = open ? 'none' : 'block'; q.setAttribute('aria-expanded', (!open).toString()); });
+      q.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); q.click(); } });
+    });
+
+    // Make product cards keyboard-activatable
+    document.querySelectorAll('.product').forEach(p=>{ p.setAttribute('tabindex','0'); p.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' '){ const a=p.querySelector('a'); if(a) a.click(); } }); });
+
+    // Reveal on scroll (simple)
+    function reveal(){ document.querySelectorAll('.panel').forEach(el=>{ const r=el.getBoundingClientRect(); if(r.top < window.innerHeight - 80) el.style.opacity=1; }); }
+    window.addEventListener('scroll', reveal); window.addEventListener('load', reveal);
+
+    // Quick keyboard focus for search
+    window.addEventListener('keydown', (e)=>{ if(e.key==='/'&&document.activeElement.tagName!=='INPUT'){ e.preventDefault(); document.getElementById('search')?.focus(); } });
+  </script>
+</body>
+</html>
