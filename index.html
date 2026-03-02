@@ -3,198 +3,240 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Command Center</title>
+<title>Gaming Command Center</title>
 
-<!-- Bootstrap -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Rubik Font -->
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-:root {
-    --primary:#6366f1;
-    --bg:#0f172a;
-    --card:#1e293b;
-    --text:#f8fafc;
+:root{
+--purple:#8b5cf6;
+--purple-glow:#a78bfa;
+--bg-black:#0b0b0f;
+--card:#15151d;
+--text:#f3f4f6;
+--border:rgba(139,92,246,.3);
 }
 
-body {
-    font-family:'Rubik',sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    min-height:100vh;
-    overflow-x:hidden;
+body{
+font-family:'Rubik',sans-serif;
+background:var(--bg-black);
+color:var(--text);
+min-height:100vh;
+overflow-x:hidden;
 }
 
-/* Animated background texture */
-body::before{
-    content:"";
-    position:fixed;
-    width:200%;
-    height:200%;
-    background:radial-gradient(circle at 20% 30%,#1e3a8a,transparent),
-               radial-gradient(circle at 80% 70%,#6366f1,transparent);
-    animation:moveBG 15s linear infinite;
-    z-index:-1;
+.sidebar{
+position:fixed;
+top:0;
+left:0;
+width:250px;
+height:100%;
+background:#0f0f16;
+padding:25px;
+border-right:1px solid var(--border);
 }
-@keyframes moveBG{
-    0%{transform:translate(0,0)}
-    50%{transform:translate(-10%,-10%)}
-    100%{transform:translate(0,0)}
+
+.sidebar h4{
+color:var(--purple);
+margin-bottom:30px;
+}
+
+.nav-link{
+color:#9ca3af;
+margin-bottom:12px;
+cursor:pointer;
+transition:.3s;
+}
+
+.nav-link:hover{
+color:var(--purple-glow);
+}
+
+.main{
+margin-left:270px;
+padding:40px;
 }
 
 .card-custom{
-    background:var(--card);
-    border-radius:16px;
-    border:1px solid rgba(255,255,255,0.05);
-    transition:.3s;
+background:var(--card);
+border-radius:18px;
+padding:20px;
+border:1px solid var(--border);
+margin-bottom:20px;
+transition:.3s;
 }
 
 .card-custom:hover{
-    transform:translateY(-6px);
-    border-color:var(--primary);
+box-shadow:0 0 20px var(--purple);
+transform:translateY(-4px);
 }
 
-.gradient-text{
-    background:linear-gradient(90deg,#6366f1,#22d3ee);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+.btn-purple{
+background:var(--purple);
+border:none;
+color:white;
 }
 
-.btn-primary{
-    background:var(--primary);
-    border:none;
+.btn-purple:hover{
+background:var(--purple-glow);
 }
 
-.search-box{
-    background:#111827;
-    border:none;
-    color:white;
+.hidden{display:none;}
+
+.status{
+padding:6px 12px;
+border-radius:50px;
+font-size:12px;
+background:var(--purple);
 }
-.search-box:focus{
-    box-shadow:0 0 0 2px var(--primary);
+
+.resource-link{
+color:var(--purple-glow);
+text-decoration:none;
+}
+.resource-link:hover{
+text-decoration:underline;
 }
 </style>
 </head>
-
 <body>
 
-<div class="container py-5">
+<div class="sidebar">
+<h4>🎮 Gaming Hub</h4>
+<div class="nav-link" onclick="showSection('dashboard')">Dashboard</div>
+<div class="nav-link" onclick="showSection('gaming')">Gaming Services</div>
+<div class="nav-link" onclick="showSection('resources')">Resources</div>
+<div class="nav-link" onclick="showSection('tickets')">Support</div>
+<div class="nav-link text-warning" onclick="toggleAdmin()">Admin</div>
+</div>
 
-    <div class="text-center mb-4">
-        <h1 class="gradient-text fw-bold">Command Center</h1>
-        <p id="welcomeUser">Loading user...</p>
-    </div>
+<div class="main">
 
-    <!-- Search -->
-    <div class="mb-4">
-        <input type="text" id="searchInput"
-               class="form-control form-control-lg search-box"
-               placeholder="Search services...">
-    </div>
+<!-- DASHBOARD -->
+<div id="dashboard">
+<h2>Overview</h2>
+<div class="card-custom d-flex justify-content-between align-items-center">
+<div>
+<h5 id="userName">Loading...</h5>
+<small>ID: <span id="userID"></span></small>
+</div>
+<div>
+<span class="status">ONLINE</span>
+</div>
+</div>
+</div>
 
-    <!-- Services -->
-    <div class="row g-4" id="servicesGrid"></div>
+<!-- GAMING SERVICES -->
+<div id="gaming" class="hidden">
+<h2>Gaming Services</h2>
+<div id="gamingGrid"></div>
+</div>
+
+<!-- RESOURCES -->
+<div id="resources" class="hidden">
+<h2>Gaming Resources</h2>
+
+<div class="card-custom">
+<h6>Official Platforms</h6>
+<p>
+<a class="resource-link" href="https://store.playstation.com" target="_blank">PlayStation Store</a><br>
+<a class="resource-link" href="https://www.xbox.com/games/store" target="_blank">Xbox Store</a><br>
+<a class="resource-link" href="https://store.steampowered.com" target="_blank">Steam</a>
+</p>
+</div>
+
+<div class="card-custom">
+<h6>Learning & Optimisation</h6>
+<p>
+• Controller setup guidance<br>
+• Console optimisation tips<br>
+• Streaming configuration<br>
+• Performance advice
+</p>
+</div>
 
 </div>
 
-<!-- Telegram Web App -->
+<!-- SUPPORT -->
+<div id="tickets" class="hidden">
+<h2>Support</h2>
+<input type="text" id="ticketInput" class="form-control mb-2" placeholder="Describe your issue...">
+<button class="btn btn-purple" onclick="createTicket()">Submit Ticket</button>
+<div id="ticketList" class="mt-3"></div>
+</div>
+
+<!-- ADMIN -->
+<div id="adminPanel" class="hidden">
+<h2 class="text-warning">Admin Controls</h2>
+<div class="card-custom">
+<button class="btn btn-danger" onclick="clearData()">Reset Data</button>
+</div>
+</div>
+
+</div>
+
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
 <script>
-/* =========================
-   TELEGRAM INITIALISATION
-========================= */
 const tg = window.Telegram.WebApp;
 tg.expand();
 
-if (tg.initDataUnsafe?.user) {
-    const user = tg.initDataUnsafe.user;
-    document.getElementById("welcomeUser").innerText =
-        "Welcome back, " + user.first_name;
-} else {
-    document.getElementById("welcomeUser").innerText =
-        "Welcome to the dashboard";
-}
+let user = tg.initDataUnsafe?.user || {first_name:"Guest",id:"0000"};
+document.getElementById("userName").innerText = user.first_name;
+document.getElementById("userID").innerText = user.id;
 
-/* =========================
-   SERVICE DATA
-========================= */
-const services = [
-    {title:"Website Build", desc:"Custom static or dynamic site deployment"},
-    {title:"Bot Automation", desc:"Telegram bot system setup"},
-    {title:"Dashboard Setup", desc:"Admin panel integration"},
-    {title:"Digital Consultation", desc:"Technical & digital advisory"},
-    {title:"UI/UX Design", desc:"Modern interface design service"},
-    {title:"System Optimisation", desc:"Performance & automation upgrades"}
+const gamingServices = [
+"Gaming Coaching",
+"Console Setup Assistance",
+"Streaming Setup",
+"UI Customisation Guidance",
+"Performance Optimisation",
+"Community Access"
 ];
 
-/* =========================
-   RENDER FUNCTION
-========================= */
-const grid = document.getElementById("servicesGrid");
-
-function renderServices(list){
-    grid.innerHTML="";
-    list.forEach(service=>{
-        grid.innerHTML+=`
-        <div class="col-md-6 col-lg-4">
-            <div class="card-custom p-4 h-100">
-                <h5>${service.title}</h5>
-                <p class="text-muted">${service.desc}</p>
-                <button class="btn btn-primary w-100 mt-3"
-                    onclick="requestService('${service.title}')">
-                    Request
-                </button>
-            </div>
-        </div>`;
-    });
-}
-
-renderServices(services);
-
-/* =========================
-   SEARCH SYSTEM
-========================= */
-document.getElementById("searchInput")
-.addEventListener("input",function(){
-    const value=this.value.toLowerCase();
-    const filtered=services.filter(s=>
-        s.title.toLowerCase().includes(value)
-    );
-    renderServices(filtered);
+function renderGaming(){
+let grid=document.getElementById("gamingGrid");
+gamingServices.forEach(service=>{
+let div=document.createElement("div");
+div.className="card-custom";
+div.innerHTML=`
+<h6>${service}</h6>
+<button class="btn btn-purple btn-sm mt-2">Request</button>`;
+div.querySelector("button").onclick=function(){
+tg.sendData(JSON.stringify({action:"gaming_request",service:service}));
+tg.showPopup({title:"Request Sent",message:service+" requested.",buttons:[{type:"ok"}]});
+};
+grid.appendChild(div);
 });
+}
+renderGaming();
 
-/* =========================
-   SERVICE REQUEST HANDLER
-========================= */
-function requestService(name){
-    tg.sendData(JSON.stringify({
-        action:"service_request",
-        service:name,
-        user:tg.initDataUnsafe?.user?.id || "guest"
-    }));
-
-    tg.showPopup({
-        title:"Request Sent",
-        message:"Your request for " + name + " has been sent.",
-        buttons:[{type:"ok"}]
-    });
+function showSection(id){
+["dashboard","gaming","resources","tickets","adminPanel"]
+.forEach(sec=>document.getElementById(sec).classList.add("hidden"));
+document.getElementById(id).classList.remove("hidden");
 }
 
-/* =========================
-   TEXTURE RANDOMISER
-========================= */
-const textures = [
-    "linear-gradient(135deg,#0f172a,#1e293b)",
-    "linear-gradient(135deg,#1e3a8a,#0f172a)",
-    "linear-gradient(135deg,#312e81,#1e293b)",
-    "linear-gradient(135deg,#0f2027,#203a43)"
-];
+let tickets=[];
+function createTicket(){
+let val=document.getElementById("ticketInput").value;
+if(!val)return;
+tickets.push(val);
+let div=document.createElement("div");
+div.className="card-custom mt-2";
+div.innerText=val;
+document.getElementById("ticketList").appendChild(div);
+document.getElementById("ticketInput").value="";
+}
 
-document.body.style.background =
-    textures[Math.floor(Math.random()*textures.length)];
+function toggleAdmin(){
+document.getElementById("adminPanel").classList.toggle("hidden");
+}
+
+function clearData(){
+location.reload();
+}
 </script>
 
 </body>
