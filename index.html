@@ -2,240 +2,195 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gaming Command Center</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Modding X Control Panel</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Rubik Font -->
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
-:root{
---purple:#8b5cf6;
---purple-glow:#a78bfa;
---bg-black:#0b0b0f;
---card:#15151d;
---text:#f3f4f6;
---border:rgba(139,92,246,.3);
+body {
+    background: linear-gradient(180deg, #0b0014, #14002a);
+    font-family: 'Rubik', sans-serif;
+    color: #fff;
+    margin: 0;
 }
 
-body{
-font-family:'Rubik',sans-serif;
-background:var(--bg-black);
-color:var(--text);
-min-height:100vh;
-overflow-x:hidden;
+.navbar {
+    background: #0d001c;
+    border-bottom: 2px solid #7b00ff;
 }
 
-.sidebar{
-position:fixed;
-top:0;
-left:0;
-width:250px;
-height:100%;
-background:#0f0f16;
-padding:25px;
-border-right:1px solid var(--border);
+.navbar-brand {
+    font-weight: 800;
+    color: #a855f7 !important;
 }
 
-.sidebar h4{
-color:var(--purple);
-margin-bottom:30px;
+.section {
+    padding: 25px 15px;
 }
 
-.nav-link{
-color:#9ca3af;
-margin-bottom:12px;
-cursor:pointer;
-transition:.3s;
+.card {
+    background: #160029;
+    border: 1px solid #7b00ff33;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    transition: 0.3s;
 }
 
-.nav-link:hover{
-color:var(--purple-glow);
+.card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 15px #7b00ff66;
 }
 
-.main{
-margin-left:270px;
-padding:40px;
+.btn-purple {
+    background: #7b00ff;
+    border: none;
+    color: white;
 }
 
-.card-custom{
-background:var(--card);
-border-radius:18px;
-padding:20px;
-border:1px solid var(--border);
-margin-bottom:20px;
-transition:.3s;
+.btn-purple:hover {
+    background: #9a2bff;
 }
 
-.card-custom:hover{
-box-shadow:0 0 20px var(--purple);
-transform:translateY(-4px);
+.stat-box {
+    background: #120022;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 15px;
 }
 
-.btn-purple{
-background:var(--purple);
-border:none;
-color:white;
-}
-
-.btn-purple:hover{
-background:var(--purple-glow);
-}
-
-.hidden{display:none;}
-
-.status{
-padding:6px 12px;
-border-radius:50px;
-font-size:12px;
-background:var(--purple);
-}
-
-.resource-link{
-color:var(--purple-glow);
-text-decoration:none;
-}
-.resource-link:hover{
-text-decoration:underline;
+.footer {
+    text-align: center;
+    font-size: 12px;
+    padding: 20px;
+    opacity: 0.6;
 }
 </style>
 </head>
 <body>
 
-<div class="sidebar">
-<h4>🎮 Gaming Hub</h4>
-<div class="nav-link" onclick="showSection('dashboard')">Dashboard</div>
-<div class="nav-link" onclick="showSection('gaming')">Gaming Services</div>
-<div class="nav-link" onclick="showSection('resources')">Resources</div>
-<div class="nav-link" onclick="showSection('tickets')">Support</div>
-<div class="nav-link text-warning" onclick="toggleAdmin()">Admin</div>
+<nav class="navbar navbar-dark">
+  <div class="container-fluid">
+    <span class="navbar-brand">🎮 Modding X Control</span>
+  </div>
+</nav>
+
+<div class="container section">
+
+<!-- USER INFO -->
+<div class="card p-3">
+    <h5>👤 User Panel</h5>
+    <div id="userInfo">Loading...</div>
 </div>
 
-<div class="main">
-
-<!-- DASHBOARD -->
-<div id="dashboard">
-<h2>Overview</h2>
-<div class="card-custom d-flex justify-content-between align-items-center">
-<div>
-<h5 id="userName">Loading...</h5>
-<small>ID: <span id="userID"></span></small>
-</div>
-<div>
-<span class="status">ONLINE</span>
-</div>
-</div>
+<!-- GAMING SECTION -->
+<div class="card p-3">
+    <h5>🎮 Gaming & Modding</h5>
+    <p>Access tools, gaming services and mod support.</p>
+    <button class="btn btn-purple w-100 mb-2" onclick="openTelegram('https://t.me/ModdingXZ')">Join Main Channel</button>
+    <button class="btn btn-outline-light w-100 mb-2" onclick="openTelegram('https://t.me/ModdingXZ_Support')">Support Chat</button>
+    <button class="btn btn-outline-light w-100" onclick="alert('Coming Soon')">Game Tools</button>
 </div>
 
-<!-- GAMING SERVICES -->
-<div id="gaming" class="hidden">
-<h2>Gaming Services</h2>
-<div id="gamingGrid"></div>
+<!-- SUPPORT SYSTEM -->
+<div class="card p-3">
+    <h5>🛠 Support Centre</h5>
+    <form onsubmit="submitTicket(event)">
+        <input type="text" id="issue" class="form-control mb-2" placeholder="Describe your issue..." required>
+        <button class="btn btn-purple w-100">Submit Ticket</button>
+    </form>
+    <div id="ticketStatus" class="mt-2 small"></div>
 </div>
 
-<!-- RESOURCES -->
-<div id="resources" class="hidden">
-<h2>Gaming Resources</h2>
-
-<div class="card-custom">
-<h6>Official Platforms</h6>
-<p>
-<a class="resource-link" href="https://store.playstation.com" target="_blank">PlayStation Store</a><br>
-<a class="resource-link" href="https://www.xbox.com/games/store" target="_blank">Xbox Store</a><br>
-<a class="resource-link" href="https://store.steampowered.com" target="_blank">Steam</a>
-</p>
+<!-- LIVE STATS -->
+<div class="card p-3">
+    <h5>📊 Live Stats</h5>
+    <div class="row">
+        <div class="col-4">
+            <div class="stat-box">
+                <div id="onlineUsers">0</div>
+                <small>Online</small>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="stat-box">
+                <div id="ticketsOpen">0</div>
+                <small>Tickets</small>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="stat-box">
+                <div id="membersCount">0</div>
+                <small>Members</small>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="card-custom">
-<h6>Learning & Optimisation</h6>
-<p>
-• Controller setup guidance<br>
-• Console optimisation tips<br>
-• Streaming configuration<br>
-• Performance advice
-</p>
-</div>
-
-</div>
-
-<!-- SUPPORT -->
-<div id="tickets" class="hidden">
-<h2>Support</h2>
-<input type="text" id="ticketInput" class="form-control mb-2" placeholder="Describe your issue...">
-<button class="btn btn-purple" onclick="createTicket()">Submit Ticket</button>
-<div id="ticketList" class="mt-3"></div>
-</div>
-
-<!-- ADMIN -->
-<div id="adminPanel" class="hidden">
-<h2 class="text-warning">Admin Controls</h2>
-<div class="card-custom">
-<button class="btn btn-danger" onclick="clearData()">Reset Data</button>
-</div>
+<!-- TEXTURE GENERATOR -->
+<div class="card p-3">
+    <h5>🎨 Dynamic Texture Generator</h5>
+    <button class="btn btn-purple w-100 mb-2" onclick="generateTexture()">Generate Texture</button>
+    <canvas id="textureCanvas" width="300" height="200" style="width:100%;border-radius:12px;"></canvas>
 </div>
 
 </div>
 
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<div class="footer">
+Modding X © 2026 | Telegram Web App
+</div>
 
 <script>
-const tg = window.Telegram.WebApp;
-tg.expand();
-
-let user = tg.initDataUnsafe?.user || {first_name:"Guest",id:"0000"};
-document.getElementById("userName").innerText = user.first_name;
-document.getElementById("userID").innerText = user.id;
-
-const gamingServices = [
-"Gaming Coaching",
-"Console Setup Assistance",
-"Streaming Setup",
-"UI Customisation Guidance",
-"Performance Optimisation",
-"Community Access"
-];
-
-function renderGaming(){
-let grid=document.getElementById("gamingGrid");
-gamingServices.forEach(service=>{
-let div=document.createElement("div");
-div.className="card-custom";
-div.innerHTML=`
-<h6>${service}</h6>
-<button class="btn btn-purple btn-sm mt-2">Request</button>`;
-div.querySelector("button").onclick=function(){
-tg.sendData(JSON.stringify({action:"gaming_request",service:service}));
-tg.showPopup({title:"Request Sent",message:service+" requested.",buttons:[{type:"ok"}]});
-};
-grid.appendChild(div);
-});
-}
-renderGaming();
-
-function showSection(id){
-["dashboard","gaming","resources","tickets","adminPanel"]
-.forEach(sec=>document.getElementById(sec).classList.add("hidden"));
-document.getElementById(id).classList.remove("hidden");
+// Telegram WebApp Init
+if (window.Telegram?.WebApp) {
+    Telegram.WebApp.expand();
 }
 
-let tickets=[];
-function createTicket(){
-let val=document.getElementById("ticketInput").value;
-if(!val)return;
-tickets.push(val);
-let div=document.createElement("div");
-div.className="card-custom mt-2";
-div.innerText=val;
-document.getElementById("ticketList").appendChild(div);
-document.getElementById("ticketInput").value="";
+// USER INFO
+if (window.Telegram?.WebApp?.initDataUnsafe?.user) {
+    const user = Telegram.WebApp.initDataUnsafe.user;
+    document.getElementById("userInfo").innerHTML =
+        "<b>Name:</b> " + user.first_name + "<br>" +
+        "<b>ID:</b> " + user.id;
+} else {
+    document.getElementById("userInfo").innerHTML = "Opened outside Telegram.";
 }
 
-function toggleAdmin(){
-document.getElementById("adminPanel").classList.toggle("hidden");
+// OPEN TELEGRAM LINKS
+function openTelegram(link){
+    window.location.href = link;
 }
 
-function clearData(){
-location.reload();
+// FAKE LIVE STATS
+function randomStats(){
+    document.getElementById("onlineUsers").innerText = Math.floor(Math.random()*150)+50;
+    document.getElementById("ticketsOpen").innerText = Math.floor(Math.random()*10);
+    document.getElementById("membersCount").innerText = Math.floor(Math.random()*5000)+1000;
+}
+setInterval(randomStats, 3000);
+randomStats();
+
+// SUPPORT TICKET
+function submitTicket(e){
+    e.preventDefault();
+    document.getElementById("ticketStatus").innerText = "Ticket submitted successfully.";
+    document.getElementById("issue").value = "";
+}
+
+// TEXTURE GENERATOR
+function generateTexture(){
+    const canvas = document.getElementById("textureCanvas");
+    const ctx = canvas.getContext("2d");
+
+    for(let i=0;i<1000;i++){
+        ctx.fillStyle = "hsl(" + Math.random()*360 + ", 100%, 50%)";
+        ctx.fillRect(Math.random()*300, Math.random()*200, 2, 2);
+    }
 }
 </script>
 
